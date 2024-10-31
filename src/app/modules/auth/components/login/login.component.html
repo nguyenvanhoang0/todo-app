@@ -1,0 +1,43 @@
+<form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="6">
+        <label for="email">Email:</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="18">
+        <input
+          nz-input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        <ng-container *ngIf="loginFormGroup.controls.email.invalid && loginFormGroup.controls.email.touched">
+          <small>Email is required.</small>
+        </ng-container>
+      </div>
+    </div>
+  
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col nzSpan="6">
+        <label for="password">Password:</label>
+      </div>
+      <div nz-form-control nz-col nzSpan="18">
+        <input
+          nz-input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <ng-container *ngIf="loginFormGroup.controls.password.invalid && loginFormGroup.controls.password.touched">
+          <small>Password is required.</small>
+        </ng-container>
+      </div>
+    </div>
+  
+    <div nz-form-item>
+      <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid">Login</button>
+    </div>
+  </form>
+  
+<p (click)="handleClickSignUp()">Sign up</p>

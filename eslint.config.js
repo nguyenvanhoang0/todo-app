@@ -33,6 +33,11 @@ module.exports = [
           style: 'kebab-case',
         },
       ],
+      '@typescript-eslint/consistent-type-definitions': [
+        'error',
+        'type',
+        { allowObjectTypes: true },
+      ],
     },
   },
   {
