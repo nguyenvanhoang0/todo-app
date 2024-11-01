@@ -10,7 +10,7 @@ export const authReducer = createReducer(
   initialState,
   on(authActions.loginSuccess, (state, payload) => {
     localStorage.setItem('accessToken', payload.token);
-    localStorage.setItem('expires', payload.expires.toString());
+    // localStorage.setItem('expires', payload.expires.toString());
     return {
       ...state,
       ...payload

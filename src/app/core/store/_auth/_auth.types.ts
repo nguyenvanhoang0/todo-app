@@ -8,7 +8,7 @@ export type ActionProps<P, S = {}> = {
 
 export type AuthState = {
   token?: string,
-  expires?: Date,
+  // expires?: Date,
   userInfo?: IUserInfo
 }
 
@@ -25,7 +25,7 @@ export interface ILoginPayload {
 
 export interface ILoginResponse {
   token: string,
-  expires: Date
+  // expires: Date
 }
 
 export interface IUserInfoResponse {
