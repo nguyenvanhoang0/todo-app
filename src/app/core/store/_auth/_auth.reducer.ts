@@ -3,13 +3,16 @@ import { authActions } from "./_auth.actions";
 import { AuthState, IUserInfo } from "./_auth.types";
 
 const initialState: AuthState = {
-  token: '',
+  access_token: '',
 }
 
 export const authReducer = createReducer(
   initialState,
+  
   on(authActions.loginSuccess, (state, payload) => {
-    localStorage.setItem('accessToken', payload.token);
+    console.log(payload.access_token);
+    
+    localStorage.setItem('accessToken', payload.access_token);
     // localStorage.setItem('expires', payload.expires.toString());
     return {
       ...state,

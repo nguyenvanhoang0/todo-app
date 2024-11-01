@@ -14,7 +14,6 @@ export class AuthEffect {
   loginEffect = createEffect(() =>
     this._$actions.pipe(
       ofType(authActions.login),
-      tap(() => console.log('Login action detected')), 
       switchMap(({ payload }: ActionProps<ILoginPayload>) => {
         return this._apiCallerService
           .post<ILoginPayload, IResponseTemplate<ILoginResponse>>(
@@ -41,8 +40,6 @@ export class AuthEffect {
     private _nzMsgService: NzMessageService,
     private authService: AuthApiService
 
-  ) {
-    console.log(11113434);
-    
+  ) {    
   }
 }
