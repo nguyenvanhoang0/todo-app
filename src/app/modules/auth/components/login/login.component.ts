@@ -11,7 +11,7 @@ import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginFormGroup!: FormGroup<ILoginFormGroup>;

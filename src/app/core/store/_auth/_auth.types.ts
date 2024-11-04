@@ -1,4 +1,3 @@
-import { EUserRole } from "../../enums/user.enums"
 
 export type ActionProps<P, S = {}> = {
   payload: P,
