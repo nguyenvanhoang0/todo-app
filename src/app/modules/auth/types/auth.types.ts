@@ -11,3 +11,9 @@ export interface IRegisterFormGroup {
   password: FormControl<string>,
   username: FormControl<string>,
 }
+
+export interface IRegister {
+  email: string
+  password: string
+  username: string
+}

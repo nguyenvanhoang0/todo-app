@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,4 +6,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent {}
+export class ProfileComponent implements OnInit{
+ngOnInit(): void {
+  const accessToken = localStorage.getItem("userInfo");
+
+}
+}

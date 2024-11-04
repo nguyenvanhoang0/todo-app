@@ -1,10 +1,12 @@
 <div class="login">
   <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
-    <div nz-form-item nz-row>
+    <div class="title">Welcome</div>
+
+    <div nz-form-item >
       <div nz-form-label nz-col nzSpan="6">
         <label for="email">Email:</label>
       </div>
-      <div nz-form-control nz-col nzSpan="18">
+      <div nz-form-control nz-col >
         <input
           nz-input
           id="email"
@@ -18,11 +20,11 @@
       </div>
     </div>
   
-    <div nz-form-item nz-row>
+    <div nz-form-item >
       <div nz-form-label nz-col nzSpan="6">
         <label for="password">Password:</label>
       </div>
-      <div nz-form-control nz-col nzSpan="18">
+      <div nz-form-control nz-col >
         <input
           nz-input
           id="password"
@@ -39,7 +41,8 @@
     <div nz-form-item>
       <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid">Login</button>
     </div>
+    <a (click)="handleClickSignUp()" (keydown.enter)="handleClickSignUp()" tabindex="0" role="button">Sign up</a>
+
   </form>
 </div>
   
-<!-- <p (click)="handleClickSignUp()">Sign up</p> -->

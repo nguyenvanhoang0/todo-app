@@ -1,0 +1,45 @@
+.register {
+  width: 100%;
+  margin-top: 160px;
+  form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+
+    > div {
+      margin-bottom: 20px;
+    }
+
+    .title {
+      width: 100%;
+      text-align: center;
+      font-size: large;
+    }
+
+    nz-form-item {
+      margin-bottom: 16px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      min-width: 280px;
+    }
+
+    small {
+      color: red;
+      font-size: 12px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

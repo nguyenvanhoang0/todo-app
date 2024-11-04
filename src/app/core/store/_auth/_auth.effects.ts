@@ -7,7 +7,9 @@ import { authActions } from './_auth.actions';
 import { ActionProps, ILoginPayload, ILoginResponse } from './_auth.types';
 import { ApiCallerService } from '../../services/api-caller.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthEffect {
   loginEffect = createEffect(() =>
     this._$actions.pipe(
@@ -21,11 +23,12 @@ export class AuthEffect {
           .pipe(
             map(response => {
               const accessToken = response.access_token;
+              this._nzMsgService.success("Login Success");
               return authActions.loginSuccess({ access_token: accessToken });
             }),
             catchError(error => {
               console.error('Error:', error);
-              this._nzMsgService.error(error.message);
+              this._nzMsgService.error(error);
               return EMPTY;
             })
           );

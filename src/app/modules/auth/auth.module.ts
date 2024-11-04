@@ -6,9 +6,20 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthComponent } from './auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputFieldComponent } from 'src/app/shared/components/input-field/input-field.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, AuthComponent],
-  imports: [CommonModule, AuthRoutingModule,ReactiveFormsModule,InputFieldComponent],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    InputFieldComponent,
+    NzButtonModule,
+    NzInputModule,
+    NzGridModule
+  ],
 })
 export class AuthModule {}
