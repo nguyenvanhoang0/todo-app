@@ -22,7 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzRadioModule,
   ],
   templateUrl: './input-field.component.html',
-  styleUrl: './input-field.component.css',
+  styleUrl: './input-field.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
