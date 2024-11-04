@@ -1,13 +1,11 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, EMPTY, map, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, map, switchMap} from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { IResponseTemplate } from '../../types/api.types';
 import { authActions } from './_auth.actions';
 import { ActionProps, ILoginPayload, ILoginResponse } from './_auth.types';
 import { ApiCallerService } from '../../services/api-caller.service';
-import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';
 
 @Injectable()
 export class AuthEffect {
@@ -21,10 +19,8 @@ export class AuthEffect {
             payload
           )
           .pipe(
-            tap(response => console.log('API response:', response)),
             map(response => {
               const accessToken = response.access_token;
-              console.log('Login successful, access_token:', accessToken);
               return authActions.loginSuccess({ access_token: accessToken });
             }),
             catchError(error => {
@@ -35,15 +31,11 @@ export class AuthEffect {
           );
       })
     ));
-  
-  
 
   constructor(
     private _$actions: Actions,
     private _apiCallerService: ApiCallerService,
     private _nzMsgService: NzMessageService,
-    private authService: AuthApiService
-
   ) {    
   }
 }

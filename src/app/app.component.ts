@@ -11,6 +11,5 @@ export class AppComponent implements OnInit{
   title = 'fe-simple-elysia';
 
   ngOnInit() {
-    console.log('AppComponent initialized');
   }
 }

@@ -48,7 +48,6 @@ export class InputFieldComponent {
   onTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    // Không sử dụng giá trị ở đây vì đã liên kết qua formControlName
   }
 
   registerOnChange(fn: (value: string) => void): void {

@@ -11,7 +11,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthApiService)
   const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken);
   
   if (!accessToken) {
     return router.navigate(['/auth/signIn']);

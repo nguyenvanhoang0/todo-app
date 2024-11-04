@@ -34,14 +34,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.loginFormGroup);
-    console.log(this.loginFormGroup.invalid);
     if (this.loginFormGroup.invalid) {
-      console.log(1111111111111);
       
-      Object.values(this.loginFormControls).forEach((control) => {
-        console.log(control.invalid);
-        
+      Object.values(this.loginFormControls).forEach((control) => {        
         if (control.invalid) {
           control.markAsDirty();
         }

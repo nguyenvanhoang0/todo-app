@@ -11,15 +11,9 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    /* height: fit-content; */
     z-index: 99;
-    /* margin-left: 16%; */
     background-image: url("../../../assets/img/totoro-single.png");
     background-size: cover;
-
-    /* background: rgba(255, 255, 255, 0.75); */
-    /* border-radius: 40px; */
-    /* padding: 30px 40px; */
     border: 1px solid var(--white);
   }
   
