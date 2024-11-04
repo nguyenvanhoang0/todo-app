@@ -1,5 +1,12 @@
 <div class="container">
-    <div class="content">
-        <p class="title">welcome</p>
+  <div class="content">
+    <div class="title"> 
+        <p >welcome</p>
+        <p class="out">logout</p>
     </div>
+    <div *ngIf="userInfo$ | async as userInfo">
+      <p class="name">{{ userInfo?.username }}</p>
+      <p>Email: {{ userInfo?.email }}</p>
+    </div>
+  </div>
 </div>

@@ -1,20 +1,35 @@
 .container {
-  display: flex;
-  // align-items: center;
-//   justify-content: center;
   width: 100vw;
   height: 100vh;
   z-index: 99;
   background-image: url('../../../../../assets/img/back_auth.png');
   background-size: cover;
   border: 1px solid var(--white);
+  position: relative;
 
   .content {
-    margin-top: 120px;
-    margin-left: 120px;
+    position: absolute;
+    top: 120px;
+    left: 120px;
+    padding: 40px;
+    border-radius: 12px;
+    background-color: #ffedfcb3;
 
     .title {
-      font-size: xx-large;
+      font-size: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .out {
+        font-size: 12px;
+        color: rgb(247, 99, 99);
+        cursor: pointer;
+      }
+    }
+
+    .name {
+      font-size: 48px;
+      font-weight: lighter;
     }
   }
 }
