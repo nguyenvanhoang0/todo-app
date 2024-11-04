@@ -23,7 +23,11 @@
             "input": "public"
           }
         ],
-        "styles": ["./src/styles.scss"],
+        "styles": [
+          "./src/styles.scss",
+          "./src/globals.scss",
+          "./src/themes/theme.less"
+        ],
         "scripts": []
       },
       "configurations": {

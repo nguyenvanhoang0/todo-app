@@ -16,13 +16,16 @@ export class AuthEffect {
       ofType(authActions.login),
       switchMap(({ payload }: ActionProps<ILoginPayload>) => {
         return this._apiCallerService
-          .post<ILoginPayload, IResponseTemplate<ILoginResponse>>(
+          .post<ILoginPayload, ILoginResponse>(
             environment.authEndpoint.login,
             payload
           )
           .pipe(
-            map(({ data }) => {
-              return authActions.loginSuccess(data);
+            tap(response => console.log('API response:', response)),
+            map(response => {
+              const accessToken = response.access_token;
+              console.log('Login successful, access_token:', accessToken);
+              return authActions.loginSuccess({ access_token: accessToken });
             }),
             catchError(error => {
               console.error('Error:', error);
@@ -31,8 +34,9 @@ export class AuthEffect {
             })
           );
       })
-    )
-  );
+    ));
+  
+  
 
   constructor(
     private _$actions: Actions,

@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "themes/palettes";
+// @import "themes/share";
+@import "ng-zorro-antd/ng-zorro-antd.min.css";
+
+
+html {
+  font-family: Open Sans, sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+
+  address, dl, ol, p, pre, ul {
+    margin-bottom: 0;
+  }
+
+  box-sizing: border-box;
+}
+
+button, input {
+  line-height: normal;
+  font-size: unset;
+}
