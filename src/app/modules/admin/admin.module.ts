@@ -5,6 +5,7 @@ import { AdminComponent } from './admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { IconComponent } from 'src/app/shared/components/icon/icon.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ConfirmationFormComponent } from 'src/app/shared/components/confirmation-form/confirmation-form.component';
 
 
 
@@ -14,7 +15,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     CommonModule,
     AdminRoutingModule,
     NzIconModule,
-    IconComponent
+    IconComponent,
+    ConfirmationFormComponent
   ]
 })
 export class AdminModule { }

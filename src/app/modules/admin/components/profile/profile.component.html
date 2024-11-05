@@ -1,12 +1,27 @@
 <div class="container">
   <div class="content">
-    <div class="title"> 
-        <p >welcome</p>
-        <p class="out">logout</p>
+    <div class="title">
+      <p>welcome</p>
+      <a
+        class="out"
+        (click)="openConfirmationForm()"
+        (keydown.enter)="openConfirmationForm()"
+        tabindex="0"
+        role="button"
+        >logout</a
+      >
     </div>
     <div *ngIf="userInfo$ | async as userInfo">
       <p class="name">{{ userInfo?.username }}</p>
-      <p>Email: {{ userInfo?.email }}</p>
+      <div class="information">
+        <p class="id-user">ID: {{ userInfo?.id }}</p>
+        <p>Email: {{ userInfo?.email }}</p>
+      </div>
     </div>
   </div>
 </div>
+<app-confirmation-form 
+*ngIf="confirmationForm"
+  [content]="'Are you sure you want to sign out?'" 
+  (confirm)="onConfirm($event)">
+</app-confirmation-form>

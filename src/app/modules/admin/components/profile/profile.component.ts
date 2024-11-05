@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
 import { Store } from '@ngrx/store';
 import { MainState } from 'src/app/core/store/_store.types';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +14,34 @@ import { MainState } from 'src/app/core/store/_store.types';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  userInfo$: Observable<IUserInfo | undefined> = this._store.select(selectUserInfo);
+  confirmationForm: boolean = false;
 
-  constructor(private _store: Store<MainState>) {
-    this.userInfo$.subscribe()
+  userInfo$: Observable<IUserInfo | undefined> =
+    this._store.select(selectUserInfo);
+
+  constructor(private _store: Store<MainState>, private _router: Router,    private _nzMsgService: NzMessageService,
+  ) {
+    this.userInfo$.subscribe();
+  }
+
+  openConfirmationForm(){
+    this.confirmationForm = true;
+  }
+
+  onConfirm(confirm: boolean) {    
+      if(confirm === true){
+        this.confirmationForm = false;
+        this.logout()
+      }else{
+        this.confirmationForm = false;
+      }
+  }
+
+  logout() {
+    this._nzMsgService.success("sign out success");
+
+    localStorage.removeItem('accessToken'),
+    localStorage.removeItem('userInfo'),
+      this._router.navigate(['/auth/signIn']);
   }
 }

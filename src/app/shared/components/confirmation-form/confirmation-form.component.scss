@@ -1,0 +1,49 @@
+.confirmation-form {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vW;
+    background-color: rgba(128, 128, 128, 0.362);
+    display: flex;
+    justify-content: center;
+    z-index: 101;
+    transition: 0.2s;
+
+
+    .group-content {
+        text-align: left;
+        top: 150px;
+        background-color: white;
+        position: fixed;
+        min-width: 460px;
+        max-width: 640px;
+        border-radius: 6px;
+        transition: 0.2s;
+
+        .title {
+            border-bottom: 1px solid gray;
+            padding: 12px 20px;
+            width: 100%;
+
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .group-button {
+            display: flex;
+            justify-content: right;
+            gap: 12px;
+            margin-top: 24px;
+        }
+    }
+
+    // &:hover .group-content {
+    //     top: 120px;
+    //     transition: 0.2s;
+    // }
+
+
+}
