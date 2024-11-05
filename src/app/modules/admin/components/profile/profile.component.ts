@@ -15,6 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class ProfileComponent {
   confirmationForm: boolean = false;
+  accountView: boolean = false;
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
@@ -26,6 +27,10 @@ export class ProfileComponent {
 
   openConfirmationForm(){
     this.confirmationForm = true;
+  }
+
+  handleAccountView(value: boolean) {
+    this.accountView = value;
   }
 
   onConfirm(confirm: boolean) {    

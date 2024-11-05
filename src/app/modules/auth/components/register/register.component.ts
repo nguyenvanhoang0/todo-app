@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent implements OnDestroy{
+export class RegisterComponent implements OnDestroy {
   registerFormGroup!: FormGroup<IRegisterFormGroup>;
   private _unsubscribe$ = new Subject<void>();
 
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnDestroy{
     private _router: Router,
     private _authFormService: AuthFormService,
     private authApiService: AuthApiService,
-    private _nzMsgService: NzMessageService,
+    private _nzMsgService: NzMessageService
   ) {}
 
   get registerFormControl() {
@@ -40,15 +40,17 @@ export class RegisterComponent implements OnDestroy{
         }
       });
     } else {
-      this.authApiService.Register(this.registerFormGroup.getRawValue()).subscribe(
-        response => {
-          this._nzMsgService.success(response);
-        },
-        error => {
-          this._nzMsgService.error(error);
-          console.error('Registration error:', error);
-        }
-      );
+      this.authApiService
+        .Register(this.registerFormGroup.getRawValue())
+        .subscribe(
+          (response) => {
+            this._nzMsgService.success(response);
+          },
+          (error) => {
+            this._nzMsgService.error(error);
+            console.error('Registration error:', error);
+          }
+        );
     }
   }
 

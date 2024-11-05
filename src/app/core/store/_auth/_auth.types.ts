@@ -11,9 +11,10 @@ export type AuthState = {
 }
 
 export interface IUserInfo {
-  email: string,
   id: string,
-  username: string
+  email: string,
+  username: string,
+  avatar: string,
 }
 
 export interface ILoginPayload {
@@ -29,6 +30,7 @@ export interface IUserInfoResponse {
   id: string,
   email: string,
   username: string,
+  avatar: string,
 }
 
 

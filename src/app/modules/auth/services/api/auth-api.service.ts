@@ -16,6 +16,8 @@ export class AuthApiService {
 
   getUserInfo(accessToken: string): Observable<IUserInfoResponse>  {
     const params = { access_token: accessToken };
+    console.log(this.apiUrl );
+    
     return this._apiCallerService.get<{ access_token: string }, IUserInfoResponse>(this.apiUrl.getUserInfo , params);
   }
 

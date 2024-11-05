@@ -20,6 +20,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      
       .out {
         font-size: 12px;
         color: rgb(247, 99, 99);
@@ -27,8 +28,11 @@
         padding: 6px 12px;
         border-radius: 4px;
         transition: 0.2s;
+        display: flex;
+        gap: 8px;
+        align-items: center;
 
-        &:hover{
+        &:hover {
           background-color: rgb(247, 99, 99);
           transition: 0.2s;
           color: white;
@@ -36,18 +40,49 @@
       }
     }
 
-    .name {
-      font-size: 48px;
-      font-weight: lighter;
-    }
-
-    .information{
+    .user {
       display: flex;
-      gap: 12px;
-      align-items: center;
+      gap: 24px;
 
-      .id-user{
-        color: rgb(247, 99, 99);
+      > section {
+        cursor: pointer;
+      }
+      .avatar {
+        position: relative;
+
+        .edit {
+          display: none;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background-color: aliceblue;
+          padding: 8px;
+          border-radius: 50%;
+          transition: 0.2s;
+          cursor: pointer;
+        }
+
+        &:hover {
+          .edit {
+            display: flex;
+            transition: 0.2s;
+          }
+        }
+      }
+
+      .name {
+        font-size: 48px;
+        font-weight: lighter;
+      }
+
+      .information {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .id-user {
+          color: rgb(247, 99, 99);
+        }
       }
     }
   }

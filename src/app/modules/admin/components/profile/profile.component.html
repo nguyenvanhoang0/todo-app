@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="content">
-    <div class="title">
+<section class="container">
+  <article class="content">
+    <header class="title">
       <p>welcome</p>
       <a
         class="out"
@@ -8,20 +8,35 @@
         (keydown.enter)="openConfirmationForm()"
         tabindex="0"
         role="button"
-        >logout</a
       >
-    </div>
-    <div *ngIf="userInfo$ | async as userInfo">
-      <p class="name">{{ userInfo?.username }}</p>
-      <div class="information">
-        <p class="id-user">ID: {{ userInfo?.id }}</p>
-        <p>Email: {{ userInfo?.email }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-<app-confirmation-form 
-*ngIf="confirmationForm"
-  [content]="'Are you sure you want to sign out?'" 
-  (confirm)="onConfirm($event)">
+        logout<ts-icon name="logout"></ts-icon>
+      </a>
+    </header>
+    <section class="user" *ngIf="userInfo$ | async as userInfo">
+      <figure class="avatar">
+        <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
+        <div class="edit">
+          <ts-icon [name]="'edit'"></ts-icon>
+        </div>
+      </figure>
+      <section class="" (click)="accountView = true" (keydown.enter)="openConfirmationForm()"
+      tabindex="0">
+        <p class="name">{{ userInfo?.username }}</p>
+        <div class="information">
+          <p class="id-user">ID: {{ userInfo?.id }}</p>
+          <p>Email: {{ userInfo?.email }}</p>
+        </div>
+      </section>
+    </section>
+  </article>
+</section>
+
+<app-confirmation-form
+  *ngIf="confirmationForm"
+  [content]="'Are you sure you want to sign out?'"
+  (confirm)="onConfirm($event)"
+>
 </app-confirmation-form>
+<app-open-modal *ngIf="accountView" (previewVisible)="handleAccountView($event)">
+  <app-account></app-account>
+</app-open-modal>
