@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzMessageModule,
     RouterModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
     StoreModule.forRoot(combinedReducers),
     EffectsModule.forRoot([AuthEffect]),
   ],

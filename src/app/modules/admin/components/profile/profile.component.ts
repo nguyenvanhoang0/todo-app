@@ -15,38 +15,46 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class ProfileComponent {
   confirmationForm: boolean = false;
+  updateForm: boolean = false;
   accountView: boolean = false;
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
 
-  constructor(private _store: Store<MainState>, private _router: Router,    private _nzMsgService: NzMessageService,
+  constructor(
+    private _store: Store<MainState>,
+    private _router: Router,
+    private _nzMsgService: NzMessageService
   ) {
     this.userInfo$.subscribe();
   }
 
-  openConfirmationForm(){
+  openConfirmationForm() {
     this.confirmationForm = true;
+  }
+
+  openUpdateForm(value: boolean) {    
+    this.updateForm = value;
   }
 
   handleAccountView(value: boolean) {
     this.accountView = value;
   }
 
-  onConfirm(confirm: boolean) {    
-      if(confirm === true){
-        this.confirmationForm = false;
-        this.logout()
-      }else{
-        this.confirmationForm = false;
-      }
+  onConfirm(confirm: boolean) {
+    if (confirm === true) {
+      this.confirmationForm = false;
+      this.logout();
+    } else {
+      this.confirmationForm = false;
+    }
   }
 
   logout() {
-    this._nzMsgService.success("sign out success");
+    this._nzMsgService.success('sign out success');
 
     localStorage.removeItem('accessToken'),
-    localStorage.removeItem('userInfo'),
+      localStorage.removeItem('userInfo'),
       this._router.navigate(['/auth/signIn']);
   }
 }

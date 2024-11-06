@@ -1,16 +1,5 @@
-<nz-upload
-  class="avatar-uploader"
-  [nzAction]="api"
-  nzName="avatar"
-  nzListType="picture-card"
-  [nzShowUploadList]="false"
-  [nzBeforeUpload]="beforeUpload"
-  (nzChange)="handleChange($event)"
->
-  @if (!avatarUrl) {
-  <ts-icon class="upload-icon" [name]="loading ? 'loading' : 'plus'"></ts-icon>
-  <div class="ant-upload-text">Upload</div>
-  } @else {
-  <img [src]="avatarUrl" alt="User avatar" style="width: 100%" />
-  }
-</nz-upload>
+<div class="image-upload">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <img *ngIf="selectedImage" [src]="selectedImage" alt="Selected Image" />
+  </div>
+  

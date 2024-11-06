@@ -10,6 +10,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-modal.component';
 import { AccountComponent } from 'src/app/shared/components/account/account.component';
 import { UploadImgComponent } from 'src/app/shared/components/upload-img/upload-img.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -25,6 +26,7 @@ import { UploadImgComponent } from 'src/app/shared/components/upload-img/upload-
     OpenModalComponent,
     AccountComponent,
     UploadImgComponent,
+    SharedModule,
   ]
 })
 export class AdminModule { }

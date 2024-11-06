@@ -16,10 +16,11 @@
       <figure class="avatar">
         <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
         <div class="edit">
-          <ts-icon [name]="'edit'"></ts-icon>
+          <ts-icon [name]="'edit'" (click)="updateForm = true" (keydown.enter)="updateForm = true"
+          tabindex="0"></ts-icon>
         </div>
       </figure>
-      <section class="" (click)="accountView = true" (keydown.enter)="openConfirmationForm()"
+      <section class="" (click)="accountView = true" (keydown.enter)="accountView = true"
       tabindex="0">
         <p class="name">{{ userInfo?.username }}</p>
         <div class="information">
@@ -39,4 +40,9 @@
 </app-confirmation-form>
 <app-open-modal *ngIf="accountView" (previewVisible)="handleAccountView($event)">
   <app-account></app-account>
+</app-open-modal>
+<app-open-modal *ngIf="updateForm" (previewVisible)="openUpdateForm($event)">
+  <div class="update">
+    <app-upload-img></app-upload-img>
+  </div>
 </app-open-modal>
