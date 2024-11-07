@@ -29,11 +29,7 @@ export class ProfileComponent {
     this.userInfo$.subscribe();
   }
 
-  openConfirmationForm() {
-    this.confirmationForm = true;
-  }
-
-  openUpdateForm(value: boolean) {    
+  openUpdateForm(value: boolean) {
     this.updateForm = value;
   }
 
@@ -52,9 +48,8 @@ export class ProfileComponent {
 
   logout() {
     this._nzMsgService.success('sign out success');
-
     localStorage.removeItem('accessToken'),
-      localStorage.removeItem('userInfo'),
-      this._router.navigate(['/auth/signIn']);
+    localStorage.removeItem('userInfo'), 
+    this._router.navigate(['/auth/signIn']);
   }
 }

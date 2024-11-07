@@ -4,8 +4,8 @@
       <p>welcome</p>
       <a
         class="out"
-        (click)="openConfirmationForm()"
-        (keydown.enter)="openConfirmationForm()"
+        (click)="confirmationForm = true"
+        (keydown.enter)="confirmationForm = true"
         tabindex="0"
         role="button"
       >
@@ -15,9 +15,9 @@
     <section class="user" *ngIf="userInfo$ | async as userInfo">
       <figure class="avatar">
         <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
-        <div class="edit">
-          <ts-icon [name]="'edit'" (click)="updateForm = true" (keydown.enter)="updateForm = true"
-          tabindex="0"></ts-icon>
+        <div class="edit" (click)="updateForm = true" (keydown.enter)="updateForm = true"
+        tabindex="0">
+          <ts-icon [name]="'edit'" ></ts-icon>
         </div>
       </figure>
       <section class="" (click)="accountView = true" (keydown.enter)="accountView = true"
@@ -38,9 +38,11 @@
   (confirm)="onConfirm($event)"
 >
 </app-confirmation-form>
+
 <app-open-modal *ngIf="accountView" (previewVisible)="handleAccountView($event)">
   <app-account></app-account>
 </app-open-modal>
+
 <app-open-modal *ngIf="updateForm" (previewVisible)="openUpdateForm($event)">
   <div class="update">
     <app-upload-img></app-upload-img>

@@ -15,15 +15,11 @@ export class AuthApiService {
   constructor(private _apiCallerService: ApiCallerService) { }
 
   getUserInfo(accessToken: string): Observable<IUserInfoResponse>  {
-    const params = { access_token: accessToken };
-    console.log(this.apiUrl );
-    
+    const params = { access_token: accessToken };    
     return this._apiCallerService.get<{ access_token: string }, IUserInfoResponse>(this.apiUrl.getUserInfo , params);
   }
 
-  Register(data : IRegister): Observable<string> {
-    console.log(data);
-    
+  Register(data : IRegister): Observable<string> {    
     return this._apiCallerService.post<IRegister, string>(this.apiUrl.register , data);  
   }
 }
