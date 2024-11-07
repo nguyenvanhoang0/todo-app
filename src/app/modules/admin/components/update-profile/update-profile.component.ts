@@ -16,7 +16,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './update-profile.component.css',
 })
 export class UpdateProfileComponent {
-  updateUserFormGroup!: FormGroup<IUpdateUserFormGroup>;
+  updateUserFormGroup: FormGroup<IUpdateUserFormGroup> = this._authFormService.UpdateUserGroup;
   private _unsubscribe$ = new Subject<void>();
 
   constructor(
