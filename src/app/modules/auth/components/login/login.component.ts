@@ -14,7 +14,7 @@ import { authActions } from 'src/app/core/store/_auth/_auth.actions';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  loginFormGroup!: FormGroup<ILoginFormGroup>;
+  loginFormGroup: FormGroup<ILoginFormGroup> = this._authFormService.LoginFormGroup;
   private _unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loginFormGroup = this._authFormService.LoginFormGroup;
     this.subscribeLoginSuccessAction();
   }
 

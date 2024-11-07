@@ -4,7 +4,7 @@ import { IUserInfoResponse } from 'src/app/core/store/_auth/_auth.types';
 import { environment } from 'src/environments/environment';
 import { map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { IRegister, IRegisterFormGroup } from '../../types/auth.types';
+import { IRegister, IRegisterFormGroup, IUpdateUser } from '../../types/auth.types';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,9 @@ export class AuthApiService {
 
   Register(data : IRegister): Observable<string> {    
     return this._apiCallerService.post<IRegister, string>(this.apiUrl.register , data);  
+  }
+
+  updateUser(data : IUpdateUser): Observable<string> {    
+    return this._apiCallerService.put<IUpdateUser, string>(this.apiUrl.update , data);  
   }
 }

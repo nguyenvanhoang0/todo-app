@@ -12,8 +12,20 @@ export interface IRegisterFormGroup {
   username: FormControl<string>,
 }
 
+export interface IUpdateUserFormGroup {
+  email: FormControl<string>,
+  username: FormControl<string>,
+  avatar: FormControl<File | null>,
+}
+
 export interface IRegister {
-  email: string
-  password: string
+  email: string,
+  password: string,
   username: string
+}
+
+export interface IUpdateUser {
+  email: string,
+  username: string,
+  avatar: File
 }

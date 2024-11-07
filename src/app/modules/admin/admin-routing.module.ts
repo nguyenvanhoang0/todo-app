@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: 'me',
         component: ProfileComponent,
+      },
+      {
+        path: 'update',
+        component: UpdateProfileComponent,
       },
       {
         path: '**',

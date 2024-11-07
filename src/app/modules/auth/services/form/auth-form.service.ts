@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ILoginFormGroup, IRegisterFormGroup } from '../../types/auth.types';
+import {
+  ILoginFormGroup,
+  IRegisterFormGroup,
+  IUpdateUser,
+  IUpdateUserFormGroup,
+} from '../../types/auth.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthFormService {
   private _loginFormGroup!: FormGroup<ILoginFormGroup>;
-
-  constructor(private _formBuilder: FormBuilder) {
-  }
-
   private _registerFormGroup!: FormGroup<IRegisterFormGroup>;
+  private _updateUserGroup!: FormGroup<IUpdateUserFormGroup>;
+
+  constructor(private _formBuilder: FormBuilder) {}
 
   get registerFormGroup() {
     if (!this._registerFormGroup) {
@@ -29,12 +33,20 @@ export class AuthFormService {
     return this._loginFormGroup;
   }
 
+  get UpdateUserGroup() {
+    if (!this._updateUserGroup) {
+      this.initUpdateUserForm();
+    }
+
+    return this._updateUserGroup;
+  }
+
   private initLoginForm() {
     const fb = this._formBuilder.nonNullable;
     this._loginFormGroup = fb.group({
       email: fb.control('', [Validators.required]),
-      password: fb.control('', [Validators.required])
-    })
+      password: fb.control('', [Validators.required]),
+    });
   }
 
   private initRegisterForm() {
@@ -43,6 +55,15 @@ export class AuthFormService {
       email: fb.control('', [Validators.required, Validators.email]),
       password: fb.control('', [Validators.required]),
       username: fb.control('', [Validators.required, Validators.minLength(3)]),
-    })
+    });
+  }
+
+  private initUpdateUserForm() {
+    const fb = this._formBuilder.nonNullable;
+    this._updateUserGroup = fb.group({
+      email: fb.control('', [Validators.email]),
+      username: fb.control('', [Validators.required, Validators.minLength(3)]),
+      avatar: fb.control<File | null>(null, [Validators.required]),
+    });
   }
 }

@@ -37,6 +37,10 @@ export class ProfileComponent {
     this.accountView = value;
   }
 
+  handleClickUpdate() {
+    this._router.navigate(['auth/signIn']).then();
+  }
+
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;

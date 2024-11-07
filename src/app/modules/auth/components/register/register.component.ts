@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnDestroy {
-  registerFormGroup!: FormGroup<IRegisterFormGroup>;
+  registerFormGroup: FormGroup<IRegisterFormGroup> = this._authFormService.registerFormGroup;
   private _unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -26,10 +26,6 @@ export class RegisterComponent implements OnDestroy {
 
   get registerFormControl() {
     return this.registerFormGroup.controls;
-  }
-
-  ngOnInit() {
-    this.registerFormGroup = this._authFormService.registerFormGroup;
   }
 
   onSubmit() {

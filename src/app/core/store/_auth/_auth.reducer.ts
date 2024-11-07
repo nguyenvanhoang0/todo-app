@@ -9,7 +9,7 @@ const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   
-  on(authActions.loginSuccess, (state, payload) => {    
+  on(authActions.loginSuccess, (state, payload) => {        
     localStorage.setItem('accessToken', payload.access_token);
     return {
       ...state,

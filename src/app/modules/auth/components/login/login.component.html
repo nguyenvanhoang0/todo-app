@@ -1,48 +1,61 @@
 <div class="login">
-  <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+  <form nz-form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
     <div class="title">Welcome</div>
 
-    <div nz-form-item >
-      <div nz-form-label nz-col nzSpan="6">
-        <label for="email">Email:</label>
-      </div>
-      <div nz-form-control nz-col >
-        <input
-          nz-input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
-        />
-        <ng-container *ngIf="loginFormGroup.controls.email.invalid && loginFormGroup.controls.email.touched">
-          <small>Email is required.</small>
-        </ng-container>
-      </div>
-    </div>
-  
-    <div nz-form-item >
-      <div nz-form-label nz-col nzSpan="6">
-        <label for="password">Password:</label>
-      </div>
-      <div nz-form-control nz-col >
-        <input
-          nz-input
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="Enter your password"
-        />
-        <ng-container *ngIf="loginFormGroup.controls.password.invalid && loginFormGroup.controls.password.touched">
-          <small>Password is required.</small>
-        </ng-container>
-      </div>
-    </div>
-  
-    <div nz-form-item>
-      <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid">Login</button>
-    </div>
-    <a (click)="handleClickSignUp()" (keydown.enter)="handleClickSignUp()" tabindex="0" role="button">Sign up</a>
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="loginFormGroup.controls.email"
+        [nzErrorTip]="emailErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="user">
+          <input
+            nz-input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="loginFormGroup.controls.password"
+        [nzErrorTip]="passwordErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="lock">
+          <input
+            nz-input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Enter your password"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div nz-form-item>
+      <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid">
+        Login
+      </button>
+    </div>
+    <a
+      (click)="handleClickSignUp()"
+      (keydown.enter)="handleClickSignUp()"
+      tabindex="0"
+      role="button"
+      >Sign up</a
+    >
+
+    <ng-template #emailErrorTpl>
+      <small class="error-message">Email is required.</small>
+    </ng-template>
+    <ng-template #passwordErrorTpl>
+      <small class="error-message">Password is required.</small>
+    </ng-template>
   </form>
 </div>
-  

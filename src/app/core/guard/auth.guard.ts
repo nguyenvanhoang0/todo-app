@@ -19,6 +19,8 @@ export const authGuard: CanActivateFn = (route, state) => {
     map(res => {
       localStorage.setItem("userInfo", JSON.stringify(res));
       store.dispatch(authActions.saveUserInfo(res))
+      console.log(res);
+      
       return !!res;
     })
   );

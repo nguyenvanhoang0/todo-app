@@ -1,30 +1,32 @@
 <div class="register">
-    <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
-      <div class="title">register</div>
+  <form nz-form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
+    <div class="title">Register</div>
 
-      <div nz-form-item >
-        <div nz-form-label nz-col nzSpan="6">
-          <label for="Name">Name:</label>
-        </div>
-        <div nz-form-control nz-col >
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="registerFormGroup.controls.username"
+        [nzErrorTip]="usernameErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="user">
           <input
             nz-input
             id="username"
-            type="username"
+            type="text"
             formControlName="username"
-            placeholder="name"
+            placeholder="Name"
           />
-          <ng-container *ngIf="registerFormGroup.controls.username.invalid && registerFormGroup.controls.username.touched">
-            <small>username is required.</small>
-          </ng-container>
-        </div>
-      </div>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
-      <div nz-form-item >
-        <div nz-form-label nz-col nzSpan="6">
-          <label for="email">Email:</label>
-        </div>
-        <div nz-form-control nz-col >
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="registerFormGroup.controls.email"
+        [nzErrorTip]="emailErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="mail">
           <input
             nz-input
             id="email"
@@ -32,17 +34,17 @@
             formControlName="email"
             placeholder="Enter your email"
           />
-          <ng-container *ngIf="registerFormGroup.controls.email.invalid && registerFormGroup.controls.email.touched">
-            <small>Email is required.</small>
-          </ng-container>
-        </div>
-      </div>
-    
-      <div nz-form-item >
-        <div nz-form-label nz-col nzSpan="6">
-          <label for="password">Password:</label>
-        </div>
-        <div nz-form-control nz-col >
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="registerFormGroup.controls.password"
+        [nzErrorTip]="passwordErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="lock">
           <input
             nz-input
             id="password"
@@ -50,16 +52,34 @@
             formControlName="password"
             placeholder="Enter your password"
           />
-          <ng-container *ngIf="registerFormGroup.controls.password.invalid && registerFormGroup.controls.password.touched">
-            <small>Password is required.</small>
-          </ng-container>
-        </div>
-      </div>
-    
-      <div nz-form-item>
-        <button nz-button nzType="primary" [disabled]="registerFormGroup.invalid">register</button>
-      </div>
-      <a (click)="handleClickSignIn()" (keydown.enter)="handleClickSignIn()" tabindex="0" role="button">Sign in</a>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
-    </form>
-  </div>
+    <div nz-form-item>
+      <button nz-button nzType="primary" [disabled]="registerFormGroup.invalid">
+        Register
+      </button>
+    </div>
+
+    <a
+      (click)="handleClickSignIn()"
+      (keydown.enter)="handleClickSignIn()"
+      tabindex="0"
+      role="button"
+      >Sign in</a
+    >
+
+    <ng-template #usernameErrorTpl>
+      <small class="error-message">Username is required.</small>
+    </ng-template>
+
+    <ng-template #emailErrorTpl>
+      <small class="error-message">Email is required.</small>
+    </ng-template>
+
+    <ng-template #passwordErrorTpl>
+      <small class="error-message">Password is required.</small>
+    </ng-template>
+  </form>
+</div>

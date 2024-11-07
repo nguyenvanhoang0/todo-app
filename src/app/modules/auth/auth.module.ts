@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormPatchModule } from 'ng-zorro-antd/core/form';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, AuthComponent],
@@ -17,7 +19,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     ReactiveFormsModule,
     NzButtonModule,
     NzInputModule,
-    NzGridModule
+    NzGridModule,
+    NzFormPatchModule,
+    NzFormModule
   ],
 })
 export class AuthModule {}

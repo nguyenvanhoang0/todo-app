@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
@@ -16,10 +16,14 @@ import { environment } from 'src/environments/environment';
 })
 export class UploadImgComponent {
   selectedImage: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
+  @Output() fileUploaded = new EventEmitter<File>();
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0];
+      this.fileUploaded.emit(this.selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result;

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import _ from "lodash";
+import { isObject } from 'lodash-es';
 import { HttpRequestOptions } from '../types/api.types';
 
 @Injectable({
@@ -31,12 +31,12 @@ export class ApiCallerService {
   private _objectToRequestParams<T>(obj?: T): string {
     if (!obj) return '';
 
-    if (_.isObject(obj)) {
+    if (isObject(obj)) {
       return Object.entries(obj).reduce((prev, [key, value], index) => {
         prev += (index === 0 ? `?` : `&`) + `${key}=${value}`;
         return prev;
       }, '')
     }
-    return obj;
+    return String(obj);;
   }
 }

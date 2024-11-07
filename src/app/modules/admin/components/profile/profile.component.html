@@ -15,7 +15,7 @@
     <section class="user" *ngIf="userInfo$ | async as userInfo">
       <figure class="avatar">
         <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
-        <div class="edit" (click)="updateForm = true" (keydown.enter)="updateForm = true"
+        <div class="edit" (click)="handleClickUpdate()" (keydown.enter)="handleClickUpdate()"
         tabindex="0">
           <ts-icon [name]="'edit'" ></ts-icon>
         </div>
