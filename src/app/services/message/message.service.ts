@@ -12,21 +12,30 @@ export class MessageService {
 
   constructor(private message: NzMessageService) {}
 
-  createMessage(type: string, content: string | IValidationResponse): void {
+  createMessage(
+    type: string,
+    content: string | IValidationResponse,
+    prefix?: string
+  ): void {
     if (this.messageId && this.isLoading) {
       this.message.remove(this.messageId);
       this.isLoading = false;
-    }    
+    }
+
+    const finalPrefix =
+      prefix !== undefined
+        ? prefix
+        : '';
+        
+    let finalMessage: string;
 
     if (typeof content === 'object' && 'errors' in content) {
       const validationResponse = content as IValidationResponse;
-
-      if (validationResponse.errors.length > 0) {
-        const firstError = validationResponse.errors[0];
-        this.message.create(type, firstError.message);
-      }
+      finalMessage = `${finalPrefix}${validationResponse.message}`;
+      this.message.create(type, finalMessage);
     } else {
-      this.message.create(type, content);
+      finalMessage = `${finalPrefix}${content}`;
+      this.message.create(type, finalMessage);
     }
   }
 
