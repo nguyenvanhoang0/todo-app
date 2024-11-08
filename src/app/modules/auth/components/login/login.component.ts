@@ -7,6 +7,7 @@ import { AuthFormService } from '../../services/form/auth-form.service';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/core/store/_auth/_auth.actions';
+import { MessageService } from 'src/app/services/message/message.service';
 // import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _authFormService: AuthFormService,
     private _$actions: Actions,
-    private _store: Store
+    private _store: Store,
+    public message: MessageService,
   ) {}
 
   get loginFormControls() {

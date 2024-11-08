@@ -39,12 +39,8 @@ module.exports = [
       //   { allowObjectTypes: true },
       // ],S
 
-      "@typescript-eslint/consistent-type-definitions": [
-        "error", 
-        "type"
-      ]
-
-
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/interface-name-prefix': 'off',
     },
   },
   {
