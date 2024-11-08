@@ -1,30 +1,30 @@
 import {FormControl} from "@angular/forms";
 
-export interface ILoginFormGroup {
+export type ILoginFormGroup = {
   email: FormControl<string>,
   password: FormControl<string>
 }
 
 
-export interface IRegisterFormGroup {
+export type IRegisterFormGroup = {
   email: FormControl<string>,
   password: FormControl<string>,
   username: FormControl<string>,
 }
 
-export interface IUpdateUserFormGroup {
+export type IUpdateUserFormGroup = {
   email: FormControl<string>,
   username: FormControl<string>,
   avatar: FormControl<File | null>,
 }
 
-export interface IRegister {
+export type IRegister = {
   email: string,
   password: string,
   username: string
 }
 
-export interface IUpdateUser {
+export type IUpdateUser = {
   email: string,
   username: string,
   avatar: File

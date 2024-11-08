@@ -5,7 +5,7 @@ import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.servi
 import {Store} from "@ngrx/store";
 import { authActions } from '../store/_auth/_auth.actions';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
   const router = inject(Router)
   const store = inject(Store)
 

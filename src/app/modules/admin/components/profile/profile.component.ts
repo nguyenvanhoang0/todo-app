@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component} from '@angular/core';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
 import { Observable } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
@@ -14,9 +13,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  confirmationForm: boolean = false;
-  updateForm: boolean = false;
-  accountView: boolean = false;
+  confirmationForm = false;
+  updateForm = false;
+  accountView = false;
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
@@ -52,8 +51,8 @@ export class ProfileComponent {
 
   logout() {
     this._nzMsgService.success('sign out success');
-    localStorage.removeItem('accessToken'),
-    localStorage.removeItem('userInfo'), 
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userInfo');
     this._router.navigate(['/auth/signIn']);
   }
 }

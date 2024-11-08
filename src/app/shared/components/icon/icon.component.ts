@@ -4,7 +4,7 @@ import { IconNameTypes, IconThemeTypes } from './icon.types';
 
 
 @Component({
-  selector: 'ts-icon',
+  selector: 'app-icon',
   standalone: true,
   imports: [NzIconModule],
   templateUrl: './icon.component.html',
@@ -13,7 +13,4 @@ import { IconNameTypes, IconThemeTypes } from './icon.types';
 export class IconComponent {
   @Input() name: IconNameTypes = 'plus';
   @Input() theme: IconThemeTypes = 'outline';
-
-  constructor() {
-  }
 }

@@ -15,7 +15,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   styleUrl: './confirmation-form.component.scss'
 })
 export class ConfirmationFormComponent {
-  @Input() content: string = '';
+  @Input() content = '';
   @Output() confirm = new EventEmitter<boolean>();
 
   handlecConfirm(confirm : boolean){

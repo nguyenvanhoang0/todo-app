@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiCallerService } from 'src/app/core/services/api-caller.service';
 import { IUserInfoResponse } from 'src/app/core/store/_auth/_auth.types';
 import { environment } from 'src/environments/environment';
-import { map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { IRegister, IRegisterFormGroup, IUpdateUser } from '../../types/auth.types';
+import { IRegister, IUpdateUser } from '../../types/auth.types';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
-<div class="modal" (click)="changeVisible()">
-    <div class="content" (click)="blockFormClosing($event)">
+<div class="modal" (click)="changeVisible()" (keydown.enter)="changeVisible()" tabindex="0">
+    <div class="content" (click)="blockFormClosing($event)" (keydown.enter)="changeVisible()" tabindex="0">
         <ng-content ></ng-content>
     </div>
 </div>

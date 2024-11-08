@@ -9,7 +9,7 @@
         tabindex="0"
         role="button"
       >
-        logout<ts-icon name="logout"></ts-icon>
+        logout<app-icon name="logout"></app-icon>
       </a>
     </header>
     <section class="user" *ngIf="userInfo$ | async as userInfo">
@@ -17,7 +17,7 @@
         <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
         <div class="edit" (click)="handleClickUpdate()" (keydown.enter)="handleClickUpdate()"
         tabindex="0">
-          <ts-icon [name]="'edit'" ></ts-icon>
+          <app-icon [name]="'edit'" ></app-icon>
         </div>
       </figure>
       <section class="" (click)="accountView = true" (keydown.enter)="accountView = true"

@@ -7,6 +7,7 @@ import { AuthFormService } from '../../services/form/auth-form.service';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/core/store/_auth/_auth.actions';
+// import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
 
 @Component({
   selector: 'app-login',
@@ -47,6 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleClickSignUp() {
+    this._router.navigate(['auth/signUp']).then();
+  }
+
   subscribeLoginSuccessAction() {
     this._$actions.pipe(
       takeUntil(this._unsubscribe$),
@@ -56,12 +61,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     }))
   }
 
-  handleClickSignUp() {
-    this._router.navigate(['auth/signUp']).then();
-  }
+  // subscribeLoginSuccessAction() {
+  //   this._$actions.pipe(
+  //     takeUntilDestroyed(this), 
+  //     ofType(authActions.loginSuccess) 
+  //   ).subscribe(() => {
+  //     this._router.navigate(['admin']); 
+  //   });
+  // }
 
   ngOnDestroy(): void {
-    this._unsubscribe$.next();
+    this._unsubscribe$.next();  
     this._unsubscribe$.complete();
   }
 }

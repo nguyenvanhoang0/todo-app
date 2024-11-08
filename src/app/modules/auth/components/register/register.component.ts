@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IRegisterFormGroup } from '../../types/auth.types';
 import { AuthFormService } from '../../services/form/auth-form.service';
 import { Router } from '@angular/router';

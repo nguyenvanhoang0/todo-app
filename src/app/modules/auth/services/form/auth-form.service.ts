@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   ILoginFormGroup,
   IRegisterFormGroup,
-  IUpdateUser,
   IUpdateUserFormGroup,
 } from '../../types/auth.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

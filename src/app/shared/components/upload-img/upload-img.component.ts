@@ -1,11 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { IconComponent } from '../icon/icon.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-upload-img',

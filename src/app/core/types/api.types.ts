@@ -20,14 +20,14 @@ export enum EResponseStatus {
   FAIL = 'FAIL'
 }
 
-export interface IResponseTemplate<T = null> {
+export type IResponseTemplate<T = null> = {
   message: string,
   data: T,
   errors: IErrorResponse[],
   status: EResponseStatus
 }
 
-export interface IErrorResponse {
+export type IErrorResponse = {
   target: string,
   detail: string
 }

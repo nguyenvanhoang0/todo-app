@@ -1,5 +1,6 @@
 
-export type ActionProps<P, S = {}> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ActionProps<P, S = Record<string, any>> = {
   payload: P,
   ignoreStorageKeys?: (keyof S)[]
 }
@@ -10,23 +11,23 @@ export type AuthState = {
   userInfo?: IUserInfo
 }
 
-export interface IUserInfo {
+export type IUserInfo = {
   id: string,
   email: string,
   username: string,
   avatar: string,
 }
 
-export interface ILoginPayload {
+export type ILoginPayload = {
   email: string,
   password: string
 }
 
-export interface ILoginResponse {
+export type ILoginResponse = {
   access_token: string,
 }
 
-export interface IUserInfoResponse {
+export type IUserInfoResponse = {
   id: string,
   email: string,
   username: string,
