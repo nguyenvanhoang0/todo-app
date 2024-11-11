@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMessageType } from '../../core/enums/message.enums';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { IValidationResponse } from '../../types/message.type';
+import { IValidationResponse, message } from '../../types/message.type';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class MessageService {
   constructor(private message: NzMessageService) {}
 
   createMessage(
-    type: string,
+    type: message,
     content: string | IValidationResponse,
     prefix?: string
   ): void {
@@ -22,14 +22,10 @@ export class MessageService {
       this.isLoading = false;
     }
 
-    const finalPrefix =
-      prefix !== undefined
-        ? prefix
-        : '';
-        
+    const finalPrefix = prefix !== undefined ? prefix : '';
     let finalMessage: string;
 
-    if (typeof content === 'object' && 'errors' in content) {
+    if (typeof content === 'object') {
       const validationResponse = content as IValidationResponse;
       finalMessage = `${finalPrefix}${validationResponse.message}`;
       this.message.create(type, finalMessage);

@@ -4,8 +4,8 @@ import { AuthFormService } from '../../services/form/auth-form.service';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { AuthApiService } from '../../services/api/auth-api.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnDestroy {
     private _router: Router,
     private _authFormService: AuthFormService,
     private authApiService: AuthApiService,
-    private _nzMsgService: NzMessageService
+    private message: MessageService
   ) {}
 
   get registerFormControl() {
@@ -39,10 +39,14 @@ export class RegisterComponent implements OnDestroy {
         .Register(this.registerFormGroup.getRawValue())
         .subscribe(
           (response) => {
-            this._nzMsgService.success(response);
+            // this._nzMsgService.success(response);
+            this.message.createMessage('success', response);
+
           },
           (error) => {
-            this._nzMsgService.error(error);
+            // this._nzMsgService.error(error);
+            this.message.createMessage('error', error);
+
             console.error('Registration error:', error);
           }
         );
