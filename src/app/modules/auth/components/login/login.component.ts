@@ -8,6 +8,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 import { MessageService } from 'src/app/services/message/message.service';
+import { TranslateService } from '@ngx-translate/core';
 // import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
 
 @Component({
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _$actions: Actions,
     private _store: Store,
     public message: MessageService,
+    public translate: TranslateService
   ) {}
 
   get loginFormControls() {

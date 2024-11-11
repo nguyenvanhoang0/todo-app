@@ -39,14 +39,10 @@ export class RegisterComponent implements OnDestroy {
         .Register(this.registerFormGroup.getRawValue())
         .subscribe(
           (response) => {
-            // this._nzMsgService.success(response);
             this.message.createMessage('success', response);
-
           },
           (error) => {
-            // this._nzMsgService.error(error);
             this.message.createMessage('error', error);
-
             console.error('Registration error:', error);
           }
         );

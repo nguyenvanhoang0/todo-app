@@ -10,6 +10,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormPatchModule } from 'ng-zorro-antd/core/form';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { ChangeLanguageComponent } from 'src/app/shared/components/change-language/change-language.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, AuthComponent],
@@ -17,11 +19,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
+    TranslateModule,
     NzButtonModule,
     NzInputModule,
     NzGridModule,
     NzFormPatchModule,
-    NzFormModule
+    NzFormModule,
+    ChangeLanguageComponent
   ],
 })
 export class AuthModule {}

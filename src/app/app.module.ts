@@ -6,12 +6,18 @@ import { StoreModule } from '@ngrx/store';
 import { combinedReducers } from './core/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './core/store/_auth/_auth.effects';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { apiResolverInterceptor } from './core/interceptors/api-resolver.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations:[AppComponent],
@@ -24,10 +30,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     StoreModule.forRoot(combinedReducers),
     EffectsModule.forRoot([AuthEffect]),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     provideHttpClient(withInterceptors([apiResolverInterceptor])),
   ],
+  exports: [TranslateModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

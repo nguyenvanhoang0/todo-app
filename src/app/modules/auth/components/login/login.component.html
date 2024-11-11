@@ -1,6 +1,6 @@
 <div class="login">
   <form nz-form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
-    <div class="title">Welcome</div>
+    <div class="title">{{'WELCOME' | translate}}</div>
 
     <nz-form-item class="item">
       <nz-form-control
@@ -14,7 +14,7 @@
             id="email"
             type="email"
             formControlName="email"
-            placeholder="Enter your email"
+            [placeholder]="'EMAIL_PLACEHOLDER' | translate"
           />
         </nz-input-group>
       </nz-form-control>
@@ -32,7 +32,7 @@
             id="password"
             type="password"
             formControlName="password"
-            placeholder="Enter your password"
+            [placeholder]="'PASSWORD_PLACEHOLDER' | translate"
           />
         </nz-input-group>
       </nz-form-control>
@@ -40,7 +40,7 @@
 
     <div nz-form-item>
       <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid || message.isLoading">
-        Login
+        {{'LOGIN_BUTTON' | translate}}
       </button>
     </div>
     <a
@@ -48,14 +48,16 @@
       (keydown.enter)="handleClickSignUp()"
       tabindex="0"
       role="button"
-      >Sign up</a
     >
+      {{'SIGNUP_LINK' | translate}}
+    </a>
 
     <ng-template #emailErrorTpl>
-      <small class="error-message">Email is required.</small>
+      <small class="error-message">{{'EMAIL_REQUIRED' | translate}}</small>
     </ng-template>
     <ng-template #passwordErrorTpl>
-      <small class="error-message">Password is required.</small>
+      <small class="error-message">{{'PASSWORD_REQUIRED' | translate}}</small>
     </ng-template>
   </form>
 </div>
+

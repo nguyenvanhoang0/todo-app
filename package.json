@@ -21,6 +21,8 @@
     "@ngrx/component-store": "^18.1.1",
     "@ngrx/effects": "^18.1.1",
     "@ngrx/store": "^18.1.1",
+    "@ngx-translate/core": "^16.0.3",
+    "@ngx-translate/http-loader": "^16.0.0",
     "@rx-angular/template": "^18.0.3",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",

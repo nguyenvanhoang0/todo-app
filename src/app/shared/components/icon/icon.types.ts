@@ -36,6 +36,7 @@ export type IconNameTypes =
   | 'clear'
   | 'loading'
   | 'setting'
-  | 'logout';
+  | 'logout'
+  | 'global';
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';
