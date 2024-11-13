@@ -12,10 +12,17 @@
   >
     <ng-container *ngIf="userInfo">
       <div class="header">
-        <app-icon class="edit" name="edit"></app-icon>
+        <app-icon
+          class="edit"
+          name="edit"
+          (click)="handleClickUpdate()"
+          (keydown.enter)="handleClickUpdate()"
+          tabindex="0"
+        ></app-icon>
       </div>
       <nz-content>
-        <nz-avatar class="avatar"
+        <nz-avatar
+          class="avatar"
           [nzSize]="64"
           nzIcon="user"
           [nzSrc]="userInfo.avatar"

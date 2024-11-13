@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { IconComponent } from 'src/app/shared/components/icon/icon.component';
 import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-modal.component';
+import { ConfirmationFormComponent } from 'src/app/shared/components/confirmation-form/confirmation-form.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-mo
     NzAvatarModule,
     IconComponent,
     OpenModalComponent,
+    ConfirmationFormComponent
   ]
 })
 export class ProfileModule { }

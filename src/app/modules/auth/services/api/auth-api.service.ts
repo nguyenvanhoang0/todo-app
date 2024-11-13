@@ -3,7 +3,7 @@ import { ApiCallerService } from 'src/app/core/services/api-caller.service';
 import { IUserInfoResponse } from 'src/app/core/store/_auth/_auth.types';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { IRegister, IUpdateUser } from '../../types/auth.types';
+import { IRegister } from '../../types/auth.types';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,4 @@ export class AuthApiService {
     return this._apiCallerService.post<IRegister, string>(this.apiUrl.register , data);  
   }
 
-  updateUser(data : IUpdateUser): Observable<string> {    
-    return this._apiCallerService.put<IUpdateUser, string>(this.apiUrl.update , data);  
-  }
 }

@@ -14,13 +14,15 @@ export class AccountComponent {
 
   confirmationForm = false;
 
-  constructor(
-    private _router: Router,
-    private message: MessageService
-  ) {}
+  constructor(private _router: Router, private message: MessageService) {}
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation();
+  }
+
+  handleClickUpdate() {
+    this._router.navigate(['admin/update-me']).then();
+    this.Visible.emit(false);
   }
 
   onConfirm(confirm: boolean) {
@@ -33,7 +35,7 @@ export class AccountComponent {
   }
 
   logout() {
-    this.message.createMessage('success','sign out success');
+    this.message.createMessage('success', 'sign out success');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userInfo');
     this._router.navigate(['/auth/signIn']);

@@ -37,8 +37,9 @@ export class ProfileComponent {
   }
 
   handleClickUpdate() {
-    this._router.navigate(['auth/signIn']).then();
+    this._router.navigate(['admin/update-me']).then();
   }
+  
 
   onConfirm(confirm: boolean) {
     if (confirm === true) {

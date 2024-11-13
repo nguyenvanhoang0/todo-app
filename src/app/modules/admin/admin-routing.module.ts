@@ -13,6 +13,11 @@ const routes: Routes = [
           import('./modules/profile/profile.module').then((module) => module.ProfileModule),
       },
       {
+        path: 'update-me',
+        loadChildren: () =>
+          import('./modules/update-profile/update-profile.module').then((module) => module.UpdateProfileModule),
+      },
+      {
         path: '**',
         pathMatch: 'prefix',
         redirectTo: 'me'

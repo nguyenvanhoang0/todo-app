@@ -33,6 +33,7 @@
         flex: 1;
         align-items: end;
         justify-content: end;
+        cursor: pointer;
       }
     }
 
@@ -42,7 +43,7 @@
       flex-direction: column;
       padding: 36px;
       border-bottom: solid 1px gray;
-      
+
       .avatar {
         position: absolute;
         top: 32px;

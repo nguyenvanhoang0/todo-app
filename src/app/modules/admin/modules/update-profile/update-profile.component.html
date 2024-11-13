@@ -1,0 +1,70 @@
+<form nz-form [formGroup]="updateUserFormGroup" (ngSubmit)="onSubmit()">
+    <div class="title">{{ 'UPDATE_USER' | translate }}</div>
+  
+    <!-- Email Field -->
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="updateUserFormGroup.controls.email"
+        [nzErrorTip]="emailErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="mail">
+          <input
+            nz-input
+            id="email"
+            type="email"
+            formControlName="email"
+            [placeholder]="'EMAIL_PLACEHOLDER' | translate"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <!-- Username Field -->
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="updateUserFormGroup.controls.username"
+        [nzErrorTip]="usernameErrorTpl"
+      >
+        <nz-input-group nzPrefixIcon="user">
+          <input
+            nz-input
+            id="username"
+            type="text"
+            formControlName="username"
+            [placeholder]="'USERNAME_PLACEHOLDER' | translate"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <!-- Avatar Field -->
+    <nz-form-item class="item">
+      <nz-form-control
+        [nzSpan]="14"
+        [nzValidateStatus]="updateUserFormGroup.controls.avatar"
+        [nzErrorTip]="avatarErrorTpl"
+      >
+        <app-upload-img (fileUploaded)="onFileUploaded($event)"></app-upload-img>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <!-- Submit Button -->
+    <div nz-form-item>
+      <button nz-button nzType="primary" [disabled]="updateUserFormGroup.invalid || message.isLoading">
+        {{ 'UPDATE_BUTTON' | translate }}
+      </button>
+    </div>
+  
+    <ng-template #emailErrorTpl>
+      <small class="error-message">{{ 'EMAIL_REQUIRED' | translate }}</small>
+    </ng-template>
+    <ng-template #usernameErrorTpl>
+      <small class="error-message">{{ 'USERNAME_REQUIRED' | translate }}</small>
+    </ng-template>
+    <ng-template #avatarErrorTpl>
+      <small class="error-message">{{ 'AVATAR_REQUIRED' | translate }}</small>
+    </ng-template>
+  </form>
+  
