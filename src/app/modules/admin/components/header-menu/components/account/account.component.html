@@ -1,0 +1,45 @@
+<div
+  class="account"
+  (click)="Visible.emit(false)"
+  (keydown.enter)="Visible.emit(false)"
+  tabindex="0"
+>
+  <div
+    class="content"
+    (click)="blockFormClosing($event)"
+    (keydown.enter)="Visible.emit(false)"
+    tabindex="0"
+  >
+    <ng-container *ngIf="userInfo">
+      <div class="header">
+        <app-icon class="edit" name="edit"></app-icon>
+      </div>
+      <nz-content>
+        <nz-avatar class="avatar"
+          [nzSize]="64"
+          nzIcon="user"
+          [nzSrc]="userInfo.avatar"
+        ></nz-avatar>
+        <div class="username">{{ userInfo.username }}</div>
+        <div>{{ userInfo.email }}</div>
+      </nz-content>
+      <ul class="action">
+        <li>Other profile</li>
+        <li
+          (click)="confirmationForm = true"
+          (keydown.enter)="confirmationForm = true"
+          tabindex="0"
+        >
+          Log out
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</div>
+
+<app-confirmation-form
+  *ngIf="confirmationForm"
+  [content]="'Are you sure you want to sign out?'"
+  (confirm)="onConfirm($event)"
+>
+</app-confirmation-form>

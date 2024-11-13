@@ -23,10 +23,16 @@ import {
   NzSubMenuComponent,
 } from 'ng-zorro-antd/menu';
 import { NavBarBodyComponent } from './components/nav-bar/components/nav-bar-body/nav-bar-body.component';
-
+import { AccountComponent } from './components/header-menu/components/account/account.component';
 
 @NgModule({
-  declarations: [AdminComponent,HeaderMenuComponent,NavBarComponent ,NavBarBodyComponent],
+  declarations: [
+    AdminComponent,
+    HeaderMenuComponent,
+    NavBarComponent,
+    NavBarBodyComponent,
+    AccountComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -43,7 +49,7 @@ import { NavBarBodyComponent } from './components/nav-bar/components/nav-bar-bod
     NzIconDirective,
     NzSubMenuComponent,
     NzMenuDirective,
-    NzSiderComponent
-  ]
+    NzSiderComponent,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

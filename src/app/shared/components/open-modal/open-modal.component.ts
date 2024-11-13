@@ -11,10 +11,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './open-modal.component.scss'
 })
 export class OpenModalComponent {
-  @Output() previewVisible = new EventEmitter<boolean>();
+  @Output() Visible = new EventEmitter<boolean>();
 
   changeVisible() {
-    this.previewVisible.emit(false);
+    this.Visible.emit(false);
   }
 
   blockFormClosing(event: MouseEvent) {

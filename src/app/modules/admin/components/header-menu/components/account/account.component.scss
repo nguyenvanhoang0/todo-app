@@ -1,0 +1,68 @@
+.account {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background-color: rgba(255, 255, 255, 0);
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+  color: black;
+  line-height: 1.5715;
+  text-align: left;
+  padding: 64px 50px;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+
+  .content {
+    position: relative;
+    background-color: aliceblue;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: white;
+    flex-direction: column;
+
+    .header {
+      height: 64px;
+      background-color: #fff2fd;
+      display: flex;
+      padding: 12px;
+
+      .edit {
+        flex: 1;
+        align-items: end;
+        justify-content: end;
+      }
+    }
+
+    nz-content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      padding: 36px;
+      border-bottom: solid 1px gray;
+      
+      .avatar {
+        position: absolute;
+        top: 32px;
+      }
+
+      .username {
+        font-size: 24px;
+      }
+    }
+    .action {
+      li {
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          background-color: #fff2fd;
+          transition: 0.2s;
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,25 @@
-<header>
+<ng-container *ngIf="userInfo$ | async as userInfo">
+  <header>
     <div class="logo"><app-icon name="calendar"></app-icon></div>
     <div class="title">elysia</div>
     <ul>
       <li><app-icon></app-icon></li>
       <li><app-change-language></app-change-language></li>
-    <li><nz-avatar nzSize="default" nzIcon="user"></nz-avatar></li>
-  </ul>
-</header>
+      <li>
+        <nz-avatar
+          nzSize="default"
+          nzIcon="user"
+          (click)="accountView = true"
+          (keydown.enter)="accountView = true"
+          tabindex="0"
+          [nzSrc]="userInfo.avatar"
+        ></nz-avatar>
+      </li>
+    </ul>
+  </header>
+  <app-account
+    [userInfo]="userInfo"
+    *ngIf="accountView"
+    (Visible)="handleAccountView($event)"
+  ></app-account>
+</ng-container>
