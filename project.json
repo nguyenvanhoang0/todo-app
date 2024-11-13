@@ -34,6 +34,7 @@
         "styles": [
           "./src/styles.scss",
           "./src/globals.scss",
+          "./src/variables.scss",
           "./src/themes/theme.less"
         ],
         "scripts": []

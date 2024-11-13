@@ -1,19 +1,29 @@
-<div
-  class="icon-Language"
-  (click)="changeLanguageForm = true"
-  (keydown.enter)="changeLanguageForm = true"
-  tabindex="0"
->
-  <app-icon [name]="'global'"></app-icon>
-</div>
+<div class="container">
+  <div
+    class="icon-Language"
+    (click)="changeLanguageForm = true"
+    (keydown.enter)="changeLanguageForm = true"
+    tabindex="0"
+  >
+    <app-icon [name]="'global'"></app-icon>
+  </div>
 
-<app-open-modal *ngIf="changeLanguageForm" (previewVisible)="openchangeLanguageForm($event)">
-<div class="title">Select language</div>
-  <div class="group-language">
-    <div class="item-language" *ngFor="let Language of listLanguage" (click)="changeLanguage(Language.code)"
-    (keydown.enter)="changeLanguage(Language.code)" [ngClass]="{'selected': language === Language.code}"
-    tabindex="0">
+  <app-open-modal
+    *ngIf="changeLanguageForm"
+    (previewVisible)="openchangeLanguageForm($event)"
+  >
+    <div class="title">Select language</div>
+    <div class="group-language">
+      <div
+        class="item-language"
+        *ngFor="let Language of listLanguage"
+        (click)="changeLanguage(Language.code)"
+        (keydown.enter)="changeLanguage(Language.code)"
+        [ngClass]="{ selected: language === Language.code }"
+        tabindex="0"
+      >
         {{ Language.label }}
       </div>
-  </div>
-</app-open-modal>
+    </div>
+  </app-open-modal>
+</div>

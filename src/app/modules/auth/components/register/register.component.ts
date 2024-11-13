@@ -35,6 +35,7 @@ export class RegisterComponent implements OnDestroy {
         }
       });
     } else {
+      this.message.createMessageloading();
       this.authApiService
         .Register(this.registerFormGroup.getRawValue())
         .subscribe(

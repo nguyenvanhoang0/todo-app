@@ -1,46 +1,52 @@
-.icon-Language {
-  padding: 8px 16px;
-  color: #1890ff;
-  background-color: white;
-  border-radius: 6px;
-  transition: 0.2s;
-
-  &:hover {
-    background-color: #1890ff;
-    color: white;
-    transition: 0.2s;
-  }
-}
-
-.title {
-    border-bottom: 1px solid gray;
-    padding: 12px 20px;
-    width: 100%;
-  }
-
-.group-language {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  padding: 20px;
-  gap: 12px;
-
-  .item-language {
-    padding: 20px;
-    border: 1px solid gray;
+.container {
+  color: black;
+  line-height: 1.5715;
+  text-align: left;
+  
+  .icon-Language {
+    padding: 8px 16px;
+    color: #1890ff;
+    background-color: white;
     border-radius: 6px;
-    cursor: pointer;
     transition: 0.2s;
-    text-align: center;
-
-    &.item-language.selected {
-      background-color: #007bff;
-      color: white;
-    }
 
     &:hover {
       background-color: #1890ff;
       color: white;
       transition: 0.2s;
+    }
+  }
+
+  .title {
+    border-bottom: 1px solid gray;
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  .group-language {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 20px;
+    gap: 12px;
+
+    .item-language {
+      padding: 20px;
+      border: 1px solid gray;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+
+      &.item-language.selected {
+        background-color: #007bff;
+        color: white;
+      }
+
+      &:hover {
+        background-color: #1890ff;
+        color: white;
+        transition: 0.2s;
+      }
     }
   }
 }

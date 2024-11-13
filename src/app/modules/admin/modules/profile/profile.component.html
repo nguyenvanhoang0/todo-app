@@ -2,15 +2,6 @@
   <article class="content">
     <header class="title">
       <p>welcome</p>
-      <a
-        class="out"
-        (click)="confirmationForm = true"
-        (keydown.enter)="confirmationForm = true"
-        tabindex="0"
-        role="button"
-      >
-        logout<app-icon name="logout"></app-icon>
-      </a>
     </header>
     <section class="user" *ngIf="userInfo$ | async as userInfo">
       <figure class="avatar">
@@ -32,20 +23,13 @@
   </article>
 </section>
 
-<app-confirmation-form
-  *ngIf="confirmationForm"
-  [content]="'Are you sure you want to sign out?'"
-  (confirm)="onConfirm($event)"
->
-</app-confirmation-form>
-
-<app-open-modal *ngIf="accountView" (previewVisible)="handleAccountView($event)">
+<!-- <app-open-modal *ngIf="accountView" (previewVisible)="handleAccountView($event)">
   <app-account></app-account>
   shafđfhhzfhgv
-</app-open-modal>
+</app-open-modal> -->
 
 <app-open-modal *ngIf="updateForm" (previewVisible)="openUpdateForm($event)">
   <div class="update">
-    <app-upload-img></app-upload-img>
+    <!-- <app-upload-img></app-upload-img> -->
   </div>
 </app-open-modal>

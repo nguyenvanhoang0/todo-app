@@ -1,0 +1,34 @@
+<ul nz-menu nzMode="inline">
+    <ng-container
+      *ngTemplateOutlet="menuTpl; context: { $implicit: MAIN_ROUTES }"></ng-container>
+    <ng-template #menuTpl let-menus>
+      <ng-container *ngFor="let menu of menus">
+        <li
+          *ngIf="!menu.children"
+          [nzMatchRouter]="true"
+          [nzPaddingLeft]="menu.level * 24"
+          [routerLinkActive]="menu.route"
+          [routerLink]="menu.route"
+          nz-menu-item
+        >
+          <div class="d-flex flex-dir-row gap-16"
+          >
+            <span *ngIf="menu.icon" [nzType]="menu.icon" nz-icon></span>
+            <span>{{ menu.title }}</span>
+          </div>
+        </li>
+        <li
+          *ngIf="menu.children"
+          [nzIcon]="menu.icon"
+          [nzPaddingLeft]="menu.level * 24"
+          [nzTitle]="menu.title"
+          nz-submenu
+        >
+          <ul>
+            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }"></ng-container>
+          </ul>
+        </li>
+      </ng-container>
+    </ng-template>
+  </ul>
+  

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpdateProfileComponent } from './update-profile.component';
+import { NavBarBodyComponent } from './nav-bar-body.component';
 
-describe('UpdateProfileComponent', () => {
-  let component: UpdateProfileComponent;
-  let fixture: ComponentFixture<UpdateProfileComponent>;
+describe('NavBarBodyComponent', () => {
+  let component: NavBarBodyComponent;
+  let fixture: ComponentFixture<NavBarBodyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpdateProfileComponent],
+      imports: [NavBarBodyComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UpdateProfileComponent);
+    fixture = TestBed.createComponent(NavBarBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

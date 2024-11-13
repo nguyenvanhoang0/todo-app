@@ -1,0 +1,17 @@
+<nz-layout>
+  <nz-header>
+    <div *ngIf="userInfo$ | async as userInfo" class="header">
+      <div class="avatar">
+        <nz-avatar nzSize="default" nzIcon="user"></nz-avatar>
+      </div>
+      <div class="user-info">
+        <span class="userName">{{ userInfo?.username |  titlecase }}</span>
+        <span class="email">{{ userInfo?.email |  titlecase }}</span>
+      </div>
+    </div>
+  </nz-header>
+  
+  <nz-content>
+    <app-nav-bar-body/>
+  </nz-content>
+</nz-layout>
