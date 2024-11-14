@@ -38,6 +38,9 @@ export type IconNameTypes =
   | 'setting'
   | 'logout'
   | 'global'
-  | 'upload';
+  | 'upload'
+  | 'lock'
+  | 'book'
+  | 'folder';
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';

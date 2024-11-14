@@ -4,13 +4,15 @@ import { ConfirmationFormComponent } from './components/confirmation-form/confir
 import { OpenModalComponent } from './components/open-modal/open-modal.component';
 import { UploadImgComponent } from './components/upload-img/upload-img.component';
 import { ChangeLanguageComponent } from './components/change-language/change-language.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 const COMPONENTS = [
   IconComponent,
   ConfirmationFormComponent,
   OpenModalComponent,
   UploadImgComponent,
-  ChangeLanguageComponent
+  ChangeLanguageComponent,
+  EmptyComponent
 ]
 
 @NgModule({

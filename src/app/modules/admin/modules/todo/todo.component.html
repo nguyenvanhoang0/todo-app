@@ -1,1 +1,10 @@
-<p>todo works!</p>
+<div [ngClass]="buckets.length > 0 ? 'content' : ''">
+  @for (bucket of buckets; track bucket.title) {
+  <div class="bucket">
+    <p>{{ bucket.title }}</p>
+    <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
+  </div>
+  } @empty {
+  <app-empty></app-empty>
+  }
+</div>

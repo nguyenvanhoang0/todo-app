@@ -4,10 +4,12 @@ import { API_NOT_ATTACH_ACCESS_TOKEN } from '../constants/api.constants';
 
 export const apiResolverInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const accessToken = localStorage.getItem("accessToken");
+  const bearerToken = `Bearer ${accessToken}`;
+
   const [reqApi] = req.url.split('?')
   if (accessToken && !API_NOT_ATTACH_ACCESS_TOKEN.some(endpoint => reqApi.endsWith(endpoint))) {
     const reqWithHeader = req.clone({
-      headers: req.headers.set('Authorization', accessToken)
+      headers: req.headers.set('Authorization', bearerToken)
         .set('ngrok-skip-browser-warning', 'true'),
     })
 
