@@ -1,5 +1,18 @@
 <div class="image-upload">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  <div
+    class="upload"
+    (click)="fileInput.click()"
+    (keydown.enter)="fileInput.click()"
+    tabindex="0"
+  >
+    <app-icon *ngIf="!selectedImage"></app-icon>
     <img *ngIf="selectedImage" [src]="selectedImage" alt="Selected Image" />
   </div>
-  
+  <input
+    type="file"
+    #fileInput
+    (change)="onFileSelected($event)"
+    accept="image/*"
+    style="display: none"
+  />
+</div>

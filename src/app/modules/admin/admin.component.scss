@@ -3,23 +3,18 @@
   }
   
   nz-header {
-    background: var(--pink12);
     color: #fff;
   }
-  
-  nz-sider {
-    background: var(--white);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  }
+ 
   
   .ant-layout-content {
     padding: 32px;
     overflow-y: auto;
   
     .content-wrapper {
-      background: #fff;
+      // background: #fff;
       min-height: 50px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
   }
   

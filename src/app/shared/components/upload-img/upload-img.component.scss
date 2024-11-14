@@ -1,0 +1,20 @@
+.upload {
+  width: 128px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed gray;
+  transition: 0.6s;
+
+  &:hover {
+    border: 1px solid var(--blue12);
+    transition: 0.6s;
+    box-shadow: 0 2px 10px var(--blue2);
+  }
+
+  img{
+    width: 100%;
+    height: auto;
+  }
+}

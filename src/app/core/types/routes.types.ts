@@ -7,9 +7,9 @@ export const MAIN_ROUTES: IRoute[] = [
     title: 'My Profile'
   },
   {
-    title: 'bala',
-    icon: 'deployment-unit',
-    route: ['bala'],
+    title: 'todo',
+    icon: 'calendar',
+    route: ['todo'],
   },
   {
     title: 'User',

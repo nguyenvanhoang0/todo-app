@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "themes/palettes";
-@import "themes/share";
-@import "ng-zorro-antd/ng-zorro-antd.min.css";
+@import 'themes/palettes';
+@import 'themes/share';
+@import 'ng-zorro-antd/ng-zorro-antd.min.css';
 // @import "ng-zorro-antd/style/index.min.css";
 // @import "ng-zorro-antd/input/style/index.min.css";
 
@@ -13,20 +13,34 @@ html {
   padding: 0;
   margin: 0;
 
-  address, dl, ol, p, pre, ul {
+  address,
+  dl,
+  ol,
+  p,
+  pre,
+  ul {
     margin-bottom: 0;
   }
 
   box-sizing: border-box;
 }
 
-button, input {
+button,
+input {
   line-height: normal;
   font-size: unset;
 }
 
-ul{
-  li{
+ul {
+  li {
     list-style-type: none;
   }
+}
+
+.ant-col-14 {
+  max-width: 100%;
+}
+
+.ant-menu{
+  background-color: rgba(255, 255, 255, 0);
 }

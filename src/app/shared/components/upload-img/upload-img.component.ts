@@ -8,12 +8,13 @@ import { IconComponent } from '../icon/icon.component';
   standalone: true,
   imports: [CommonModule, NzUploadModule, IconComponent],
   templateUrl: './upload-img.component.html',
-  styleUrl: './upload-img.component.css',
+  styleUrl: './upload-img.component.scss',
 })
 export class UploadImgComponent {
   selectedImage: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
   @Output() fileUploaded = new EventEmitter<File>();
+  @Output() Uploaded = new EventEmitter<string | ArrayBuffer | null>();
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -23,6 +24,8 @@ export class UploadImgComponent {
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result;
+        this.Uploaded.emit(reader.result);
+
       };
       reader.readAsDataURL(input.files[0]);
     }

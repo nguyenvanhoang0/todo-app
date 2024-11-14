@@ -17,9 +17,9 @@ export class ApiCallerService {
     );
   }
 
-  public post<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {
+  public post<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {   
     console.log("body",body);
-    
+
     return this._httpClient.post<U>(
       environment.apiUrl + endpoint,
       body || {},

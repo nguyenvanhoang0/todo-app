@@ -18,6 +18,11 @@ const routes: Routes = [
           import('./modules/update-profile/update-profile.module').then((module) => module.UpdateProfileModule),
       },
       {
+        path: 'todo',
+        loadChildren: () =>
+          import('./modules/todo/todo.module').then((module) => module.TodoModule),
+      },
+      {
         path: '**',
         pathMatch: 'prefix',
         redirectTo: 'me'
