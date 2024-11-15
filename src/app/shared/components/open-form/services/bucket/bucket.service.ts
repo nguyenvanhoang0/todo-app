@@ -25,4 +25,10 @@ export class BucketService {
       bucket
     );
   }
+
+  deleteBucket(id: number): Observable<string> {
+    return this.apiCallerService.delete<void, string>(
+      `${this.apiUrl.updateBucket}/${id}`
+    );
+  }
 }

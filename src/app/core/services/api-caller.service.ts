@@ -40,6 +40,13 @@ export class ApiCallerService {
     );
   }
 
+  public delete<T, U>( endpoint: string,body?: T, options?: HttpRequestOptions) {
+    return this._httpClient.delete<U>(environment.apiUrl + endpoint, {
+      body: body || {},
+      ...options,
+    });
+  }
+
   private _objectToRequestParams<T>(obj?: T): string {
     if (!obj) return '';
 

@@ -22,7 +22,7 @@
           (complete)="done()"
           (change)="changeValue()"
         ></app-add-bucket-form>
-        
+
         <app-edit-bocket-form
           *ngSwitchCase="'edit bucket'"
           (complete)="done()"
@@ -30,6 +30,14 @@
           [id]="id"
         >
         </app-edit-bocket-form>
+
+        <app-delete-form
+          *ngSwitchCase="'delete'"
+          [id]="id"
+          (complete)="done()"
+          (change)="changeValue()"
+          [delete]="delete"
+        ></app-delete-form>
       </ng-container>
     </ng-container>
   </div>

@@ -31,13 +31,14 @@ export class TodoContentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe(() => this.getAllTodo());
+    this.eventSubscription = this._eventService.event$.subscribe(() =>
+      this.getAllTodo()
+    );
 
     this.getAllTodo();
   }
 
   getAllTodo(): void {
-    // this.buckets = [];
     this.message.createMessageloading(false);
 
     this.subscriptions.add(
@@ -50,7 +51,7 @@ export class TodoContentComponent implements OnInit, OnDestroy {
         .subscribe(
           (response) => {
             this.buckets = response.data;
-            this.message.createMessage('success', 'loading success','',false);
+            this.message.createMessage('success', 'loading success', '', false);
           },
           (error) => {
             this.message.createMessage('error', error);
@@ -68,4 +69,5 @@ export class TodoContentComponent implements OnInit, OnDestroy {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
-  }}
+  }
+}

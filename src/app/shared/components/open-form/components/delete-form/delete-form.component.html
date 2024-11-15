@@ -1,0 +1,8 @@
+<div class="delete-form">
+    <p class="title">confirm delete</p>
+<p>Are you sure delete this {{delete}} with id : {{id}}</p>
+<div class="group-button">
+    <button nz-button nzType="text" (click)="done(Message.CANCEL)">Cancel</button>
+    <button nz-button nzType="primary" type="button" nzDanger (click)="onDelete()">Delete</button>
+</div>
+</div>

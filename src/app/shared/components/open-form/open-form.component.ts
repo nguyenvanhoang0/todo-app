@@ -10,6 +10,7 @@ import { ConfirmationFormComponent } from '../confirmation-form/confirmation-for
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { AddBucketFormComponent } from './components/add-bucket-form/add-bucket-form.component';
 import { EditBocketFormComponent } from './components/edit-bocket-form/edit-bocket-form.component';
+import { DeleteFormComponent } from './components/delete-form/delete-form.component';
 
 @Component({
   selector: 'app-open-form',
@@ -21,6 +22,7 @@ import { EditBocketFormComponent } from './components/edit-bocket-form/edit-bock
     ConfirmationFormComponent,
     AddBucketFormComponent,
     EditBocketFormComponent,
+    DeleteFormComponent,
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
