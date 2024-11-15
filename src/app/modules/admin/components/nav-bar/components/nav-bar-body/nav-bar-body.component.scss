@@ -18,10 +18,6 @@
   .ant-menu-submenu-title:active {
     background-color: var(--red2);
     color: var(--pink12);
-
-    // &:hover {
-    //   color: var(--white);
-    // }
   }
 
   .ant-menu-submenu:hover
@@ -63,6 +59,5 @@
   .ant-menu-inline.ant-menu-root .ant-menu-item {
     margin: 0;
     padding: 26px 0;
-    // border-bottom: 1px solid #d9d5d5;
   }
 }

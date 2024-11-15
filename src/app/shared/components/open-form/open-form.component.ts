@@ -62,9 +62,7 @@ export class OpenFormComponent implements OnDestroy {
     }
   }
 
-  changeValue() {
-    console.log("aaaaaaaaaa");
-    
+  changeValue() {    
     if (this.change === false) {
       this.change = true;
     }

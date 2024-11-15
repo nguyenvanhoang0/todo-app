@@ -24,7 +24,6 @@ export class TodoDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
-      console.log(this.todoId);
       this.getBucketDetails(this.todoId)
     });
   }

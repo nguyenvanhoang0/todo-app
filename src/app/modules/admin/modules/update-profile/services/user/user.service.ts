@@ -12,10 +12,7 @@ export class UserService {
 
   constructor(private _apiCallerService: ApiCallerService) { }
 
-
-  updateUser(data : IUpdateUser): Observable<string> {    
-    console.log(data);
-    
+  updateUser(data : IUpdateUser): Observable<string> {        
     return this._apiCallerService.post<IUpdateUser, string>(this.apiUrl.update , data);  
   }
 }

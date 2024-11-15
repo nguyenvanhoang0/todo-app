@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.scss',
 })
-export class UpdateProfileComponent implements OnDestroy ,OnInit {
+export class UpdateProfileComponent implements OnDestroy, OnInit {
   updateUserFormGroup: FormGroup<IUpdateUserFormGroup> =
     this._updateUserService.UpdateUserGroup;
   private _unsubscribe$ = new Subject<void>();
@@ -48,8 +48,6 @@ export class UpdateProfileComponent implements OnDestroy ,OnInit {
   }
   onFileUploaded(file: File) {
     this.updateUserFormGroup.controls.avatar.setValue(file);
-    console.log(file);
-    console.log(this.updateUserFormGroup.getRawValue());
   }
 
   onSubmit() {
