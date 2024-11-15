@@ -1,0 +1,30 @@
+<p class="title">add Bucket</p>
+<div>
+  <form nz-form (ngSubmit)="onSubmit($event)">
+    <div class="basic">
+      <app-input-field
+        id="title"
+        label="title"
+        [(value)]="bucket.title"
+        type="text"
+        [required]="true"
+      >
+      </app-input-field>
+
+      <app-input-field
+        id="public"
+        [(value)]="bucket.public"
+        [optionValues]="[false, true]"
+        [labelValues]="['private', 'public']"
+        [required]="true"
+      >
+      </app-input-field>
+    </div>
+    <div class="group-button">
+      <button nz-button nzType="text" type="reset">Reset</button>
+      <button nz-button nzType="primary" type="submit" class="submit" nzDanger>
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

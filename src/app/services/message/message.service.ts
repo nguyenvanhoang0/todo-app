@@ -15,30 +15,33 @@ export class MessageService {
   createMessage(
     type: message,
     content: string | IValidationResponse,
-    prefix?: string
+    prefix?: string,
+    message = true
   ): void {
     if (this.messageId && this.isLoading) {
       this.message.remove(this.messageId);
       this.isLoading = false;
     }
-
-    const finalPrefix = prefix !== undefined ? prefix : '';
-    let finalMessage: string;
-
-    if (typeof content === 'object') {
-      const validationResponse = content as IValidationResponse;
-      finalMessage = `${finalPrefix}${validationResponse.message}`;
-      this.message.create(type, finalMessage);
-    } else {
-      finalMessage = `${finalPrefix}${content}`;
-      this.message.create(type, finalMessage);
+    if (message) {
+      const finalPrefix = prefix !== undefined ? prefix : '';
+      let finalMessage: string;
+      if (typeof content === 'object') {
+        const validationResponse = content as IValidationResponse;
+        finalMessage = `${finalPrefix}${validationResponse.message}`;
+        this.message.create(type, finalMessage);
+      } else {
+        finalMessage = `${finalPrefix}${content}`;
+        this.message.create(type, finalMessage);
+      }
     }
   }
 
-  createMessageloading(): void {
+  createMessageloading(messageView = true): void {
     this.isLoading = true;
-    this.messageId = this.message.loading(EMessageType.LOADING, {
-      nzDuration: 0,
-    }).messageId;
+    if (messageView) {
+      this.messageId = this.message.loading(EMessageType.LOADING, {
+        nzDuration: 0,
+      }).messageId;
+    }
   }
 }

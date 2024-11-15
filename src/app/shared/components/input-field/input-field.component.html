@@ -1,0 +1,32 @@
+<div class="input-field">
+  <label [attr.for]="id"
+    >{{ label }}
+    <p *ngIf="required === true && label">*</p></label
+  >
+  <nz-input-group>
+    <input
+      nz-input
+      *ngIf="!optionValues"
+      [type]="passwordVisible ? 'text' : type"
+      [(ngModel)]="value"
+      (ngModelChange)="valueChange.emit($event)"
+      [required]="required"
+      [placeholder]="placeholder"
+    />
+  </nz-input-group>
+  <nz-radio-group
+    class="radio"
+    *ngIf="optionValues !== null"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+  >
+    <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
+    <label
+      nz-radio-button
+      *ngFor="let optionValue of optionValues; let i = index"
+      nz-radio
+      [nzValue]="optionValue"
+      >{{labelValues?.[i] || optionValue}}</label
+    >
+  </nz-radio-group>
+</div>

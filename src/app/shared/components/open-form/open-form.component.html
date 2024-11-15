@@ -1,0 +1,37 @@
+<button (click)="openForm()" nz-button nzType="primary" [ngClass]="buttonType">
+  <app-icon [name]="icon"></app-icon>
+  <p *ngIf="label">{{ formName }}</p>
+</button>
+<div
+  class="container"
+  *ngIf="currentForm === formName"
+  (click)="closeForm()"
+  (keydown.enter)="closeForm()"
+  tabindex="0"
+>
+  <div
+    class="content"
+    (click)="blockFormClosing($event)"
+    (keydown.enter)="closeForm()"
+    tabindex="0"
+  >
+    <ng-container *ngIf="currentForm === formName">
+      <ng-container [ngSwitch]="formName">
+
+        <app-add-bucket-form
+          *ngSwitchCase="'add bucket'"
+          (complete)="done()"
+          (change)="changeValue()"
+        ></app-add-bucket-form>
+        
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<app-confirmation-form
+  *ngIf="confirmationForm"
+  content="changes are not saved yet. Do you want to exit?"
+  (confirm)="closeConfirmationForm($event)"
+>
+</app-confirmation-form>

@@ -1,0 +1,12 @@
+<div [ngClass]="buckets.length > 0 ? 'content' : ''">
+    @for (bucket of buckets; track bucket.title) {
+    <div class="bucket">
+      <p>{{ bucket.title }}</p>
+      <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
+    </div>
+    } @empty { @if (message.isLoading) {<nz-skeleton
+      [nzActive]="true"
+    ></nz-skeleton
+    >}@else {<app-empty></app-empty>} }
+  </div>
+  
