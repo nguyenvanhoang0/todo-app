@@ -5,6 +5,7 @@ import { IBucket } from '../../types/todo.type';
 import { TodoService } from '../../services/todo/todo.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-content',
@@ -16,7 +17,7 @@ export class TodoContentComponent implements OnInit, OnDestroy {
   private eventSubscription!: Subscription;
 
   configurationParams: IQueryParams = {
-    limit: 10,
+    limit: 99,
     page: 1,
   };
 
@@ -25,7 +26,7 @@ export class TodoContentComponent implements OnInit, OnDestroy {
   constructor(
     private _todoService: TodoService,
     private _eventService: EventService,
-
+    private _router: Router,
     public message: MessageService
   ) {}
 
@@ -57,6 +58,10 @@ export class TodoContentComponent implements OnInit, OnDestroy {
           }
         )
     );
+  }
+
+  navigateToDetails(id: number) {
+    this._router.navigate(['admin/todo-details', id]);
   }
 
   ngOnDestroy() {

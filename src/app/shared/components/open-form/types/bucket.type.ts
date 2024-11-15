@@ -1,4 +1,4 @@
-export type Ibucket = {
+export type IBucketSimple = {
   title: string;
   public: boolean;
 };

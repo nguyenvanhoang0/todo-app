@@ -7,6 +7,7 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { IconComponent } from '../icon/icon.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { WordLimitDirective } from 'src/app/core/directive/word-limit.directive';
 
 @Component({
   standalone: true,
@@ -18,6 +19,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     IconComponent,
     NzSelectModule,
     NzRadioModule,
+    WordLimitDirective
   ],
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',

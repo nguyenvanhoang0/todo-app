@@ -10,8 +10,8 @@ export const environment = {
   bucketsEndpoint:{
     getBuckets: 'buckets',
     createBucket: 'buckets',
-    getBucketById: 'buckets/{id}',
-    updateBucket: 'buckets/{id}',
+    getBucketById: 'buckets/',
+    updateBucket: 'buckets',
     delete: 'buckets/{id}',
   },
   bucketitemsEndpoint:{

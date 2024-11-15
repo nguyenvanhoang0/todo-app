@@ -17,13 +17,19 @@
   >
     <ng-container *ngIf="currentForm === formName">
       <ng-container [ngSwitch]="formName">
-
         <app-add-bucket-form
           *ngSwitchCase="'add bucket'"
           (complete)="done()"
           (change)="changeValue()"
         ></app-add-bucket-form>
         
+        <app-edit-bocket-form
+          *ngSwitchCase="'edit bucket'"
+          (complete)="done()"
+          (change)="changeValue()"
+          [id]="id"
+        >
+        </app-edit-bocket-form>
       </ng-container>
     </ng-container>
   </div>

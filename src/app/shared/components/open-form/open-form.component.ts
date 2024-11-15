@@ -9,6 +9,7 @@ import { IconNameTypes } from '../icon/icon.types';
 import { ConfirmationFormComponent } from '../confirmation-form/confirmation-form.component';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { AddBucketFormComponent } from './components/add-bucket-form/add-bucket-form.component';
+import { EditBocketFormComponent } from './components/edit-bocket-form/edit-bocket-form.component';
 
 @Component({
   selector: 'app-open-form',
@@ -19,6 +20,7 @@ import { AddBucketFormComponent } from './components/add-bucket-form/add-bucket-
     IconComponent,
     ConfirmationFormComponent,
     AddBucketFormComponent,
+    EditBocketFormComponent,
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
@@ -29,7 +31,7 @@ export class OpenFormComponent implements OnDestroy {
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
-  @Input() id?: string;
+  @Input() id?: number;
   @Input() delete: 'Bucket' | 'Bucket item' = 'Bucket';
   @Output() complete = new EventEmitter<void>();
   change = false;

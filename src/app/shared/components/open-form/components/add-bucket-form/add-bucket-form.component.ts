@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InputFieldComponent } from '../../../input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
-import { Ibucket } from '../../types/bucket.type';
+import { IBucketSimple } from '../../types/bucket.type';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'src/app/services/message/message.service';
 import { BucketService } from '../../services/bucket/bucket.service';
@@ -19,7 +19,7 @@ export class AddBucketFormComponent implements OnDestroy{
   @Output() complete = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
 
-  bucket: Ibucket = {
+  bucket: IBucketSimple = {
     title: '',
     public: false,
   };

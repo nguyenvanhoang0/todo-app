@@ -5,6 +5,8 @@ import { OpenModalComponent } from './components/open-modal/open-modal.component
 import { UploadImgComponent } from './components/upload-img/upload-img.component';
 import { ChangeLanguageComponent } from './components/change-language/change-language.component';
 import { EmptyComponent } from './components/empty/empty.component';
+import { TextComponent } from './components/text/text.component';
+import { OpenFormComponent } from './components/open-form/open-form.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -12,7 +14,9 @@ const COMPONENTS = [
   OpenModalComponent,
   UploadImgComponent,
   ChangeLanguageComponent,
-  EmptyComponent
+  EmptyComponent,
+  TextComponent,
+  OpenFormComponent
 ]
 
 @NgModule({

@@ -23,6 +23,11 @@ const routes: Routes = [
           import('./modules/todo/todo.module').then((module) => module.TodoModule),
       },
       {
+        path: 'todo-details/:id',
+        loadChildren: () =>
+          import('./modules/todo-details/todo-details.module').then((module) => module.TodoDetailsModule),
+      },
+      {
         path: '**',
         pathMatch: 'prefix',
         redirectTo: 'me'

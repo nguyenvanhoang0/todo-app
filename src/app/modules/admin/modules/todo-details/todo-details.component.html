@@ -1,0 +1,6 @@
+@if (bucket) {
+<div>
+  {{ bucket.title }}
+</div>
+}
+<app-open-form [formName]="'edit bucket'" [icon]="'edit'" [id]="bucket.id"> </app-open-form>

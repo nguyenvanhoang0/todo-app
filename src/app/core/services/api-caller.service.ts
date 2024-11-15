@@ -17,8 +17,8 @@ export class ApiCallerService {
     );
   }
 
-  public post<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {   
-    console.log("body",body);
+  public post<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {
+    console.log('body', body);
 
     return this._httpClient.post<U>(
       environment.apiUrl + endpoint,
@@ -34,11 +34,10 @@ export class ApiCallerService {
       options
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public patch<U>(endpoint: string, body?: any, options?: HttpRequestOptions) {
+  public patch<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {
     return this._httpClient.patch<U>(
       environment.apiUrl + endpoint,
-      body,
+      body || {},
       options
     );
   }

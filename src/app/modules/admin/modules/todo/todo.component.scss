@@ -1,5 +1,10 @@
-.container{
+.container {
   display: flex;
   gap: 24px;
-  flex-direction: column;
+
+  .todo-content {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+  }
 }
