@@ -11,16 +11,6 @@ export const MAIN_ROUTES: IRoute[] = [
     icon: 'calendar',
     route: ['todo'],
   },
-  {
-    title: 'User',
-    icon: 'project',
-    route: ['user'],
-  },
-  {
-    title: 'library',
-    icon: 'tag',
-    route: ['library'],
-  }
 ];
 
 

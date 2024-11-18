@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .content {
+    width: 50%;
+
+    .bucket {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid gray;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+
+      .title {
+        display: flex;
+        gap: 12px;
+        font-size: large;
+      }
+
+      .action {
+        display: flex;
+        gap: 12px;
+      }
+    }
+  }
+}

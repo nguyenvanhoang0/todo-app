@@ -24,7 +24,8 @@ export type IResponseTemplate<T = null> = {
   message: string,
   data: T,
   errors: IErrorResponse[],
-  status: EResponseStatus
+  status: EResponseStatus,
+  total: number
 }
 
 export type IErrorResponse = {

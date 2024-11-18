@@ -44,7 +44,7 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
           this.bucket = response.data;
         },
         (error) => {
-          console.error('Error fetching author details:', error);
+          console.error('Error Fetching Bucket Details:', error);
         }
       )
     );

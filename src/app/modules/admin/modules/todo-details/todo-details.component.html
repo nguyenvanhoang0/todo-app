@@ -1,7 +1,31 @@
-@if (bucket) {
-<div>
-  {{ bucket.title }}
-  <app-open-form [formName]="'edit bucket'" [icon]="'edit'" [id]="bucket.id" [label]="false"> </app-open-form>
-  <app-open-form [formName]="'delete'" [delete]="'Bucket'" [icon]="'delete'" [id]="bucket.id" [label]="false"> </app-open-form>
+<div class="container">
+  <div class="content">
+    @if (bucket) {
+    <div class="bucket">
+      <p class="title">
+        {{ bucket.title }}
+        <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
+      </p>
+      <div class="action">
+        <app-open-form
+          [formName]="'edit bucket'"
+          [icon]="'edit'"
+          [id]="bucket.id"
+          [label]="false"
+        >
+        </app-open-form>
+        <app-open-form
+          [buttonType]="'danger'"
+          [formName]="'delete'"
+          [delete]="'Bucket'"
+          [icon]="'delete'"
+          [id]="bucket.id"
+          [label]="false"
+        >
+        </app-open-form>
+      </div>
+    </div>
+    }
+    <app-todo-item></app-todo-item>
+  </div>
 </div>
-}

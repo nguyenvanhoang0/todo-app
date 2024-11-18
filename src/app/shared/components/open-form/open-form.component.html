@@ -23,6 +23,14 @@
           (change)="changeValue()"
         ></app-add-bucket-form>
 
+        <app-add-bucket-item-form
+          *ngSwitchCase="'add bucket items'"
+          (complete)="done()"
+          (change)="changeValue()"
+          [id]="id"
+        ></app-add-bucket-item-form>
+
+
         <app-edit-bocket-form
           *ngSwitchCase="'edit bucket'"
           (complete)="done()"
@@ -30,6 +38,16 @@
           [id]="id"
         >
         </app-edit-bocket-form>
+
+        <app-edit-bocket-item-form
+        *ngSwitchCase="'edit bucket items'"
+          (complete)="done()"
+          (change)="changeValue()"
+          [id]="id"
+          [parentId]="parentId"
+          >
+
+        </app-edit-bocket-item-form>
 
         <app-delete-form
           *ngSwitchCase="'delete'"

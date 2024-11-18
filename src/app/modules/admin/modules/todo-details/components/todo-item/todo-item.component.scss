@@ -1,0 +1,13 @@
+.container{
+    .group-bucket-item{
+        // padding: 24px;
+        text-align: left;
+        margin-top: 24px;
+
+        .bucket-item{
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

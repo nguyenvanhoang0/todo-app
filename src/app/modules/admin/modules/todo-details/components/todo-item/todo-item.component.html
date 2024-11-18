@@ -1,0 +1,27 @@
+<div class="container">
+  <app-open-form
+    [formName]="'add bucket items'"
+    [icon]="'plus'"
+    [id]="todoItemId"
+  >
+  </app-open-form>
+  <div class="group-bucket-item">
+    @for (bucket of bucketItem; track bucket.content) {
+    <div class="bucket-item">
+      <app-text [content]="bucket.content" [line]="1"></app-text>
+      <app-open-form
+          [formName]="'edit bucket items'"
+          [icon]="'edit'"
+          [id]="bucket.id"
+          [parentId]="bucket.parentId ? bucket.parentId : bucket.bucketId "
+          [label]="false"
+          [buttonType]="'text'"
+        >
+        </app-open-form>
+    </div>
+    } @empty { @if (message.isLoading) {<nz-skeleton
+      [nzActive]="true"
+    ></nz-skeleton
+    >}@else {<app-empty></app-empty>} }
+  </div>
+</div>

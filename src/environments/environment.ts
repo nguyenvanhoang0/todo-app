@@ -15,9 +15,9 @@ export const environment = {
     delete: 'buckets/{id}',
   },
   bucketitemsEndpoint:{
-    createBucketItem: 'buckets/{id}/items',
-    getBucketItem: 'buckets/{id}/items',
-    updateBucket: 'buckets/{id}/items/{id}',
-    delete: 'buckets/{id}/items/{id}',
+    createBucketItem: '/items',
+    getBucketItem: '/items',
+    updateBucket: '/items/{id}',
+    delete: '/items/{id}',
   },
 };

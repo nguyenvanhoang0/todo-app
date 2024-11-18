@@ -53,7 +53,7 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
           this.bucket = response.data;
         },
         (error) => {
-          console.error('Error fetching author details:', error);
+          console.error('Error get bucket details:', error);
         }
       )
     );
