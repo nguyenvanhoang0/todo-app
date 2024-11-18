@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { IBucketItem } from '../../types/todo-item.type';
 import { TodoItemService } from '../../services/todo-item/todo-item.service';
@@ -19,6 +19,8 @@ export class TodoItemComponent implements OnDestroy, OnInit {
   private eventSubscription!: Subscription;
 
   bucketItem!: IBucketItem[];
+  totalBuckets = 0;
+
   configurationParams: IQueryParams = {
     limit: 99,
     page: 1,
@@ -33,26 +35,36 @@ export class TodoItemComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     if(this.todoItemId){
-      this.eventSubscription = this._eventService.event$.subscribe(() => this.getBucketItems(this.todoItemId));
+      this.eventSubscription = this._eventService.event$.subscribe(() => this.getBucketItems());
 
     }
 
     this._route.paramMap.subscribe((params) => {
       this.todoItemId = Number(params.get('id'));
-      this.getBucketItems(this.todoItemId)
+      this.getBucketItems()
     });
   }
 
-  getBucketItems(id: number): void {
-    this.message.createMessageloading(false);
+  onPageChange(page: number): void {
+    this.configurationParams.page = page;
+    this.getBucketItems();
+  }
 
+  getBucketItems(): void {
     this.subscriptions.add(
       this._todoItemsService
-        .getBucketItems(id, this.configurationParams)
+        .getBucketItems(this.todoItemId, this.configurationParams)
+        .pipe(
+          finalize(() => {
+            this.message.createMessageloading(false);
+          })
+        )
         .subscribe(
           (response) => {
-            this.message.createMessage('success', 'loading success', '', false);
+            this.totalBuckets = response.total;
             this.bucketItem = response.data;
+            this.message.createMessage('success', 'loading success', '', false);
+
           },
           (error) => {
             this.message.createMessage('error', error);

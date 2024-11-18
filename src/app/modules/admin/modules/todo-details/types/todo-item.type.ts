@@ -4,6 +4,6 @@ export type IBucketItem = {
   parentId?: number;
   content: string;
   done: boolean;
-  createdAt: string;
+  createdAt: Date;
   updatedAt?: string;
 };

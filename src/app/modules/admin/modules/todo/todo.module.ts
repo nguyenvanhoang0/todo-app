@@ -10,6 +10,7 @@ import { TodoContentComponent } from './components/todo-content/todo-content.com
 import { OpenFormComponent } from 'src/app/shared/components/open-form/open-form.component';
 import { TextComponent } from 'src/app/shared/components/text/text.component';
 import { ItemContentComponent } from './components/item-content/item-content.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 
 @NgModule({
@@ -18,10 +19,11 @@ import { ItemContentComponent } from './components/item-content/item-content.com
     CommonModule,
     TodoRoutingModule,
     NzSkeletonModule,
+    NzPaginationModule,
     IconComponent,
     EmptyComponent,
     OpenFormComponent,
-    TextComponent
+    TextComponent,
   ]
 })
 export class TodoModule { }

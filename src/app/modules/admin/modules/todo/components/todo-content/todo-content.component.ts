@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { IBucket } from '../../types/todo.type';
 import { TodoService } from '../../services/todo/todo.service';
@@ -17,11 +17,12 @@ export class TodoContentComponent implements OnInit, OnDestroy {
   private eventSubscription!: Subscription;
 
   configurationParams: IQueryParams = {
-    limit: 99,
+    limit: 12,
     page: 1,
   };
 
   buckets: IBucket[] = [];
+  totalBuckets = 0;
 
   constructor(
     private _todoService: TodoService,
@@ -38,19 +39,24 @@ export class TodoContentComponent implements OnInit, OnDestroy {
     this.getAllTodo();
   }
 
-  getAllTodo(): void {
-    this.message.createMessageloading(false);
+  onPageChange(page: number): void {
+    this.configurationParams.page = page;
+    this.getAllTodo();
+  }
 
+  getAllTodo(): void {
     this.subscriptions.add(
       this._todoService
         .getBuckets(this.configurationParams)
-        // .pipe(
-        //   finalize(() => {
-        //   })
-        // )
+        .pipe(
+          finalize(() => {
+            this.message.createMessageloading(false);
+          })
+        )
         .subscribe(
           (response) => {
             this.buckets = response.data;
+            this.totalBuckets = response.total;
             this.message.createMessage('success', 'loading success', '', false);
           },
           (error) => {

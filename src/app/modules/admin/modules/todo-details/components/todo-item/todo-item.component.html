@@ -8,20 +8,32 @@
   <div class="group-bucket-item">
     @for (bucket of bucketItem; track bucket.content) {
     <div class="bucket-item">
-      <app-text [content]="bucket.content" [line]="1"></app-text>
+      <div>
+        <app-text [content]="bucket.content" [line]="1" class="content"></app-text>
+        <p class="time">{{ bucket.createdAt | timeAgo }}</p>
+      </div>
       <app-open-form
-          [formName]="'edit bucket items'"
-          [icon]="'edit'"
-          [id]="bucket.id"
-          [parentId]="bucket.parentId ? bucket.parentId : bucket.bucketId "
-          [label]="false"
-          [buttonType]="'text'"
-        >
-        </app-open-form>
+        [formName]="'edit bucket items'"
+        [icon]="'edit'"
+        [id]="bucket.id"
+        [parentId]="bucket.parentId ? bucket.parentId : bucket.bucketId"
+        [label]="false"
+        [buttonType]="'text'"
+      >
+      </app-open-form>
     </div>
     } @empty { @if (message.isLoading) {<nz-skeleton
       [nzActive]="true"
     ></nz-skeleton
     >}@else {<app-empty></app-empty>} }
+  </div>
+  <div class="pagination">
+    <nz-pagination
+      *ngIf="message.isLoading && bucketItem.length > 0 && totalBuckets > configurationParams.limit"
+      [nzPageIndex]="configurationParams.page"
+      [nzTotal]="totalBuckets"
+      [nzPageSize]="configurationParams.limit"
+      (nzPageIndexChange)="onPageChange($event)"
+    ></nz-pagination>
   </div>
 </div>

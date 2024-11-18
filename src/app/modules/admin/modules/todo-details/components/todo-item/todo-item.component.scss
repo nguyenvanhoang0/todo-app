@@ -7,7 +7,30 @@
         .bucket-item{
             padding: 6px 12px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            border-radius: 6px;
+            transition: 0.2s;
+
+            .content{
+                font-size: large;
+            }
+
+            .time{
+                font-size: x-small;
+            }
+
+            &:hover{
+                background-color: var(--red2);
+                // color: var(--pink12);
+                transition: 0.2s;
+            }
         }
     }
+
+    .pagination {
+        margin-top: 24px;
+        display: flex;
+      }
+      
 }

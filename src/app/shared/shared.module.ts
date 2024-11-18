@@ -7,6 +7,7 @@ import { ChangeLanguageComponent } from './components/change-language/change-lan
 import { EmptyComponent } from './components/empty/empty.component';
 import { TextComponent } from './components/text/text.component';
 import { OpenFormComponent } from './components/open-form/open-form.component';
+import { TimeAgoPipe } from '../core/pipe/time-ago.pipe';
 
 const COMPONENTS = [
   IconComponent,
@@ -20,9 +21,10 @@ const COMPONENTS = [
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [TimeAgoPipe],
   imports: [
-    COMPONENTS
-  ]
+    COMPONENTS,
+  ],
+  exports: [TimeAgoPipe],
 })
 export class SharedModule { }
