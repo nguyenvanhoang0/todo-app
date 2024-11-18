@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMessageType } from 'src/app/core/enums/message.enums';
 import { BucketService } from '../../services/bucket/bucket.service';
+import { BucketItemService } from '../../services/bucket-item/bucket-item.service';
 
 @Component({
   standalone: true,
@@ -18,6 +19,7 @@ import { BucketService } from '../../services/bucket/bucket.service';
 })
 export class DeleteFormComponent implements OnDestroy {
   @Input() id?: number;
+  @Input() parentId?: number;
   @Input() delete: 'Bucket' | 'Bucket item' = 'Bucket';
   @Output() complete = new EventEmitter<void>();
   Message=  EMessageType;
@@ -27,10 +29,13 @@ export class DeleteFormComponent implements OnDestroy {
   constructor(
     private _messageService: NzMessageService,
     private _bucketService: BucketService,
+    private _bucketItemService: BucketItemService,
   ) { }
 
   onDelete(): void {
     if (this.id) {
+      console.log(this.parentId);
+      
       switch (this.delete) {
         case 'Bucket':
           this._bucketService.deleteBucket(this.id).subscribe(
@@ -43,6 +48,19 @@ export class DeleteFormComponent implements OnDestroy {
               
             }
           );
+          break;
+          case 'Bucket item':
+          if(this.parentId){
+            this._bucketItemService.deleteBucketItem(this.id , this.parentId).subscribe(
+              () => {
+                this.done(EMessageType.SUCCESS)
+              },
+              error => {
+                this.done(EMessageType.ERROR)
+                console.log(error);
+              }
+            );
+          }
           break;
       }
     }

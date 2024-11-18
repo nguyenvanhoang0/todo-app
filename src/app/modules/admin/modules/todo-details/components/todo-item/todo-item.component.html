@@ -1,15 +1,18 @@
 <div class="container">
-  <app-open-form
-    [formName]="'add bucket items'"
-    [icon]="'plus'"
-    [id]="todoItemId"
-  >
-  </app-open-form>
   <div class="group-bucket-item">
     @for (bucket of bucketItem; track bucket.content) {
-    <div class="bucket-item">
+    <div
+      class="bucket-item"
+      (click)="openItemDetailsView(true, bucket)"
+      (keydown.enter)="openItemDetailsView(true, bucket)"
+      tabindex="0"
+    >
       <div>
-        <app-text [content]="bucket.content" [line]="1" class="content"></app-text>
+        <app-text
+          [content]="bucket.content"
+          [line]="1"
+          class="content"
+        ></app-text>
         <p class="time">{{ bucket.createdAt | timeAgo }}</p>
       </div>
       <app-open-form
@@ -22,14 +25,13 @@
       >
       </app-open-form>
     </div>
-    } @empty { @if (message.isLoading) {<nz-skeleton
-      [nzActive]="true"
-    ></nz-skeleton
-    >}@else {<app-empty></app-empty>} }
+
+    }
   </div>
+
   <div class="pagination">
     <nz-pagination
-      *ngIf="message.isLoading && bucketItem.length > 0 && totalBuckets > configurationParams.limit"
+      *ngIf="totalBuckets > configurationParams.limit"
       [nzPageIndex]="configurationParams.page"
       [nzTotal]="totalBuckets"
       [nzPageSize]="configurationParams.limit"
@@ -37,3 +39,11 @@
     ></nz-pagination>
   </div>
 </div>
+<app-open-modal
+  *ngIf="itemDetailsView"
+  (Visible)="handleItemDetailsView($event)"
+>
+  <app-todo-item-details
+    [bucketItem]="bucketSelectItem"
+  ></app-todo-item-details>
+</app-open-modal>

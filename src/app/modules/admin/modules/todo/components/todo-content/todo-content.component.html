@@ -9,13 +9,13 @@
     <app-text [content]="bucket.title" [line]="1"></app-text>
     <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
   </div>
-  } @empty { @if (message.isLoading) {<nz-skeleton
-    [nzActive]="true"
-  ></nz-skeleton
-  >}@else {<app-empty></app-empty>} }
+  } @empty { @if (message.isLoading) {
+  <nz-skeleton [nzActive]="true"></nz-skeleton>}@else {<app-empty></app-empty>}
+  }
 </div>
 <div class="pagination">
-  <nz-pagination *ngIf="message.isLoading && buckets.length > 0 && totalBuckets > configurationParams.limit"
+  <nz-pagination
+    *ngIf="message.isLoading && totalBuckets > configurationParams.limit"
     [nzPageIndex]="configurationParams.page"
     [nzTotal]="totalBuckets"
     [nzPageSize]="configurationParams.limit"

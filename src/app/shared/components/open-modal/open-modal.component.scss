@@ -9,10 +9,11 @@
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
 
 
     .content {
+        margin-top: 240px;
         position: fixed;
         background-color: white;
         border-radius: 8px;

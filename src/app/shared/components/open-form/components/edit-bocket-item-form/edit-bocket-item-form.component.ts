@@ -67,7 +67,7 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
     this._message.createMessageloading();
     if (this.id && this.parentId) {
       this._bucketItemService
-        .updateBucket(this.bucket, this.id, this.parentId)
+        .updateBucketItem(this.bucket, this.id, this.parentId)
         .subscribe(
           (response) => {
             this._message.createMessage('success', 'update success');

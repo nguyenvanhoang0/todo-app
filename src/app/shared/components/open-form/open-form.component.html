@@ -52,6 +52,7 @@
         <app-delete-form
           *ngSwitchCase="'delete'"
           [id]="id"
+          [parentId]="parentId"
           (complete)="done()"
           (change)="changeValue()"
           [delete]="delete"

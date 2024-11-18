@@ -11,9 +11,11 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { EmptyComponent } from 'src/app/shared/components/empty/empty.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { TodoItemDetailsComponent } from './components/todo-item-details/todo-item-details.component';
+import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-modal.component';
 
 @NgModule({
-  declarations: [TodoDetailsComponent, TodoItemComponent],
+  declarations: [TodoDetailsComponent, TodoItemComponent,TodoItemDetailsComponent],
   imports: [
     CommonModule,
     TodoDetailsRoutingModule,
@@ -21,6 +23,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     SharedModule,
     NzPaginationModule,
     OpenFormComponent,
+    OpenModalComponent,
     IconComponent,
     TextComponent,
     EmptyComponent,

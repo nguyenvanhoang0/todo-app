@@ -4,6 +4,10 @@ import { TodoDetailsService } from './services/todo/todo-details.service';
 import { Subscription } from 'rxjs';
 import { IBucket } from '../todo/types/todo.type';
 import { EventService } from '../../services/event/event.service';
+import { TodoItemService } from './services/todo-item/todo-item.service';
+import { IBucketItem } from './types/todo-item.type';
+import { IQueryParams } from '../../types/query-params.type';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -17,24 +21,39 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
   private eventSubscription!: Subscription;
 
   bucket!: IBucket;
+  bucketItem!: IBucketItem[];
+  totalBuckets = 0;
+
+  doneItems: IBucketItem[] = [];
+  notDoneItems: IBucketItem[] = [];
+
+  configurationParams: IQueryParams = {
+    limit: 99,
+    page: 1,
+  };
 
   constructor(
     private _route: ActivatedRoute,
     private _eventService: EventService,
-
-    private _todoDetailsService: TodoDetailsService
+    private _todoItemsService: TodoItemService,
+    private _todoDetailsService: TodoDetailsService,
+    public message: MessageService
   ) {}
 
   ngOnInit(): void {
-    if(this.todoId){
-      this.eventSubscription = this._eventService.event$.subscribe(() => this.getBucketDetails(this.todoId));
-
-    }
+      this.eventSubscription = this._eventService.event$.subscribe(() => this.getTodo());
 
     this._route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
-      this.getBucketDetails(this.todoId)
+      this.getTodo()
     });
+  }
+
+  getTodo(){
+    if(this.todoId){
+      this.getBucketDetails(this.todoId);
+      this.getBucketItems()
+    }
   }
 
   getBucketDetails(id: number): void {
@@ -48,6 +67,36 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
         }
       )
     );
+  }
+
+  getBucketItems(): void {
+    this.message.createMessageloading();
+
+    this.subscriptions.add(
+      this._todoItemsService
+        .getBucketItems(this.todoId, this.configurationParams)
+        // .pipe(
+        //   finalize(() => {
+        //   })
+        // )
+        .subscribe(
+          (response) => {
+            this.totalBuckets = response.total;
+            this.bucketItem = response.data;
+            this.filterBucketItems(response.data)
+            this.message.createMessage('success', 'loading success', '');
+          },
+          (error) => {
+            this.message.createMessage('error', error);
+            console.error('Error Fetching Bucket Items:', error);
+          }
+        )
+    );
+  }
+
+  filterBucketItems(bucketItem:  IBucketItem[]){
+    this.doneItems = bucketItem.filter((item) => item.done === true);
+    this.notDoneItems = bucketItem.filter((item) => item.done === false);
   }
 
   ngOnDestroy() {

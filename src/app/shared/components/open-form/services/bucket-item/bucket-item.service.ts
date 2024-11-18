@@ -22,10 +22,16 @@ export class BucketItemService {
     );
   }
 
-  updateBucket(bucketItem: IBucketItemSimple, id: number , parentId: number): Observable<string> {
+  updateBucketItem(bucketItem: IBucketItemSimple, id: number , parentId: number): Observable<string> {
     return this.apiCallerService.patch<IBucketItemSimple, string>(
       `${this.apiBucket.getBucketById}${parentId}${this.apiBucketItem.createBucketItem}/${id}`,
       bucketItem
+    );
+  }
+
+  deleteBucketItem(id: number, parentId: number): Observable<string> {
+    return this.apiCallerService.delete<void, string>(
+      `${this.apiBucket.getBucketById}${parentId}${this.apiBucketItem.createBucketItem}/${id}`
     );
   }
 }

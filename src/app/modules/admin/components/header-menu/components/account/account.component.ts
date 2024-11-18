@@ -14,7 +14,7 @@ export class AccountComponent {
 
   confirmationForm = false;
 
-  constructor(private _router: Router, private message: MessageService) {}
+  constructor(private _router: Router, private _message: MessageService) {}
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation();
@@ -35,7 +35,7 @@ export class AccountComponent {
   }
 
   logout() {
-    this.message.createMessage('success', 'sign out success');
+    this._message.createMessage('success', 'sign out success');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userInfo');
     this._router.navigate(['/auth/signIn']);

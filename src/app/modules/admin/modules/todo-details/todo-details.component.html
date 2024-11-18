@@ -25,7 +25,19 @@
         </app-open-form>
       </div>
     </div>
-    }
-    <app-todo-item></app-todo-item>
+    } @if(doneItems.length > 0 || notDoneItems.length > 0){
+    <app-open-form
+      [formName]="'add bucket items'"
+      [icon]="'plus'"
+      [id]="todoId"
+    >
+    </app-open-form>
+    <app-todo-item [bucketItem]="notDoneItems"></app-todo-item>
+    <app-todo-item [bucketItem]="doneItems"></app-todo-item>
+    }@else{ @if (message.isLoading) {
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+    }@else {
+    <app-empty></app-empty>
+    } }
   </div>
 </div>

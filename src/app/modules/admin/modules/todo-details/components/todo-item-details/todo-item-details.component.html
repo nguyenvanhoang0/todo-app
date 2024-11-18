@@ -1,0 +1,39 @@
+<div class="content" *ngIf="bucketItem">
+  <div class="text-content">
+    {{ bucketItem.content }}
+    <div class="action">
+      <app-open-form
+        [formName]="'edit bucket items'"
+        [icon]="'edit'"
+        [id]="bucketItem.id"
+        [parentId]="
+          bucketItem.parentId ? bucketItem.parentId : bucketItem.bucketId
+        "
+        [label]="false"
+        [buttonType]="'text'"
+      >
+      </app-open-form>
+      <app-open-form
+        [formName]="'delete'"
+        [delete]="'Bucket item'"
+        [icon]="'delete'"
+        [id]="bucketItem.id"
+        [parentId]="
+          bucketItem.parentId ? bucketItem.parentId : bucketItem.bucketId
+        "
+        [label]="false"
+        [buttonType]="'text'"
+      >
+      </app-open-form>
+    </div>
+  </div>
+  <div>
+    most recent changes:
+    {{
+      bucketItem.updatedAt
+        ? bucketItem.updatedAt
+        : (bucketItem.createdAt | timeAgo)
+    }}
+  </div>
+  <div>status : {{ bucketItem.done }}</div>
+</div>

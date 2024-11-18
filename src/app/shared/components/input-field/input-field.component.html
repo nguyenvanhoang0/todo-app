@@ -6,6 +6,8 @@
   <nz-input-group>
     <input
       nz-input
+      [id]="id"
+      [name]="id"
       *ngIf="!optionValues"
       [type]="passwordVisible ? 'text' : type"
       [(ngModel)]="value"

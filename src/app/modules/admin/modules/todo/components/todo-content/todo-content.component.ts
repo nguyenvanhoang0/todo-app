@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { finalize, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { IBucket } from '../../types/todo.type';
 import { TodoService } from '../../services/todo/todo.service';
@@ -45,14 +45,15 @@ export class TodoContentComponent implements OnInit, OnDestroy {
   }
 
   getAllTodo(): void {
+    this.message.createMessageloading(false);
+
     this.subscriptions.add(
       this._todoService
         .getBuckets(this.configurationParams)
-        .pipe(
-          finalize(() => {
-            this.message.createMessageloading(false);
-          })
-        )
+        // .pipe(
+        //   finalize(() => {
+        //   })
+        // )
         .subscribe(
           (response) => {
             this.buckets = response.data;

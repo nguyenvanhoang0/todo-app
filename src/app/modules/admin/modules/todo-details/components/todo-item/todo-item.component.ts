@@ -1,77 +1,43 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { finalize, Subscription } from 'rxjs';
-import { EventService } from 'src/app/modules/admin/services/event/event.service';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IBucketItem } from '../../types/todo-item.type';
-import { TodoItemService } from '../../services/todo-item/todo-item.service';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
-import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.scss',
 })
-export class TodoItemComponent implements OnDestroy, OnInit {
-  todoItemId = 1;
-
-  private subscriptions: Subscription = new Subscription();
-  private eventSubscription!: Subscription;
-
-  bucketItem!: IBucketItem[];
-  totalBuckets = 0;
-
-  configurationParams: IQueryParams = {
+export class TodoItemComponent implements OnDestroy{
+  @Input() bucketItem: IBucketItem[]=[];
+  @Input() totalBuckets = 0;
+  @Input() todoItemId = 0;
+  @Input() configurationParams:IQueryParams = {
     limit: 99,
     page: 1,
-  };
+  };;
+  @Output() page = new EventEmitter<number>();
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _eventService: EventService,
-    private _todoItemsService: TodoItemService,
-    public message: MessageService
-  ) {}
+  private eventSubscription!: Subscription;
 
-  ngOnInit(): void {
-    if(this.todoItemId){
-      this.eventSubscription = this._eventService.event$.subscribe(() => this.getBucketItems());
+  itemDetailsView = false;
+  bucketSelectItem?: IBucketItem;
 
-    }
-
-    this._route.paramMap.subscribe((params) => {
-      this.todoItemId = Number(params.get('id'));
-      this.getBucketItems()
-    });
-  }
+  // constructor(
+  // ) {}
 
   onPageChange(page: number): void {
     this.configurationParams.page = page;
-    this.getBucketItems();
   }
 
-  getBucketItems(): void {
-    this.subscriptions.add(
-      this._todoItemsService
-        .getBucketItems(this.todoItemId, this.configurationParams)
-        .pipe(
-          finalize(() => {
-            this.message.createMessageloading(false);
-          })
-        )
-        .subscribe(
-          (response) => {
-            this.totalBuckets = response.total;
-            this.bucketItem = response.data;
-            this.message.createMessage('success', 'loading success', '', false);
 
-          },
-          (error) => {
-            this.message.createMessage('error', error);
-            console.error('Error Fetching Bucket Items:', error);
-          }
-        )
-    );
+  handleItemDetailsView(value: boolean) {
+    this.itemDetailsView = value;
+  }
+
+  openItemDetailsView(value: boolean , bucketSelectItem:IBucketItem) {
+    this.itemDetailsView = value;
+    this.bucketSelectItem = bucketSelectItem
   }
 
   ngOnDestroy() {
