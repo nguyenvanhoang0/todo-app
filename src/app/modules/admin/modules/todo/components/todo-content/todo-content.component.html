@@ -15,7 +15,7 @@
 </div>
 <div class="pagination">
   <nz-pagination
-    *ngIf="message.isLoading && totalBuckets > configurationParams.limit"
+    *ngIf="totalBuckets > configurationParams.limit"
     [nzPageIndex]="configurationParams.page"
     [nzTotal]="totalBuckets"
     [nzPageSize]="configurationParams.limit"

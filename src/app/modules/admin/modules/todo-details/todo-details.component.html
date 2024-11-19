@@ -25,15 +25,19 @@
         </app-open-form>
       </div>
     </div>
-    } @if(doneItems.length > 0 || notDoneItems.length > 0){
+    } 
     <app-open-form
       [formName]="'add bucket items'"
       [icon]="'plus'"
       [id]="todoId"
     >
     </app-open-form>
-    <app-todo-item [bucketItem]="notDoneItems"></app-todo-item>
-    <app-todo-item [bucketItem]="doneItems"></app-todo-item>
+    @if(doneItems.length > 0 || notDoneItems.length > 0){
+    <div>{{doneItems.length}}/{{totalBuckets}}</div>
+    <app-todo-item [bucketItem]="notDoneItems" ></app-todo-item>
+    <app-todo-item [bucketItem]="doneItems" ></app-todo-item>
+    <div>{{doneItems.length}}/{{totalBuckets}}</div>
+
     }@else{ @if (message.isLoading) {
     <nz-skeleton [nzActive]="true"></nz-skeleton>
     }@else {

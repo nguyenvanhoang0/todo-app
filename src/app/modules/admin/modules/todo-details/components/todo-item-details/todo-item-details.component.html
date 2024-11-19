@@ -31,9 +31,18 @@
     most recent changes:
     {{
       bucketItem.updatedAt
-        ? bucketItem.updatedAt
+        ? (bucketItem.updatedAt | timeAgo)
         : (bucketItem.createdAt | timeAgo)
     }}
   </div>
-  <div>status : {{ bucketItem.done }}</div>
+  <div
+    class="status"
+    [ngClass]="bucketItem.done ? 'finish' : 'unfinished'"
+    (click)="updateStatus()"
+    (keydown.enter)="updateStatus()"
+    tabindex="0"
+  >
+    status : {{ bucketItem.done ? 'finish' : 'unfinished'
+    }}<app-icon [name]="bucketItem.done ? 'check' : 'clock-circle'"></app-icon>
+  </div>
 </div>

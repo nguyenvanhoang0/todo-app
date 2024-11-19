@@ -44,7 +44,7 @@ export class OpenFormComponent implements OnDestroy {
   change = false;
   confirmationForm= false;
   private subscriptions: Subscription = new Subscription();
-  constructor(private eventService: EventService) { }
+  constructor(private _eventService: EventService) { }
 
   openForm() {
     this.currentForm = this.formName
@@ -78,7 +78,7 @@ export class OpenFormComponent implements OnDestroy {
   done() {
     this.complete.emit();
     this.currentForm = null
-    this.eventService.emitEvent();    
+    this._eventService.emitEvent();    
   }
 
   blockFormClosing(event: MouseEvent) {

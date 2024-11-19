@@ -14,9 +14,9 @@ import { MessageService } from 'src/app/services/message/message.service';
   templateUrl: './todo-details.component.html',
   styleUrl: './todo-details.component.scss',
 })
-export class TodoDetailsComponent implements OnInit ,OnDestroy {
+export class TodoDetailsComponent implements OnInit, OnDestroy {
   todoId = 1;
-  
+
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 
@@ -26,7 +26,6 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
 
   doneItems: IBucketItem[] = [];
   notDoneItems: IBucketItem[] = [];
-
   configurationParams: IQueryParams = {
     limit: 99,
     page: 1,
@@ -41,18 +40,20 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
   ) {}
 
   ngOnInit(): void {
-      this.eventSubscription = this._eventService.event$.subscribe(() => this.getTodo());
+    this.eventSubscription = this._eventService.event$.subscribe(() =>
+      this.getTodo()
+    );
 
     this._route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
-      this.getTodo()
+      this.getTodo();
     });
   }
 
-  getTodo(){
-    if(this.todoId){
+  getTodo() {
+    if (this.todoId) {
       this.getBucketDetails(this.todoId);
-      this.getBucketItems()
+      this.getBucketItems();
     }
   }
 
@@ -70,8 +71,7 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
   }
 
   getBucketItems(): void {
-    this.message.createMessageloading();
-
+    this.message.createMessageloading(false);
     this.subscriptions.add(
       this._todoItemsService
         .getBucketItems(this.todoId, this.configurationParams)
@@ -83,8 +83,8 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
           (response) => {
             this.totalBuckets = response.total;
             this.bucketItem = response.data;
-            this.filterBucketItems(response.data)
-            this.message.createMessage('success', 'loading success', '');
+            this.filterBucketItems(response.data);
+            this.message.createMessage('success', 'loading success', '', false);
           },
           (error) => {
             this.message.createMessage('error', error);
@@ -94,7 +94,7 @@ export class TodoDetailsComponent implements OnInit ,OnDestroy {
     );
   }
 
-  filterBucketItems(bucketItem:  IBucketItem[]){
+  filterBucketItems(bucketItem: IBucketItem[]) {
     this.doneItems = bucketItem.filter((item) => item.done === true);
     this.notDoneItems = bucketItem.filter((item) => item.done === false);
   }

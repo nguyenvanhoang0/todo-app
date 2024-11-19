@@ -40,6 +40,10 @@ export class TodoItemComponent implements OnDestroy{
     this.bucketSelectItem = bucketSelectItem
   }
 
+  blockFormClosing(event: MouseEvent) {
+    event.stopPropagation(); 
+  }
+
   ngOnDestroy() {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();

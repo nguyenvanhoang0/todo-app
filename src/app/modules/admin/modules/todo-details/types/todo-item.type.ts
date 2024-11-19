@@ -5,5 +5,5 @@ export type IBucketItem = {
   content: string;
   done: boolean;
   createdAt: Date;
-  updatedAt?: string;
+  updatedAt?: Date;
 };
