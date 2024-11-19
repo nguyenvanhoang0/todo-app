@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { IBucket } from '../../types/todo.type';
@@ -12,7 +19,9 @@ import { Router } from '@angular/router';
   templateUrl: './todo-content.component.html',
   styleUrl: './todo-content.component.scss',
 })
-export class TodoContentComponent implements OnInit, OnDestroy {
+export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() searchContent?: string;
+
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 
@@ -35,8 +44,13 @@ export class TodoContentComponent implements OnInit, OnDestroy {
     this.eventSubscription = this._eventService.event$.subscribe(() =>
       this.getAllTodo()
     );
-
     this.getAllTodo();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchContent']) {
+      this.search(changes['searchContent'].currentValue);
+    }
   }
 
   onPageChange(page: number): void {
@@ -66,6 +80,13 @@ export class TodoContentComponent implements OnInit, OnDestroy {
           }
         )
     );
+  }
+
+  search(query: string | null): void {
+    if (query) {
+      this.configurationParams.query = query;
+      this.getAllTodo();
+    }
   }
 
   navigateToDetails(id: number) {

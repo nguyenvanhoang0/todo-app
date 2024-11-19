@@ -7,5 +7,15 @@
     gap: 24px;
     flex-direction: column;
     width: 100%;
+
+    .title{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      input{
+        width: 42%;
+      }
+    }
   }
 }

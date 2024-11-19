@@ -11,6 +11,8 @@ import { OpenFormComponent } from 'src/app/shared/components/open-form/open-form
 import { TextComponent } from 'src/app/shared/components/text/text.component';
 import { ItemContentComponent } from './components/item-content/item-content.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 
 @NgModule({
@@ -20,10 +22,12 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     TodoRoutingModule,
     NzSkeletonModule,
     NzPaginationModule,
+    ReactiveFormsModule,
     IconComponent,
     EmptyComponent,
     OpenFormComponent,
     TextComponent,
+    NzInputModule
   ]
 })
 export class TodoModule { }

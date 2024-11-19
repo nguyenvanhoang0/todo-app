@@ -1,5 +1,5 @@
 export type IQueryParams = {
   page: number;
   limit: number;
-  query?: string;
+  query?: string | null;
 };

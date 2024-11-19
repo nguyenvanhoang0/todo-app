@@ -1,9 +1,14 @@
 <div class="container">
   <div class="todo-content">
-    <app-open-form></app-open-form>
-    <app-todo-content></app-todo-content>
+    <div class="title">
+      <app-open-form></app-open-form>
+      <input
+        nz-input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Tìm kiếm..."
+      />
+    </div>
+    <app-todo-content [searchContent]="searchContent"></app-todo-content>
   </div>
-  <!-- <div class="item-content">
-    <app-item-content></app-item-content>
-  </div> -->
 </div>
