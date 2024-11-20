@@ -66,9 +66,8 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
           (response) => {
             this.message.createMessage(
               'success',
-              'Cập nhật thông tin thành công'
+              response
             );
-            console.log('Update success:', response);
           },
           (error) => {
             this.message.createMessage('error', error);
@@ -81,5 +80,6 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
+    this.message.destroy()
   }
 }

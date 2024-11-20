@@ -64,10 +64,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.add(
       this._todoService
         .getBuckets(this.configurationParams)
-        // .pipe(
-        //   finalize(() => {
-        //   })
-        // )
         .subscribe(
           (response) => {
             this.buckets = response.data;
@@ -97,5 +93,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+    this.message.destroy()
   }
 }

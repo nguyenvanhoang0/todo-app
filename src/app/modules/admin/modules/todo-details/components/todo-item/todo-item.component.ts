@@ -23,9 +23,6 @@ export class TodoItemComponent implements OnDestroy{
   itemDetailsView = false;
   bucketSelectItem?: IBucketItem;
 
-  // constructor(
-  // ) {}
-
   onPageChange(page: number): void {
     this.configurationParams.page = page;
   }

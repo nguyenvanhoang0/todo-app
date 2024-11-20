@@ -103,5 +103,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+    this.message.destroy()
   }
 }

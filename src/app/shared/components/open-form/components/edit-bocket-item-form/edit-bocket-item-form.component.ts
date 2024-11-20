@@ -41,9 +41,6 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.id );
-    console.log(this.parentId );
-    
     if (this.id && this.parentId) {
       this.getBucketDetails(this.id, this.parentId);
     }
@@ -70,9 +67,7 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
         .updateBucketItem(this.bucket, this.id, this.parentId)
         .subscribe(
           (response) => {
-            this._message.createMessage('success', 'update success');
-            console.log(response);
-
+            this._message.createMessage('success',response);
             this.complete.emit();
           },
           (error) => {
@@ -84,5 +79,6 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this._message.destroy()
   }
 }

@@ -1,6 +1,5 @@
 .container {
   .group-bucket-item {
-    // padding: 24px;
     text-align: left;
     margin-bottom: 24px;
 
@@ -35,7 +34,6 @@
 
       &:hover {
         background-color: var(--red2);
-        // color: var(--pink12);
         transition: 0.2s;
       }
     }

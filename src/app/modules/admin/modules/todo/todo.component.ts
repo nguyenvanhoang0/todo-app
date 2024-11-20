@@ -35,5 +35,6 @@ ngOnInit(): void {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+    this.message.destroy()
   }
 }

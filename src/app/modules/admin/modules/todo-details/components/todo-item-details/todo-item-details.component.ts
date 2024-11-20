@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { IBucketItem } from '../../types/todo-item.type';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'src/app/services/message/message.service';
@@ -11,7 +11,7 @@ import { EventService } from 'src/app/modules/admin/services/event/event.service
   templateUrl: './todo-item-details.component.html',
   styleUrl: './todo-item-details.component.scss',
 })
-export class TodoItemDetailsComponent {
+export class TodoItemDetailsComponent implements OnDestroy{
   @Input() bucketItem!: IBucketItem;
   @Output() done = new EventEmitter<boolean>();
 
@@ -38,11 +38,10 @@ export class TodoItemDetailsComponent {
         this._bucketItemService
           .updateBucketItem(this.bucket, this.bucketItem.id, targetId)
           .subscribe({
-            next: (response) => {
+            next: () => {
               this._message.createMessage('success', 'Update successful');
               this._eventService.emitEvent();   
               this.done.emit(false); 
-              console.log(response);
             },
             error: (err) => {
               this._message.createMessage('error', 'Update failed');
@@ -57,5 +56,9 @@ export class TodoItemDetailsComponent {
         console.warn('Target ID is missing for the bucket item.');
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this._message.destroy()
   }
 }

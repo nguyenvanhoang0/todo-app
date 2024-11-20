@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._unsubscribe$.next();  
     this._unsubscribe$.complete();
+    this.message.destroy()
   }
 }
 

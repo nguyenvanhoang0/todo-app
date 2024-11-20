@@ -18,10 +18,11 @@ export class MessageService {
     prefix?: string,
     message = true
   ): void {
-    if (this.messageId && this.isLoading) {
-      this.message.remove(this.messageId);
-      this.isLoading = false;
+    if (this.messageId) {
+      this.message.remove(this.messageId);      
     }
+    this.isLoading = false;
+
     if (message) {
       const finalPrefix = prefix !== undefined ? prefix : '';
       let finalMessage: string;
@@ -36,12 +37,18 @@ export class MessageService {
     }
   }
 
-  createMessageloading(messageView = true): void {
+  createMessageloading(messageView = true): void {    
     this.isLoading = true;
     if (messageView) {
       this.messageId = this.message.loading(EMessageType.LOADING, {
         nzDuration: 0,
       }).messageId;
     }
+  }
+
+  destroy(): void {
+    this.message.remove();
+    this.messageId = null;
+    this.isLoading = false;
   }
 }

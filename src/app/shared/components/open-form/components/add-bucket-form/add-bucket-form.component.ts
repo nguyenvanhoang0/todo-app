@@ -33,9 +33,7 @@ export class AddBucketFormComponent implements OnDestroy{
     this.bucketService.createBucket(this.bucket).subscribe(
       response => {
         
-        this.message.createMessage('success', 'create success')
-        console.log(response);
-        
+        this.message.createMessage('success', response)
         this.complete.emit();
       },
       error => {
@@ -47,5 +45,6 @@ export class AddBucketFormComponent implements OnDestroy{
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.message.destroy()
   }
 }

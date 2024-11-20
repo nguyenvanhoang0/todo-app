@@ -37,7 +37,7 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
   constructor(
     private _bucketService: BucketService,
     private _todoDetailsService: TodoDetailsService,
-    private message: MessageService
+    private _message: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -61,17 +61,15 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.message.createMessageloading();
+    this._message.createMessageloading();
     if (this.id) {
       this._bucketService.updateBucket(this.bucket, this.id).subscribe(
         (response) => {
-          this.message.createMessage('success', 'update success');
-          console.log(response);
-
+          this._message.createMessage('success', response);
           this.complete.emit();
         },
         (error) => {
-          this.message.createMessage('error', error);
+          this._message.createMessage('error', error);
         }
       );
     }
@@ -79,5 +77,6 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this._message.destroy()
   }
 }

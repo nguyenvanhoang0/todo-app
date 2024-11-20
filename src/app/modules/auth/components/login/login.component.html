@@ -37,7 +37,7 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-
+{{message.isLoading}}
     <div nz-form-item>
       <button nz-button nzType="primary" [disabled]="loginFormGroup.invalid || message.isLoading">
         {{'LOGIN_BUTTON' | translate}}

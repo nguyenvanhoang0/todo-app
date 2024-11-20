@@ -33,9 +33,7 @@ export class DeleteFormComponent implements OnDestroy {
   ) { }
 
   onDelete(): void {
-    if (this.id) {
-      console.log(this.parentId);
-      
+    if (this.id) {      
       switch (this.delete) {
         case 'Bucket':
           this._bucketService.deleteBucket(this.id).subscribe(
@@ -44,7 +42,7 @@ export class DeleteFormComponent implements OnDestroy {
             },
             error => {
               this.done(EMessageType.ERROR)
-              console.log(error);
+              console.error(error);
               
             }
           );
@@ -57,7 +55,7 @@ export class DeleteFormComponent implements OnDestroy {
               },
               error => {
                 this.done(EMessageType.ERROR)
-                console.log(error);
+                console.error(error);
               }
             );
           }
