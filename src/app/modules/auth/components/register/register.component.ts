@@ -13,7 +13,8 @@ import { MessageService } from 'src/app/services/message/message.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnDestroy {
-  registerFormGroup: FormGroup<IRegisterFormGroup> = this._authFormService.registerFormGroup;
+  registerFormGroup: FormGroup<IRegisterFormGroup> =
+    this._authFormService.registerFormGroup;
   private _unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -38,15 +39,15 @@ export class RegisterComponent implements OnDestroy {
       this.message.createMessageloading();
       this.authApiService
         .Register(this.registerFormGroup.getRawValue())
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             this.message.createMessage('success', response);
           },
-          (error) => {
-            this.message.createMessage('error', error);
-            console.error('Registration error:', error);
-          }
-        );
+          error: (err) => {
+            this.message.createMessage('error', err);
+            console.error('Registration error:', err);
+          },
+        });
     }
   }
 
@@ -57,6 +58,6 @@ export class RegisterComponent implements OnDestroy {
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
-    this.message.destroy()
+    this.message.destroy();
   }
 }

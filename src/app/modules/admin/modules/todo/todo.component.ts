@@ -25,7 +25,7 @@ export class TodoComponent implements OnDestroy ,OnInit{
 
 ngOnInit(): void {
   this.searchControl.valueChanges
-  .pipe(debounceTime(1000), distinctUntilChanged())
+  .pipe(debounceTime(500), distinctUntilChanged())
   .subscribe((value) => {
     this.searchContent= value ? value : undefined;
   });

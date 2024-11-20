@@ -15,7 +15,7 @@ import { BucketService } from '../../services/bucket/bucket.service';
   templateUrl: './add-bucket-form.component.html',
   styleUrl: './add-bucket-form.component.scss',
 })
-export class AddBucketFormComponent implements OnDestroy{
+export class AddBucketFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
 
@@ -24,27 +24,29 @@ export class AddBucketFormComponent implements OnDestroy{
     public: false,
   };
 
-  constructor(private bucketService: BucketService, private message: MessageService) { }
-
+  constructor(
+    private bucketService: BucketService,
+    private message: MessageService
+  ) {}
 
   onSubmit(event: Event): void {
     event.preventDefault();
     this.message.createMessageloading();
-    this.bucketService.createBucket(this.bucket).subscribe(
-      response => {
-        
-        this.message.createMessage('success', response)
+    this.bucketService.createBucket(this.bucket).subscribe({
+      next: (response) => {
+        this.message.createMessage('success', response);
         this.complete.emit();
       },
-      error => {
-        
-        this.message.createMessage('error', error)
-      }
-    );
+      error: (err) => {
+        this.message.createMessage('error', err);
+
+        console.error(err);
+      },
+    });
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this.message.destroy()
+    this.message.destroy();
   }
 }

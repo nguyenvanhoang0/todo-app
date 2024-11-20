@@ -13,6 +13,7 @@ import { ItemContentComponent } from './components/item-content/item-content.com
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzSkeletonModule,
     NzPaginationModule,
     ReactiveFormsModule,
+    SharedModule,
     IconComponent,
     EmptyComponent,
     OpenFormComponent,

@@ -3,5 +3,7 @@ export type IBucket = {
     userId: number;
     title: string;
     public: boolean;
+    createdAt: Date;
+    updatedAt?: Date;
   };
   

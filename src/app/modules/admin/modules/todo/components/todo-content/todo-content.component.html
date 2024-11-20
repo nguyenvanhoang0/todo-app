@@ -1,4 +1,3 @@
-
 <div [ngClass]="buckets.length > 0 ? 'content' : ''">
   @for (bucket of buckets; track bucket.title) {
   <div
@@ -7,7 +6,16 @@
     (keydown.enter)="navigateToDetails(bucket.id)"
     tabindex="0"
   >
-    <app-text [content]="bucket.title" [line]="1"></app-text>
+    <div class="bucket-content">
+      <app-text [content]="bucket.title" [line]="1"></app-text>
+      <div>
+        {{
+          bucket.updatedAt
+            ? (bucket.updatedAt | timeAgo)
+            : (bucket.createdAt | timeAgo)
+        }}
+      </div>
+    </div>
     <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
   </div>
   } @empty { @if (message.isLoading) {

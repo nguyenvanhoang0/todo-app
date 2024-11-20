@@ -48,14 +48,14 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
 
   getBucketDetails(id: number, parentId: number): void {
     this.subscriptions.add(
-      this._todoItemService.getBucketItemsById(id, parentId).subscribe(
-        (response) => {
+      this._todoItemService.getBucketItemsById(id, parentId).subscribe({
+        next: (response) => {
           this.bucket = response.data;
         },
-        (error) => {
-          console.error('Error get bucket item:', error);
-        }
-      )
+        error: (err) => {
+          console.error('Error get bucket item:', err);
+        },
+      })
     );
   }
 
@@ -65,20 +65,20 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
     if (this.id && this.parentId) {
       this._bucketItemService
         .updateBucketItem(this.bucket, this.id, this.parentId)
-        .subscribe(
-          (response) => {
-            this._message.createMessage('success',response);
+        .subscribe({
+          next: (response) => {
+            this._message.createMessage('success', response);
             this.complete.emit();
           },
-          (error) => {
-            this._message.createMessage('error', error);
-          }
-        );
+          error: (err) => {
+            this._message.createMessage('error', err);
+          },
+        });
     }
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this._message.destroy()
+    this._message.destroy();
   }
 }

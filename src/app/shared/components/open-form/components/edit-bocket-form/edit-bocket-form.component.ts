@@ -48,14 +48,14 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
 
   getBucketDetails(id: number): void {
     this.subscriptions.add(
-      this._todoDetailsService.getBucketById(id).subscribe(
-        (response) => {
+      this._todoDetailsService.getBucketById(id).subscribe({
+        next: (response) => {
           this.bucket = response.data;
         },
-        (error) => {
-          console.error('Error get bucket details:', error);
-        }
-      )
+        error: (err) => {
+          console.error('Error get bucket details:', err);
+        },
+      })
     );
   }
 
@@ -63,20 +63,20 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
     event.preventDefault();
     this._message.createMessageloading();
     if (this.id) {
-      this._bucketService.updateBucket(this.bucket, this.id).subscribe(
-        (response) => {
+      this._bucketService.updateBucket(this.bucket, this.id).subscribe({
+        next: (response) => {
           this._message.createMessage('success', response);
           this.complete.emit();
         },
-        (error) => {
-          this._message.createMessage('error', error);
-        }
-      );
+        error: (err) => {
+          this._message.createMessage('error', err);
+        },
+      });
     }
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this._message.destroy()
+    this._message.destroy();
   }
 }

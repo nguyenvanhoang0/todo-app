@@ -59,14 +59,14 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   getBucketDetails(id: number): void {
     this.subscriptions.add(
-      this._todoDetailsService.getBucketById(id).subscribe(
-        (response) => {
+      this._todoDetailsService.getBucketById(id).subscribe({
+        next: (response) => {
           this.bucket = response.data;
         },
-        (error) => {
-          console.error('Error Fetching Bucket Details:', error);
-        }
-      )
+        error: (err) => {
+          console.error('Error Fetching Bucket Details:', err);
+        },
+      })
     );
   }
 
@@ -79,18 +79,18 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
         //   finalize(() => {
         //   })
         // )
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             this.totalBuckets = response.total;
             this.bucketItem = response.data;
             this.filterBucketItems(response.data);
             this.message.createMessage('success', 'loading success', '', false);
           },
-          (error) => {
-            this.message.createMessage('error', error);
-            console.error('Error Fetching Bucket Items:', error);
-          }
-        )
+          error: (err) => {
+            this.message.createMessage('error', err);
+            console.error('Error Fetching Bucket Items:', err);
+          },
+        })
     );
   }
 
@@ -103,6 +103,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
-    this.message.destroy()
+    this.message.destroy();
   }
 }

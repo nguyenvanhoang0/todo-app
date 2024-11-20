@@ -62,24 +62,21 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
       this.message.createMessageloading();
       this._authApiService
         .updateUser(this.updateUserFormGroup.getRawValue())
-        .subscribe(
-          (response) => {
-            this.message.createMessage(
-              'success',
-              response
-            );
+        .subscribe({
+          next: (response) => {
+            this.message.createMessage('success', response);
           },
-          (error) => {
-            this.message.createMessage('error', error);
-            console.error('Update error:', error);
-          }
-        );
+          error: (err) => {
+            this.message.createMessage('error', err);
+            console.error('Update error:', err);
+          },
+        });
     }
   }
 
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
-    this.message.destroy()
+    this.message.destroy();
   }
 }

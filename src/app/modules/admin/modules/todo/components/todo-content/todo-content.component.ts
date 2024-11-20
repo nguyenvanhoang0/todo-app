@@ -13,6 +13,7 @@ import { TodoService } from '../../services/todo/todo.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { Router } from '@angular/router';
+import { ConfigurationParamsService } from 'src/app/modules/admin/services/configuration-params/configuration-params.service';
 
 @Component({
   selector: 'app-todo-content',
@@ -24,7 +25,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
-
   configurationParams: IQueryParams = {
     limit: 12,
     page: 1,
@@ -36,15 +36,17 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private _todoService: TodoService,
     private _eventService: EventService,
+    private _configService: ConfigurationParamsService,
+
     private _router: Router,
     public message: MessageService
   ) {}
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.getAllTodo()
+      this.getAllTodo(this.configurationParams)
     );
-    this.getAllTodo();
+    this.getAllTodo(this.configurationParams);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,15 +57,15 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   onPageChange(page: number): void {
     this.configurationParams.page = page;
-    this.getAllTodo();
+    this.getAllTodo(this.configurationParams);
   }
 
-  getAllTodo(): void {
+  getAllTodo(params : IQueryParams): void {
     this.message.createMessageloading(false);
 
     this.subscriptions.add(
       this._todoService
-        .getBuckets(this.configurationParams)
+        .getBuckets(params)
         .subscribe(
           (response) => {
             this.buckets = response.data;
@@ -79,9 +81,12 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   search(query: string | null): void {
-    if (query) {
+    if (query && query.length > 1) {
       this.configurationParams.query = query;
-      this.getAllTodo();
+      this.configurationParams.page = 1;
+      this.getAllTodo(this.configurationParams);
+    }else{      
+      this.getAllTodo(this._configService.getDefaultParamsConfiguration());      
     }
   }
 

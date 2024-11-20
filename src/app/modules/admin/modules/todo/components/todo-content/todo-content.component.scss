@@ -15,6 +15,13 @@
     transition: 0.2s;
     cursor: pointer;
 
+    .bucket-content{
+      text-align: left;
+      >div{
+        font-size: x-small;
+      }
+    }
+
     &:hover {
       background-color: var(--red2);
       transition: 0.2s;
