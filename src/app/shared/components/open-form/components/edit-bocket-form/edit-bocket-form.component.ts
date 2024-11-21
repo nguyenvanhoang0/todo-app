@@ -25,6 +25,7 @@ import { TodoDetailsService } from 'src/app/modules/admin/modules/todo-details/s
 })
 export class EditBocketFormComponent implements OnDestroy, OnInit {
   @Input() id?: number;
+  @Input() content?: string;
   @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
@@ -37,7 +38,7 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
   constructor(
     private _bucketService: BucketService,
     private _todoDetailsService: TodoDetailsService,
-    private _message: MessageService
+    public message: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -61,15 +62,15 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this._message.createMessageloading();
+    this.message.createMessageloading();
     if (this.id) {
       this._bucketService.updateBucket(this.bucket, this.id).subscribe({
         next: (response) => {
-          this._message.createMessage('success', response);
+          this.message.createMessage('success', response);
           this.complete.emit();
         },
         error: (err) => {
-          this._message.createMessage('error', err);
+          this.message.createMessage('error', err);
         },
       });
     }
@@ -77,6 +78,6 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this._message.destroy();
+    this.message.destroy();
   }
 }

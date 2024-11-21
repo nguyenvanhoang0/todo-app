@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputFieldComponent } from '../../../input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -16,6 +16,7 @@ import { BucketService } from '../../services/bucket/bucket.service';
   styleUrl: './add-bucket-form.component.scss',
 })
 export class AddBucketFormComponent implements OnDestroy {
+  @Input() content?: string;
   @Output() complete = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
 
@@ -25,14 +26,14 @@ export class AddBucketFormComponent implements OnDestroy {
   };
 
   constructor(
-    private bucketService: BucketService,
-    private message: MessageService
+    private _bucketService: BucketService,
+    public message: MessageService
   ) {}
 
   onSubmit(event: Event): void {
     event.preventDefault();
     this.message.createMessageloading();
-    this.bucketService.createBucket(this.bucket).subscribe({
+    this._bucketService.createBucket(this.bucket).subscribe({
       next: (response) => {
         this.message.createMessage('success', response);
         this.complete.emit();

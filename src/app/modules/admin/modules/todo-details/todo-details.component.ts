@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TodoDetailsService } from './services/todo/todo-details.service';
-import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { IBucket } from '../todo/types/todo.type';
 import { EventService } from '../../services/event/event.service';
 import { TodoItemService } from './services/todo-item/todo-item.service';
 import { IBucketItem } from './types/todo-item.type';
 import { IQueryParams } from '../../types/query-params.type';
 import { MessageService } from 'src/app/services/message/message.service';
+import { FormControl } from '@angular/forms';
+import { ConfigurationParamsService } from '../../services/configuration-params/configuration-params.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -15,12 +17,12 @@ import { MessageService } from 'src/app/services/message/message.service';
   styleUrl: './todo-details.component.scss',
 })
 export class TodoDetailsComponent implements OnInit, OnDestroy {
-  todoId = 1;
-
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+  searchControl = new FormControl('', { updateOn: 'change' });
+  todoId!: number;
 
-  bucket!: IBucket;
+  bucket?: IBucket;
   bucketItem!: IBucketItem[];
   totalBuckets = 0;
 
@@ -36,25 +38,28 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     private _eventService: EventService,
     private _todoItemsService: TodoItemService,
     private _todoDetailsService: TodoDetailsService,
+    private _configService: ConfigurationParamsService,
     public message: MessageService
   ) {}
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.getTodo()
+      this.getTodo(this.todoId)
     );
+    this.getIDBucket();
+    this.searchWithDebounce();
+  }
 
+  getIDBucket() {
     this._route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
-      this.getTodo();
+      this.getTodo(this.todoId);
     });
   }
 
-  getTodo() {
-    if (this.todoId) {
-      this.getBucketDetails(this.todoId);
-      this.getBucketItems();
-    }
+  getTodo(id: number) {
+    this.getBucketDetails(id);
+    this.getBucketItems(id,  this.configurationParams);
   }
 
   getBucketDetails(id: number): void {
@@ -70,11 +75,11 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getBucketItems(): void {
+  getBucketItems(id: number , params : IQueryParams): void {
     this.message.createMessageloading(false);
     this.subscriptions.add(
       this._todoItemsService
-        .getBucketItems(this.todoId, this.configurationParams)
+        .getBucketItems(id,params)
         // .pipe(
         //   finalize(() => {
         //   })
@@ -94,6 +99,26 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  searchWithDebounce(): void {
+    this.searchControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((value) => {
+        this.search(value)
+      });
+  }
+
+  search(query: string | null): void {
+    if (query && query.length > 1) {
+      this.configurationParams.query = query;
+      this.configurationParams.page = 1;
+      this.getBucketItems(this.todoId ,this.configurationParams);
+    }else{      
+      console.log(1);
+      
+      this.getBucketItems(this.todoId, this._configService.getDefaultParamsConfiguration());      
+    }
+  }
+
   filterBucketItems(bucketItem: IBucketItem[]) {
     this.doneItems = bucketItem.filter((item) => item.done === true);
     this.notDoneItems = bucketItem.filter((item) => item.done === false);
@@ -103,6 +128,7 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+    this.subscriptions.unsubscribe();
     this.message.destroy();
   }
 }

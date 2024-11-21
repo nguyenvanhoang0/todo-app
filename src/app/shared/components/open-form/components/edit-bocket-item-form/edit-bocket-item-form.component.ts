@@ -24,20 +24,21 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './edit-bocket-item-form.component.scss',
 })
 export class EditBocketItemFormComponent implements OnInit, OnDestroy {
-  @Output() complete = new EventEmitter<void>();
   @Input() id?: number;
   @Input() parentId?: number;
+  @Input() content?: string;
+  @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
 
-  bucket: IBucketItemSimple = {
+  bucketItem: IBucketItemSimple = {
     content: '',
   };
 
   constructor(
     private _bucketItemService: BucketItemService,
     private _todoItemService: TodoItemService,
-    private _message: MessageService
+    public message: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -50,9 +51,12 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this._todoItemService.getBucketItemsById(id, parentId).subscribe({
         next: (response) => {
-          this.bucket = response.data;
+          this.bucketItem = response.data;
         },
         error: (err) => {
+          if (this.content) {
+            this.bucketItem.content = this.content;
+          }
           console.error('Error get bucket item:', err);
         },
       })
@@ -61,17 +65,17 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this._message.createMessageloading();
+    this.message.createMessageloading();
     if (this.id && this.parentId) {
       this._bucketItemService
-        .updateBucketItem(this.bucket, this.id, this.parentId)
+        .updateBucketItem(this.bucketItem, this.id, this.parentId)
         .subscribe({
           next: (response) => {
-            this._message.createMessage('success', response);
+            this.message.createMessage('success', response);
             this.complete.emit();
           },
           error: (err) => {
-            this._message.createMessage('error', err);
+            this.message.createMessage('error', err);
           },
         });
     }
@@ -79,6 +83,6 @@ export class EditBocketItemFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this._message.destroy();
+    this.message.destroy();
   }
 }

@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IBucket } from './types/todo.type';
-import { TodoService } from './services/todo/todo.service';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
-import { MessageService } from 'src/app/services/message/message.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -10,31 +8,31 @@ import { FormControl } from '@angular/forms';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })
-export class TodoComponent implements OnDestroy ,OnInit{
-  private eventSubscription!: Subscription;
-  searchControl = new FormControl('', { updateOn: 'change' });
-  searchContent? : string;
+export class TodoComponent implements OnDestroy, OnInit {
+  // private eventSubscription!: Subscription;
+  private searchSubscription: Subscription = new Subscription();
 
+  searchControl = new FormControl('', { updateOn: 'change' });
+  searchContent?: string;
 
   buckets: IBucket[] = [];
 
-  constructor(
-    private _todoService: TodoService,
-    public message: MessageService
-  ) {}
+  // constructor(
+  //   // private _todoService: TodoService,
+  //   // public message: MessageService
+  // ) {}
 
-ngOnInit(): void {
-  this.searchControl.valueChanges
-  .pipe(debounceTime(500), distinctUntilChanged())
-  .subscribe((value) => {
-    this.searchContent= value ? value : undefined;
-  });
-}
+  ngOnInit(): void {
+    this.searchSubscription = this.searchControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((value) => {
+        this.searchContent = value ? value : undefined;
+      });
+  }
 
-  ngOnDestroy() {
-    if (this.eventSubscription) {
-      this.eventSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
     }
-    this.message.destroy()
   }
 }

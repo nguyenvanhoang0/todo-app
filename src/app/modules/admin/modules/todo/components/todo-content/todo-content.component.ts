@@ -46,7 +46,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     this.eventSubscription = this._eventService.event$.subscribe(() =>
       this.getAllTodo(this.configurationParams)
     );
-    this.getAllTodo(this.configurationParams);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -86,6 +85,8 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
       this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
     }else{      
+      console.log(1);
+      
       this.getAllTodo(this._configService.getDefaultParamsConfiguration());      
     }
   }
@@ -98,6 +99,8 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+    this.subscriptions.unsubscribe();
+
     this.message.destroy()
   }
 }

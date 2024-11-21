@@ -4,7 +4,7 @@
       <app-input-field
         id="title"
         label="title"
-        [(value)]="bucket.content"
+        [(value)]="bucketItem.content"
         type="text"
         [required]="true"
       >
@@ -12,7 +12,7 @@
     </div>
     <div class="group-button">
       <button nz-button nzType="text" type="reset">Reset</button>
-      <button nz-button nzType="primary" type="submit" class="submit" nzDanger>
+      <button nz-button nzType="primary" type="submit" class="submit" [disabled]="message.isLoading" nzDanger>
         Submit
       </button>
     </div>

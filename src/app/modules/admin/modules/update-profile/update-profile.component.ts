@@ -59,9 +59,25 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
         }
       });
     } else {
+      const { email, username, avatar } = this.updateUserFormGroup.getRawValue();
+      const formData = new FormData();
+      formData.append('email', email as string);
+      formData.append('username', username as string);
+      if (avatar) {
+        formData.append('avatar', avatar);
+      }   
+      formData.forEach((value, key) => {
+        if (key === 'avatar' && value instanceof File) {
+          console.log(key + ': ' + value.name); 
+          console.log(key + ' size: ' + value.size); 
+        } else {
+          console.log(key + ': ' + value);
+        }
+      });
+      
       this.message.createMessageloading();
       this._authApiService
-        .updateUser(this.updateUserFormGroup.getRawValue())
+        .updateUser(formData)
         .subscribe({
           next: (response) => {
             this.message.createMessage('success', response);

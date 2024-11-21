@@ -22,8 +22,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-bucket-item-form.component.scss',
 })
 export class AddBucketItemFormComponent implements OnDestroy {
-  @Output() complete = new EventEmitter<void>();
   @Input() id?: number;
+  @Input() content?: string;
+  @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
 
@@ -32,15 +33,15 @@ export class AddBucketItemFormComponent implements OnDestroy {
   };
 
   constructor(
-    private bucketService: BucketItemService,
-    private message: MessageService
+    private _bucketService: BucketItemService,
+    public message: MessageService
   ) {}
 
   onSubmit(event: Event): void {
     event.preventDefault();
     if (this.id) {
       this.message.createMessageloading();
-      this.bucketService.createBucketItem(this.id, this.bucket).subscribe({
+      this._bucketService.createBucketItem(this.id, this.bucket).subscribe({
         next: () => {
           this.message.createMessage('success', 'create success');
           this.complete.emit();

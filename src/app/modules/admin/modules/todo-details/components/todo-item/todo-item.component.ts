@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBucketItem } from '../../types/todo-item.type';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
@@ -8,7 +8,7 @@ import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.scss',
 })
-export class TodoItemComponent implements OnDestroy{
+export class TodoItemComponent implements OnDestroy , OnChanges{
   @Input() bucketItem: IBucketItem[]=[];
   @Input() totalBuckets = 0;
   @Input() todoItemId = 0;
@@ -22,6 +22,12 @@ export class TodoItemComponent implements OnDestroy{
 
   itemDetailsView = false;
   bucketSelectItem?: IBucketItem;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['bucketItem']) {
+      this.itemDetailsView = false;
+    }
+  }
 
   onPageChange(page: number): void {
     this.configurationParams.page = page;

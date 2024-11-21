@@ -40,6 +40,7 @@ export class OpenFormComponent implements OnDestroy {
   @Input() id?: number;
   @Input() parentId?: number;
   @Input() delete: 'Bucket' | 'Bucket item' = 'Bucket';
+  @Input() content?: string;
   @Output() complete = new EventEmitter<void>();
   change = false;
   confirmationForm= false;
@@ -48,6 +49,8 @@ export class OpenFormComponent implements OnDestroy {
 
   openForm() {
     this.currentForm = this.formName
+    console.log(this.content);
+    
   }
 
   closeForm() {

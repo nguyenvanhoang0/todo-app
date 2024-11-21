@@ -13,6 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { TodoItemDetailsComponent } from './components/todo-item-details/todo-item-details.component';
 import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
   declarations: [TodoDetailsComponent, TodoItemComponent,TodoItemDetailsComponent],
@@ -21,7 +23,9 @@ import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-mo
     TodoDetailsRoutingModule,
     NzSkeletonModule,
     SharedModule,
+    ReactiveFormsModule,
     NzPaginationModule,
+    NzInputModule,
     OpenFormComponent,
     OpenModalComponent,
     IconComponent,
