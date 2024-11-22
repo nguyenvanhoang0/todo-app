@@ -68,6 +68,13 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.totalBucketNotDone = Total;
   }
 
+  TotalBucket(): number {
+    return (
+      (this.totalBucketDone ? this.totalBucketDone : 0) +
+      (this.totalBucketNotDone ? this.totalBucketNotDone : 0)
+    );
+  }
+
   searchWithDebounce(): void {
     this.searchControl.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())

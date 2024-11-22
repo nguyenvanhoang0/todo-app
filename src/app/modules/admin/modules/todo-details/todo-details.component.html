@@ -30,8 +30,6 @@
         </app-open-form>
       </div>
     </div>
-    }
-
     <div class="title-action">
       <app-open-form
         [formName]="'add bucket items'"
@@ -46,18 +44,14 @@
         placeholder="Tìm kiếm..."
       />
     </div>
-    <div *ngIf="totalBucketDone || totalBucketNotDone" class="flex">
+    }
+    <div *ngIf="TotalBucket()" class="flex">
       <div class="flex done">
         <app-icon [name]="'check'" class="icon"></app-icon>
-        <p>{{ totalBucketDone? totalBucketDone : 0 }}</p>
+        <p>{{ totalBucketDone ? totalBucketDone : 0 }}</p>
       </div>
       <p>/</p>
-      <p>
-        {{
-          (totalBucketDone ? totalBucketDone : 0) +
-            (totalBucketNotDone ? totalBucketNotDone : 0)
-        }}
-      </p>
+      <p>{{ TotalBucket() }}</p>
     </div>
     @if(bucket){
     <app-todo-item
@@ -70,11 +64,7 @@
       [searchContent]="searchContent"
       (totalBucket)="getTotalBucketDone($event)"
     ></app-todo-item>
-
-    }@else{ @if (message.isLoading) {
-    <nz-skeleton [nzActive]="true"></nz-skeleton>
-    }@else {
-    <app-empty></app-empty>
+    @if(!TotalBucket()){ <app-empty></app-empty>
     } }
   </div>
 </div>

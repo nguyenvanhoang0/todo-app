@@ -33,7 +33,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   todoItemId = 0;
 
   configurationParams: IQueryParams = {
-    limit: 5,
+    limit: 12,
     page: 1,
   };
 
@@ -96,7 +96,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   }
 
   search(query?: string | null): void {
-    if (query && query.length > 2) {
+    if (query && query.length > 1) {
       this.configurationParams.query = query;
       this.getBucketItems(this.todoId, this.configurationParams);
     } else {
@@ -104,7 +104,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
         this.todoId,
         this._configService.getDefaultParamsConfiguration(
           this.done,
-          5,
+          12,
           this.configurationParams.page
         )
       );
