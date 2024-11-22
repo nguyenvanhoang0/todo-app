@@ -41,6 +41,16 @@ ul {
   max-width: 100%;
 }
 
-.ant-menu{
+.ant-menu {
   background-color: rgba(255, 255, 255, 0);
 }
+
+.flex{
+  display: flex;
+  gap: 4px;
+}
+
+// .ant-layout {
+//   background-image: url('assets/img/back_auth.png');
+//   background-size: cover;
+// }

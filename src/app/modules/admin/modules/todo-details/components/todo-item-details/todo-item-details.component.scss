@@ -18,6 +18,7 @@
     .status{
         display: flex;
         gap: 12px;
+        cursor: pointer;
 
         &.finish{
             color: var(--green6);

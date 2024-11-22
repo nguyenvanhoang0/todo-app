@@ -80,7 +80,8 @@ export class OpenFormComponent implements OnDestroy {
 
   done() {
     this.complete.emit();
-    this.currentForm = null
+    this.currentForm = null;
+    this.change = false
     this._eventService.emitEvent();    
   }
 

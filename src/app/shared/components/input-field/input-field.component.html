@@ -1,13 +1,14 @@
 <div class="input-field">
-  <label [attr.for]="id"
+  
+  <nz-input-group>
+    <label [attr.for]="id"
     >{{ label }}
     <p *ngIf="required === true && label">*</p></label
   >
-  <nz-input-group>
     <input
       nz-input
-      [id]="id"
-      [name]="id"
+      id="{{id}}"
+      name="{{id}}"
       *ngIf="!optionValues"
       [type]="passwordVisible ? 'text' : type"
       [(ngModel)]="value"

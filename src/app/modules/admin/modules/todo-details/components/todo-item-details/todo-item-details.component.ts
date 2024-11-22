@@ -64,12 +64,6 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
               },
             })
         );
-      } else {
-        this._message.createMessage(
-          'error',
-          'Target ID is missing for the bucket item.'
-        );
-        console.warn('Target ID is missing for the bucket item.');
       }
     }
   }

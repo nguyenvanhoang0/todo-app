@@ -15,13 +15,13 @@
         border-radius: 0px;
         margin-bottom: 6px;
         border-left: 6px solid var(--green4);
-        background: linear-gradient(to right, #b7eb8f,#d9f7be);
+        background: linear-gradient(to right, #b7eb8f, #d9f7be);
         transition: 0.2s;
 
         &:hover {
-            background: var(--red2);
-            transition: 0.2s;
-          }
+          background: var(--red2);
+          transition: 0.2s;
+        }
       }
 
       .content {
@@ -35,8 +35,13 @@
       &:hover {
         background-color: var(--red2);
         transition: 0.2s;
+        cursor: pointer;
       }
     }
   }
-
+  
+  .pagination {
+    margin-top: 24px;
+    display: flex;
+  }
 }

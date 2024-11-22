@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://elysia.monthlyparty.com/',
+  apiUrl: 'http://localhost:3000/',
   authEndpoint: {
     login: 'sign-in',
     register: 'sign-up',

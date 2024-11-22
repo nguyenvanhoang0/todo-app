@@ -29,6 +29,8 @@ export class RegisterComponent implements OnDestroy {
   }
 
   onSubmit() {
+    console.log(1233);
+    
     if (this.registerFormGroup.invalid) {
       Object.values(this.registerFormControl).forEach((control) => {
         if (control.invalid) {

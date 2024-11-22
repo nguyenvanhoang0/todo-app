@@ -3,9 +3,14 @@
     @if (bucket) {
     <div class="bucket">
       <p class="title">
-        {{ bucket.title }}
-        <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
+        <app-text>{{ bucket.title }}</app-text>
+        <app-icon
+          *ngIf="!bucket.public"
+          [name]="'lock'"
+          class="icon"
+        ></app-icon>
       </p>
+
       <div class="action">
         <app-open-form
           [formName]="'edit bucket'"
@@ -26,6 +31,7 @@
       </div>
     </div>
     }
+
     <div class="title-action">
       <app-open-form
         [formName]="'add bucket items'"
@@ -40,9 +46,30 @@
         placeholder="Tìm kiếm..."
       />
     </div>
-    @if(doneItems.length > 0 || notDoneItems.length > 0){
-    <app-todo-item [bucketItem]="notDoneItems"></app-todo-item>
-    <app-todo-item [bucketItem]="doneItems"></app-todo-item>
+    <div *ngIf="totalBucketDone || totalBucketNotDone" class="flex">
+      <div class="flex done">
+        <app-icon [name]="'check'" class="icon"></app-icon>
+        <p>{{ totalBucketDone? totalBucketDone : 0 }}</p>
+      </div>
+      <p>/</p>
+      <p>
+        {{
+          (totalBucketDone ? totalBucketDone : 0) +
+            (totalBucketNotDone ? totalBucketNotDone : 0)
+        }}
+      </p>
+    </div>
+    @if(bucket){
+    <app-todo-item
+      [done]="0"
+      [searchContent]="searchContent"
+      (totalBucket)="getTotalBucketNotDone($event)"
+    ></app-todo-item>
+    <app-todo-item
+      [done]="1"
+      [searchContent]="searchContent"
+      (totalBucket)="getTotalBucketDone($event)"
+    ></app-todo-item>
 
     }@else{ @if (message.isLoading) {
     <nz-skeleton [nzActive]="true"></nz-skeleton>

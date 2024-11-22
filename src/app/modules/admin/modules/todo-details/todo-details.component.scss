@@ -13,13 +13,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid gray;
+      // border-bottom: 1px solid gray;
       padding-bottom: 12px;
 
       .title {
         display: flex;
         gap: 12px;
-        font-size: x-large;
+        font-size: large;
+        text-align: left;
+        max-width: 60%;
+
+        .icon{
+          font-size: medium;
+        }
       }
 
       .action {
@@ -34,6 +40,9 @@
       input {
         width: 42%;
       }
+    }
+    .done{
+      color: var(--green6);
     }
   }
 }

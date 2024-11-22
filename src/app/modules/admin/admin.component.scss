@@ -1,27 +1,25 @@
 :host {
-    text-align: center;
+  text-align: center;
+}
+
+nz-header {
+  color: #fff;
+}
+
+.ant-layout-content {
+  padding: 32px;
+  overflow-y: auto;
+
+  .content-wrapper {
+    min-height: 50px;
   }
-  
-  nz-header {
-    color: #fff;
-  }
- 
-  
-  .ant-layout-content {
-    padding: 32px;
-    overflow-y: auto;
-  
-    .content-wrapper {
-      min-height: 50px;
-    }
-  }
-  
-  nz-layout nz-layout,
-  nz-layout:last-child {
-    margin: 0;
-  }
-  
-  .ant-layout {
-    height: 100vh;
-  }
-  
+}
+
+nz-layout nz-layout,
+nz-layout:last-child {
+  margin: 0;
+}
+
+.ant-layout {
+  height: 100vh;
+}
