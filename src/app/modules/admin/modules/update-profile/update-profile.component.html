@@ -10,6 +10,7 @@
           [nzErrorTip]="avatarErrorTpl"
         >
           <app-upload-img
+            [img]="avatar"
             (fileUploaded)="onFileUploaded($event)"
           ></app-upload-img>
         </nz-form-control>
@@ -29,6 +30,7 @@
                 type="email"
                 formControlName="email"
                 [placeholder]="'EMAIL_PLACEHOLDER' | translate"
+                [disabled]="true"
               />
             </nz-input-group>
           </nz-form-control>
@@ -61,7 +63,6 @@
             {{ 'UPDATE_BUTTON' | translate }}
           </button>
         </div>
-        
       </div>
     </div>
 

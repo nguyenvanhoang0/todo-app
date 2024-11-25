@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ModalService } from './services/modal/modal.service';
 
@@ -10,9 +10,9 @@ import { ModalService } from './services/modal/modal.service';
   templateUrl: './open-modal.component.html',
   styleUrl: './open-modal.component.scss',
 })
-export class OpenModalComponent implements OnInit {
+export class OpenModalComponent implements OnInit ,OnDestroy{
   @Input() canCloseByOutsideClick = false;
-  @Input() modalId: string = '';
+  @Input() modalId= '';
   @Output() Visible = new EventEmitter<boolean>();
 
   @Input() isVisible = false;

@@ -24,6 +24,8 @@ import { FormsModule } from '@angular/forms';
 export class AddBucketItemFormComponent implements OnDestroy {
   @Input() id?: number;
   @Input() content?: string;
+  @Input() parentId?: number;
+
   @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
@@ -38,6 +40,10 @@ export class AddBucketItemFormComponent implements OnDestroy {
   ) {}
 
   onSubmit(event: Event): void {
+    if (this.parentId) {
+      this.bucket.parentId = this.parentId
+    }
+    
     event.preventDefault();
     if (this.id) {
       this.message.createMessageloading();

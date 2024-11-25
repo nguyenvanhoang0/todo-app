@@ -3,6 +3,13 @@
     {{ bucketItem.content }}
     <div class="action">
       <app-open-form
+        [formName]="'add bucket items'"
+        [icon]="'plus'"
+        [id]="bucketId"
+        [parentId]="bucketItem.id"
+      >
+      </app-open-form>
+      <app-open-form
         [formName]="'edit bucket items'"
         [icon]="'edit'"
         [id]="bucketItem.id"
@@ -12,7 +19,7 @@
         [label]="false"
         [buttonType]="'text'"
         [content]="bucketItem.content"
-        >
+      >
       </app-open-form>
       <app-open-form
         [formName]="'delete'"

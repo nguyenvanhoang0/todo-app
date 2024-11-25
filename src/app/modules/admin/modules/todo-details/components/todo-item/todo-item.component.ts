@@ -53,9 +53,11 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.search(this.searchContent)
-    );
+    this.eventSubscription = this._eventService.event$.subscribe((event) => {
+      if (event.id === undefined) {
+        this.search(this.searchContent);
+      }
+    });
     this.configurationParams.done = this.done;
   }
 
@@ -80,7 +82,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
             response.total > 0 &&
             this.configurationParams.page > 1
           ) {
-            this.configurationParams.page = 1;
+            this.configurationParams.page = this.configurationParams.page - 1;
             this.search(this.searchContent);
           }
           this.totalBuckets = response.total;

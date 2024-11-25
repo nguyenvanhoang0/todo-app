@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IRegister } from '../../types/auth.types';
 import { MessageService } from 'src/app/services/message/message.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class AuthApiService {
   constructor(
     private _apiCallerService: ApiCallerService,
     private _message: MessageService,
+    private _http: HttpClient,
     private _router: Router
   ) {}
 
@@ -32,6 +34,10 @@ export class AuthApiService {
       { access_token: string },
       IUserInfoResponse
     >(this.apiUrl.getUserInfo, params);
+  }
+
+  getAvatar(): Observable<string> {
+    return this._http.get(`${environment.apiUrl}${this.apiUrl.avatar}`, { responseType: 'text'});
   }
 
   Register(data: IRegister): Observable<string> {

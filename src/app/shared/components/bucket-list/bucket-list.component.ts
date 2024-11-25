@@ -35,7 +35,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
   templateUrl: './bucket-list.component.html',
   styleUrl: './bucket-list.component.scss',
 })
-export class BucketListComponent implements OnDestroy, OnChanges ,OnInit{
+export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
   @Input() searchContent?: string;
 
   private subscriptions: Subscription = new Subscription();
@@ -60,10 +60,12 @@ export class BucketListComponent implements OnDestroy, OnChanges ,OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.search(this.searchContent)
-    );
-     this.getIDBucket() 
+    this.eventSubscription = this._eventService.event$.subscribe((event) => {
+      if (event.id === undefined) {
+        this.search(this.searchContent);
+      }
+    });
+    this.getIDBucket();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -100,7 +102,6 @@ export class BucketListComponent implements OnDestroy, OnChanges ,OnInit{
       this.todoId = Number(params.get('id'));
     });
   }
-
 
   search(query?: string | null): void {
     if (query && query.length > 1) {

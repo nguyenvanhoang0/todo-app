@@ -21,6 +21,8 @@ import { EventService } from 'src/app/modules/admin/services/event/event.service
 })
 export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
   @Input() bucketItem!: IBucketItem;
+  @Input() bucketId!: number;
+
   @Output() done = new EventEmitter<boolean>();
 
   private subscriptions: Subscription = new Subscription();

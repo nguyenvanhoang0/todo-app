@@ -1,22 +1,26 @@
-import { Component} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
 import { Store } from '@ngrx/store';
 import { MainState } from 'src/app/core/store/_store.types';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnDestroy , OnInit{
   confirmationForm = false;
   updateForm = false;
   accountView = false;
+  avatar?: string;
+
+  private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
@@ -24,19 +28,28 @@ export class ProfileComponent {
   constructor(
     private _store: Store<MainState>,
     private _router: Router,
-    private _nzMsgService: NzMessageService,
+    private _message: MessageService,
     private _authApiService: AuthApiService,
-
   ) {
     this.userInfo$.subscribe();
   }
 
-  openUpdateForm(value: boolean) {
-    this.updateForm = value;
+  ngOnInit(): void {
+    this.getAvatar();
   }
 
-  handleAccountView(value: boolean) {
-    this.accountView = value;
+  getAvatar(): void {
+    this.subscriptions.add(
+      this._authApiService.getAvatar().subscribe({
+        next: (response: string) => {
+          this.avatar = response; 
+        },
+        error: (error) => {
+          this._message.createMessage('error', 'Failed to load avatar');
+          console.error('Error loading avatar:', error);
+        }
+      })
+    );
   }
 
   handleClickUpdate() {
@@ -51,5 +64,13 @@ export class ProfileComponent {
     } else {
       this.confirmationForm = false;
     }
+  }
+
+  ngOnDestroy() {
+    if(this.eventSubscription){
+      this.eventSubscription.unsubscribe();
+    }
+    this.subscriptions.unsubscribe();
+    this._message.destroy();
   }
 }

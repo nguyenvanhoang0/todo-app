@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
@@ -11,6 +11,7 @@ import { MainState } from 'src/app/core/store/_store.types';
   styleUrl: './header-menu.component.scss',
 })
 export class HeaderMenuComponent {
+  @Input() avatar? = '';
   accountView = false;
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);

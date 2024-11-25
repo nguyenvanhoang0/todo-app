@@ -43,9 +43,11 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.getAllTodo(this.configurationParams)
-    );
+    this.eventSubscription = this._eventService.event$.subscribe((event) => {
+      if (event.id === undefined) {
+        this.getAllTodo(this.configurationParams);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -59,23 +61,21 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     this.getAllTodo(this.configurationParams);
   }
 
-  getAllTodo(params : IQueryParams): void {
+  getAllTodo(params: IQueryParams): void {
     this.message.createMessageloading(false);
 
     this.subscriptions.add(
-      this._todoService
-        .getBuckets(params)
-        .subscribe(
-          (response) => {
-            this.buckets = response.data;
-            this.totalBuckets = response.total;
-            this.message.createMessage('success', 'loading success', '', false);
-          },
-          (error) => {
-            this.message.createMessage('error', error);
-            console.error('Error loading buckets', error);
-          }
-        )
+      this._todoService.getBuckets(params).subscribe(
+        (response) => {
+          this.buckets = response.data;
+          this.totalBuckets = response.total;
+          this.message.createMessage('success', 'loading success', '', false);
+        },
+        (error) => {
+          this.message.createMessage('error', error);
+          console.error('Error loading buckets', error);
+        }
+      )
     );
   }
 
@@ -84,10 +84,10 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
       this.configurationParams.query = query;
       this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
-    }else{      
+    } else {
       console.log(1);
-      
-      this.getAllTodo(this._configService.getDefaultParamsConfiguration());      
+
+      this.getAllTodo(this._configService.getDefaultParamsConfiguration());
     }
   }
 
@@ -101,6 +101,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     }
     this.subscriptions.unsubscribe();
 
-    this.message.destroy()
+    this.message.destroy();
   }
 }

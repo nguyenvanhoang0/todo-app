@@ -12,12 +12,13 @@
           (click)="accountView = true"
           (keydown.enter)="accountView = true"
           tabindex="0"
-          [nzSrc]="userInfo.avatar"
+          [nzSrc]="avatar"
         ></nz-avatar>
       </li>
     </ul>
   </header>
   <app-account
+    [avatar]="avatar"
     [userInfo]="userInfo"
     *ngIf="accountView"
     (Visible)="handleAccountView($event)"

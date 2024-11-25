@@ -5,10 +5,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class EventService {
-  private eventSource = new Subject<void>();
+  private eventSource = new Subject<{ id?: string | number }>();
   event$ = this.eventSource.asObservable();
 
-  emitEvent() :void {
-    this.eventSource.next();
+  emitEvent(id?: string | number): void {
+    this.eventSource.next({ id });
   }
-}
+} 

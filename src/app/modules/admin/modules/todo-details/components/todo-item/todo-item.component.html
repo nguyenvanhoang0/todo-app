@@ -20,7 +20,7 @@
         [formName]="'edit bucket items'"
         [icon]="'edit'"
         [id]="bucket.id"
-        [parentId]="bucket.parentId ? bucket.parentId : bucket.bucketId"
+        [parentId]="bucket.bucketId"
         [label]="false"
         [buttonType]="'text'"
         [content]="bucket.content"
@@ -46,6 +46,7 @@
   >
     <app-todo-item-details
       *ngIf="bucketSelectItem"
+      [bucketId]="todoId"
       (done)="handleItemDetailsView($event)"
       [bucketItem]="bucketSelectItem"
     ></app-todo-item-details>

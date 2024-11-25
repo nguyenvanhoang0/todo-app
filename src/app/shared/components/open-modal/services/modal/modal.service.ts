@@ -7,8 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class ModalService {
   private modalStates: Map<string, BehaviorSubject<boolean>> = new Map();
 
-  constructor() {}
-
   createModal(id: string): void {
     if (!this.modalStates.has(id)) {
       this.modalStates.set(id, new BehaviorSubject<boolean>(false));

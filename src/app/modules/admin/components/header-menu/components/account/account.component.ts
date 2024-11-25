@@ -11,6 +11,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 })
 export class AccountComponent {
   @Input() userInfo?: IUserInfo;
+  @Input() avatar? = '';
   @Output() Visible = new EventEmitter<boolean>();
 
   confirmationForm = false;

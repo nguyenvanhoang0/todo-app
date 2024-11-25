@@ -1,20 +1,21 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/',
+  apiUrl: 'https://elysia.monthlyparty.com/',
   authEndpoint: {
     login: 'sign-in',
     register: 'sign-up',
     getUserInfo: 'me',
     update: 'me/update',
+    avatar: 'me/avatar',
   },
-  bucketsEndpoint:{
+  bucketsEndpoint: {
     getBuckets: 'buckets',
     createBucket: 'buckets',
     getBucketById: 'buckets/',
     updateBucket: 'buckets',
     delete: 'buckets/{id}',
   },
-  bucketitemsEndpoint:{
+  bucketitemsEndpoint: {
     createBucketItem: '/items',
     getBucketItem: '/items',
     updateBucket: '/items/{id}',

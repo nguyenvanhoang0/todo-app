@@ -28,9 +28,11 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe(() =>
-      this.getBucketDetails(this.todoId)
-    );
+    this.eventSubscription = this._eventService.event$.subscribe((event) => {
+      if (event.id === undefined) {
+        this.getBucketDetails(this.todoId);
+      }
+    });
     this.getIDBucket();
   }
 
