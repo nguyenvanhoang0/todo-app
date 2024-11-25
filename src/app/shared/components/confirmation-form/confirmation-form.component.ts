@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IconComponent } from '../icon/icon.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
-    IconComponent,
-    NzButtonModule
+    NzButtonModule,
   ],
   selector: 'app-confirmation-form',
   templateUrl: './confirmation-form.component.html',
@@ -16,6 +14,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 })
 export class ConfirmationFormComponent {
   @Input() content = '';
+  @Input() cancel = true;
   @Output() confirm = new EventEmitter<boolean>();
 
   handlecConfirm(confirm : boolean){

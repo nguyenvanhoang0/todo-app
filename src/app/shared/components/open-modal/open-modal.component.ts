@@ -1,23 +1,52 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ModalService } from './services/modal/modal.service';
 
 @Component({
   selector: 'app-open-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './open-modal.component.html',
-  styleUrl: './open-modal.component.scss'
+  styleUrl: './open-modal.component.scss',
 })
-export class OpenModalComponent {
+export class OpenModalComponent implements OnInit {
+  @Input() canCloseByOutsideClick = false;
+  @Input() modalId: string = '';
   @Output() Visible = new EventEmitter<boolean>();
 
-  changeVisible() {
-    this.Visible.emit(false);
+  @Input() isVisible = false;
+  private subscription?: Subscription;
+
+  constructor(private _modalService: ModalService) {}
+
+  ngOnInit(): void {
+    if (this.modalId) {
+      this.subscription = this._modalService
+        .isVisible(this.modalId)
+        ?.subscribe((isVisible) => {
+          console.log(`Modal ${this.modalId} visible:`, isVisible);
+          this.isVisible = isVisible;
+        });
+    }
+  }
+
+  changeVisible(): void {
+    if (this.modalId) {
+      this._modalService.hide(this.modalId);
+    } else {
+      this.isVisible = false;
+      this.Visible.emit(false);
+    }
+    console.log(this.isVisible);
+    
   }
 
   blockFormClosing(event: MouseEvent) {
-    event.stopPropagation(); 
+    event.stopPropagation();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

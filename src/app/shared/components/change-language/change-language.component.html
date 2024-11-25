@@ -9,7 +9,7 @@
   </div>
 
   <app-open-modal
-    *ngIf="changeLanguageForm"
+    [isVisible]="changeLanguageForm"
     (Visible)="openchangeLanguageForm($event)"
   >
     <div class="title">Select language</div>

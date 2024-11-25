@@ -15,6 +15,9 @@ import { TodoItemDetailsComponent } from './components/todo-item-details/todo-it
 import { OpenModalComponent } from 'src/app/shared/components/open-modal/open-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
+import { SearchFieldComponent } from 'src/app/shared/components/searchField/searchField.component';
+import { BucketListComponent } from 'src/app/shared/components/bucket-list/bucket-list.component';
 
 @NgModule({
   declarations: [TodoDetailsComponent, TodoItemComponent,TodoItemDetailsComponent],
@@ -31,6 +34,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     IconComponent,
     TextComponent,
     EmptyComponent,
+    SidebarComponent,
+    SearchFieldComponent,
+    BucketListComponent
   ],
 })
 export class TodoDetailsModule {}

@@ -30,8 +30,7 @@
           (change)="changeValue()"
           [id]="id"
           [content]="content"
-          ></app-add-bucket-item-form>
-
+        ></app-add-bucket-item-form>
 
         <app-edit-bocket-form
           *ngSwitchCase="'edit bucket'"
@@ -39,17 +38,17 @@
           (change)="changeValue()"
           [id]="id"
           [content]="content"
-          >
+        >
         </app-edit-bocket-form>
 
         <app-edit-bocket-item-form
-        *ngSwitchCase="'edit bucket items'"
+          *ngSwitchCase="'edit bucket items'"
           (complete)="done()"
           (change)="changeValue()"
           [id]="id"
           [parentId]="parentId"
           [content]="content"
-          >
+        >
         </app-edit-bocket-item-form>
 
         <app-delete-form
@@ -64,10 +63,10 @@
     </ng-container>
   </div>
 </div>
-
-<app-confirmation-form
-  *ngIf="confirmationForm"
-  content="changes are not saved yet. Do you want to exit?"
-  (confirm)="closeConfirmationForm($event)"
->
-</app-confirmation-form>
+<app-open-modal [isVisible]="confirmationForm" (Visible)="closeConfirmationForm($event)">
+  <app-confirmation-form
+    content="changes are not saved yet. Do you want to exit?"
+    (confirm)="closeConfirmationForm($event)"
+  >
+  </app-confirmation-form>
+</app-open-modal>

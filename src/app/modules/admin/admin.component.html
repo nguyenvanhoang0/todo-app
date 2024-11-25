@@ -1,14 +1,14 @@
 <div class="container">
-  <nz-layout >
+  <nz-layout>
     <nz-header>
       <app-header-menu></app-header-menu>
     </nz-header>
-  
+
     <nz-layout>
       <nz-sider>
         <app-nav-bar></app-nav-bar>
       </nz-sider>
-  
+
       <nz-content>
         <div class="content-wrapper">
           <router-outlet></router-outlet>
@@ -16,5 +16,13 @@
       </nz-content>
     </nz-layout>
   </nz-layout>
-  
 </div>
+
+<app-open-modal [modalId]="'Unauthorized'" [canCloseByOutsideClick]="true">
+  <app-confirmation-form
+    content="session expired! please login again"
+    (confirm)="onConfirm($event)"
+    [cancel]="false"
+  >
+  </app-confirmation-form>
+</app-open-modal>

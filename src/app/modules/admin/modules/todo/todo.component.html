@@ -2,12 +2,8 @@
   <div class="todo-content">
     <div class="title">
       <app-open-form></app-open-form>
-      <input
-        nz-input
-        type="text"
-        [formControl]="searchControl"
-        placeholder="Tìm kiếm..."
-      />
+      <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+
     </div>
     <app-todo-content [searchContent]="searchContent"></app-todo-content>
   </div>

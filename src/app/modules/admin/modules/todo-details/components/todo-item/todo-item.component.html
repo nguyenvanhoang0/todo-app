@@ -1,6 +1,6 @@
 <div [ngClass]="bucketItem.length > 0 ? 'container' : ''">
   <div class="group-bucket-item">
-    @if (!message.isLoading) { @for (bucket of bucketItem; track bucket.id) {
+    @for (bucket of bucketItem; track bucket.id) {
     <div
       class="bucket-item"
       [ngClass]="bucket.done ? 'finish' : 'unfinished'"
@@ -27,8 +27,8 @@
       >
       </app-open-form>
     </div>
-    }} @else {<nz-skeleton [nzActive]="true"></nz-skeleton>}
-
+    }@empty { @if (message.isLoading) {
+    <nz-skeleton [nzActive]="true"></nz-skeleton>} }
     <div class="pagination">
       <nz-pagination
         *ngIf="totalBuckets > configurationParams.limit"
@@ -41,7 +41,7 @@
   </div>
 
   <app-open-modal
-    *ngIf="itemDetailsView"
+    [isVisible]="itemDetailsView"
     (Visible)="handleItemDetailsView($event)"
   >
     <app-todo-item-details

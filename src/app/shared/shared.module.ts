@@ -8,6 +8,9 @@ import { EmptyComponent } from './components/empty/empty.component';
 import { TextComponent } from './components/text/text.component';
 import { OpenFormComponent } from './components/open-form/open-form.component';
 import { TimeAgoPipe } from '../core/pipe/time-ago.pipe';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BucketListComponent } from './components/bucket-list/bucket-list.component';
+import { SearchFieldComponent } from './components/searchField/searchField.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -17,7 +20,10 @@ const COMPONENTS = [
   ChangeLanguageComponent,
   EmptyComponent,
   TextComponent,
-  OpenFormComponent
+  OpenFormComponent,
+  SidebarComponent,
+  BucketListComponent,
+  SearchFieldComponent
 ]
 
 @NgModule({

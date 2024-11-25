@@ -4,7 +4,6 @@ import { InputFieldTypes } from './input-field.types';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
-import { IconComponent } from '../icon/icon.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { WordLimitDirective } from 'src/app/core/directive/word-limit.directive';
@@ -16,7 +15,6 @@ import { WordLimitDirective } from 'src/app/core/directive/word-limit.directive'
     NzInputModule,
     FormsModule,
     NzSkeletonModule,
-    IconComponent,
     NzSelectModule,
     NzRadioModule,
     WordLimitDirective

@@ -1,0 +1,36 @@
+.content {
+    gap: 24px;
+    width: 100%;
+  
+    .bucket {
+      padding: 12px 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.2s;
+      cursor: pointer;
+
+      &.select{
+        background-color: var(--red2);
+      }
+  
+      .bucket-content{
+        text-align: left;
+        >div{
+          font-size: x-small;
+        }
+      }
+  
+      &:hover {
+        background-color: var(--red2);
+        transition: 0.2s;
+      }
+    }
+  }
+  
+  .pagination {
+    padding: 12px 24px;
+    display: flex;
+  }
+  

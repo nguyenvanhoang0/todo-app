@@ -1,0 +1,9 @@
+<button nz-button nzType="primary" (click)="openSidebar()" nzType="text">
+  <app-icon [name]="icon"></app-icon>
+</button>
+<div class="sidebar" [ngClass]="{'open': sidebarView}">
+    <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+    <div *ngIf="sidebarView">
+        <ng-container *ngTemplateOutlet="contentTemplate; context: { searchContent: searchContent }"></ng-container>
+    </div>
+</div>

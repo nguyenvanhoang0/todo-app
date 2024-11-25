@@ -1,0 +1,27 @@
+<div [ngClass]="buckets.length > 0 ? 'content' : ''">
+    @for (bucket of buckets; track bucket.title) {
+    <div
+      class="bucket"
+      (click)="navigateToDetails(bucket.id)"
+      (keydown.enter)="navigateToDetails(bucket.id)"
+      tabindex="0"
+      [ngClass]="{'select': bucket.id === todoId}"
+    >
+      <div class="bucket-content">
+        <app-text [line]="1">{{bucket.title}}</app-text>
+      </div>
+      <app-icon *ngIf="!bucket.public" [name]="'lock'"></app-icon>
+    </div>
+    } @empty { @if (message.isLoading) {
+    <nz-skeleton [nzActive]="true"></nz-skeleton>}@else {<app-empty></app-empty>}
+    }
+  </div>
+  <div class="pagination">
+    <nz-pagination
+      *ngIf="totalBuckets > configurationParams.limit"
+      [nzPageIndex]="configurationParams.page"
+      [nzTotal]="totalBuckets"
+      [nzPageSize]="configurationParams.limit"
+      (nzPageIndexChange)="onPageChange($event)"
+    ></nz-pagination>
+  </div>

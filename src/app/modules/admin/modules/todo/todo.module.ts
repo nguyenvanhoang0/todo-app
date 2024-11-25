@@ -14,10 +14,10 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { SearchFieldComponent } from 'src/app/shared/components/searchField/searchField.component';
 
 @NgModule({
-  declarations: [TodoComponent,TodoContentComponent,ItemContentComponent],
+  declarations: [TodoComponent, TodoContentComponent, ItemContentComponent],
   imports: [
     CommonModule,
     TodoRoutingModule,
@@ -25,11 +25,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     NzPaginationModule,
     ReactiveFormsModule,
     SharedModule,
+    NzInputModule,
     IconComponent,
     EmptyComponent,
     OpenFormComponent,
     TextComponent,
-    NzInputModule
-  ]
+    SearchFieldComponent,
+  ],
 })
-export class TodoModule { }
+export class TodoModule {}

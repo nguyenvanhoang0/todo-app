@@ -20,8 +20,8 @@ export class RegisterComponent implements OnDestroy {
   constructor(
     private _router: Router,
     private _authFormService: AuthFormService,
-    private authApiService: AuthApiService,
-    private message: MessageService
+    private _authApiService: AuthApiService,
+    public message: MessageService
   ) {}
 
   get registerFormControl() {
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnDestroy {
       });
     } else {
       this.message.createMessageloading();
-      this.authApiService
+      this._authApiService
         .Register(this.registerFormGroup.getRawValue())
         .subscribe({
           next: (response) => {

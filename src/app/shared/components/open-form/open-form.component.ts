@@ -13,6 +13,7 @@ import { EditBocketFormComponent } from './components/edit-bocket-form/edit-bock
 import { DeleteFormComponent } from './components/delete-form/delete-form.component';
 import { AddBucketItemFormComponent } from './components/add-bucket-item-form/add-bucket-item-form.component';
 import { EditBocketItemFormComponent } from './components/edit-bocket-item-form/edit-bocket-item-form.component';
+import { OpenModalComponent } from '../open-modal/open-modal.component';
 
 @Component({
   selector: 'app-open-form',
@@ -21,6 +22,7 @@ import { EditBocketItemFormComponent } from './components/edit-bocket-item-form/
     CommonModule,
     NzButtonModule,
     IconComponent,
+    OpenModalComponent,
     ConfirmationFormComponent,
     AddBucketFormComponent,
     EditBocketFormComponent,
@@ -54,8 +56,13 @@ export class OpenFormComponent implements OnDestroy {
   }
 
   closeForm() {
+    console.log(this.change);
+    console.log(this.confirmationForm);
+
     if (this.change === false) {
       this.currentForm = null
+      console.log(this.currentForm);
+      
     } else {
       this.confirmationForm = true
     }

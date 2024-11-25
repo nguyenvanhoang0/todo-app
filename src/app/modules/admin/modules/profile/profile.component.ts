@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { MainState } from 'src/app/core/store/_store.types';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,9 @@ export class ProfileComponent {
   constructor(
     private _store: Store<MainState>,
     private _router: Router,
-    private _nzMsgService: NzMessageService
+    private _nzMsgService: NzMessageService,
+    private _authApiService: AuthApiService,
+
   ) {
     this.userInfo$.subscribe();
   }
@@ -44,16 +47,9 @@ export class ProfileComponent {
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;
-      this.logout();
+      this._authApiService.logout();
     } else {
       this.confirmationForm = false;
     }
-  }
-
-  logout() {
-    this._nzMsgService.success('sign out success');
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userInfo');
-    this._router.navigate(['/auth/signIn']);
   }
 }

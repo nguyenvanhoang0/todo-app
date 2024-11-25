@@ -12,6 +12,7 @@
       </p>
 
       <div class="action">
+        <app-sidebar [contentTemplate]="customContent"></app-sidebar>
         <app-open-form
           [formName]="'edit bucket'"
           [icon]="'edit'"
@@ -37,12 +38,7 @@
         [id]="todoId"
       >
       </app-open-form>
-      <input
-        nz-input
-        type="text"
-        [formControl]="searchControl"
-        placeholder="Tìm kiếm..."
-      />
+      <app-search-field (searchContent)="onSearch($event)"></app-search-field>
     </div>
     }
     <div *ngIf="TotalBucket()" class="flex">
@@ -68,3 +64,7 @@
     } }
   </div>
 </div>
+
+<ng-template #customContent let-searchContent="searchContent">
+    <app-bucket-list [searchContent]="searchContent"></app-bucket-list>
+</ng-template>

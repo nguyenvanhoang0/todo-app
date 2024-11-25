@@ -1,4 +1,4 @@
-<div class="confirmation-form" 
+<!-- <div class="confirmation-form" 
      (click)="handlecConfirm(false)" 
      (keydown.enter)="handlecConfirm(false)" 
      tabindex="0">
@@ -6,14 +6,36 @@
        (click)="blockFormClosing($event)" 
        (keydown.enter)="blockFormClosing($event)" 
        tabindex="0">
-    <div class="title">Confirmation Form</div>
+    
+  </div>
+</div> -->
+<!-- <app-open-modal > -->
+<div class="group-content">
+  <div class="title">Confirmation Form</div>
 
-    <div class="content">
-      <div class="text">{{ content }}</div>
-      <div class="group-button">
-        <button nz-button nzType="text" type="button" (click)="handlecConfirm(false)">Cancel</button>
-        <button nz-button nzType="primary" type="button" (click)="handlecConfirm(true)" nzDanger>Confirm</button>
-      </div>
+  <div class="content">
+    <div class="text">{{ content }}</div>
+    <div class="group-button">
+      <button
+        *ngIf="cancel"
+        nz-button
+        nzType="text"
+        type="button"
+        (click)="handlecConfirm(false)"
+      >
+        Cancel
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        type="button"
+        (click)="handlecConfirm(true)"
+        nzDanger
+      >
+        Confirm
+      </button>
     </div>
   </div>
 </div>
+
+<!-- </app-open-modal> -->

@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TodoDetailsService } from './services/todo/todo-details.service';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { IBucket } from '../todo/types/todo.type';
 import { EventService } from '../../services/event/event.service';
 import { MessageService } from 'src/app/services/message/message.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-details',
@@ -15,7 +14,6 @@ import { FormControl } from '@angular/forms';
 export class TodoDetailsComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
-  searchControl = new FormControl('', { updateOn: 'change' });
   searchContent?: string;
 
   todoId!: number;
@@ -34,7 +32,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
       this.getBucketDetails(this.todoId)
     );
     this.getIDBucket();
-    this.searchWithDebounce();
   }
 
   getIDBucket() {
@@ -68,19 +65,15 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.totalBucketNotDone = Total;
   }
 
+  onSearch(query: string): void {
+    this.searchContent = query;
+  }
+
   TotalBucket(): number {
     return (
       (this.totalBucketDone ? this.totalBucketDone : 0) +
       (this.totalBucketNotDone ? this.totalBucketNotDone : 0)
     );
-  }
-
-  searchWithDebounce(): void {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((value) => {
-        this.searchContent = value ? value : undefined;
-      });
   }
 
   ngOnDestroy() {
