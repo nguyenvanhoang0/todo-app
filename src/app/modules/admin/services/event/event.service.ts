@@ -9,6 +9,8 @@ export class EventService {
   event$ = this.eventSource.asObservable();
 
   emitEvent(id?: string | number): void {
+    console.log(id);
+    
     this.eventSource.next({ id });
   }
 } 

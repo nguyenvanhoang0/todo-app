@@ -29,7 +29,11 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === undefined) {
+      if (
+        event.id === 'edit bucket' ||
+        event.id === 'add bucket' ||
+        event.id === 'deleteBucket'
+      ) {
         this.getBucketDetails(this.todoId);
       }
     });
@@ -52,8 +56,12 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
           this.message.createMessage('success', 'loading success', '', false);
         },
         error: (err) => {
-          this.message.createMessage('error', err);
-          console.error('Error Fetching Bucket Details:', err);
+          if (err.status !== 404) {
+            this.message.createMessage('error', err);
+            console.error('Error Fetching Bucket Details:', err);
+          }else{
+            this.bucket = undefined;
+          }
         },
       })
     );

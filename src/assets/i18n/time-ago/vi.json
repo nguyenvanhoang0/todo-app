@@ -1,0 +1,13 @@
+{
+  "ONE_YEAR": "1 năm trước",
+  "YEARS": "{{count}} năm trước",
+  "ONE_MONTH": "1 tháng trước",
+  "MONTHS": "{{count}} tháng trước",
+  "ONE_DAY": "1 ngày trước",
+  "DAYS": "{{count}} ngày trước",
+  "ONE_HOUR": "1 giờ trước",
+  "HOURS": "{{count}} giờ trước",
+  "ONE_MINUTE": "1 phút trước",
+  "MINUTES": "{{count}} phút trước",
+  "SECONDS": "{{count}} giây trước"
+}

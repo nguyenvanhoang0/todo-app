@@ -41,7 +41,7 @@ export class OpenFormComponent implements OnDestroy {
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' | 'text' = 'default';
   @Input() id?: number;
   @Input() parentId?: number;
-  @Input() delete: 'Bucket' | 'Bucket item' = 'Bucket';
+  @Input() delete: 'deleteBucket' | 'deleteBucketItem' | '' = '';
   @Input() content?: string;
   @Output() complete = new EventEmitter<void>();
   change = false;
@@ -89,7 +89,7 @@ export class OpenFormComponent implements OnDestroy {
     this.complete.emit();
     this.currentForm = null;
     this.change = false
-    this._eventService.emitEvent();    
+    this._eventService.emitEvent(this.formName === 'delete'?  this.delete : this.formName);    
   }
 
   blockFormClosing(event: MouseEvent) {

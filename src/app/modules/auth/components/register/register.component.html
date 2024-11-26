@@ -1,6 +1,6 @@
 <div class="register">
   <form nz-form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
-    <div class="title">Register</div>
+    <div class="title">{{ 'REGISTER.REGISTER' | translate }}</div>
 
     <nz-form-item class="item">
       <nz-form-control
@@ -14,7 +14,7 @@
             id="username"
             type="text"
             formControlName="username"
-            placeholder="Name"
+            placeholder="{{ 'REGISTER.NAME' | translate }}"
           />
         </nz-input-group>
       </nz-form-control>
@@ -32,7 +32,7 @@
             id="email"
             type="email"
             formControlName="email"
-            placeholder="Enter your email"
+            placeholder="{{ 'REGISTER.ENTER_YOUR_EMAIL' | translate }}"
           />
         </nz-input-group>
       </nz-form-control>
@@ -50,7 +50,7 @@
             id="password"
             type="password"
             formControlName="password"
-            placeholder="Enter your password"
+            placeholder="{{ 'REGISTER.ENTER_YOUR_PASSWORD' | translate }}"
           />
         </nz-input-group>
       </nz-form-control>
@@ -58,7 +58,7 @@
 
     <div nz-form-item>
       <button nz-button nzType="primary" [disabled]="registerFormGroup.invalid && message.isLoading">
-        Register
+        {{ 'REGISTER.REGISTER_BUTTON' | translate }}
       </button>
     </div>
 
@@ -67,19 +67,20 @@
       (keydown.enter)="handleClickSignIn()"
       tabindex="0"
       role="button"
-      >Sign in</a
     >
+      {{ 'REGISTER.SIGN_IN' | translate }}
+    </a>
 
     <ng-template #usernameErrorTpl>
-      <small class="error-message">Username is required.</small>
+      <small class="error-message">{{ 'REGISTER.USERNAME_REQUIRED' | translate }}</small>
     </ng-template>
 
     <ng-template #emailErrorTpl>
-      <small class="error-message">Email is required.</small>
+      <small class="error-message">{{ 'REGISTER.EMAIL_REQUIRED' | translate }}</small>
     </ng-template>
 
     <ng-template #passwordErrorTpl>
-      <small class="error-message">Password is required.</small>
+      <small class="error-message">{{ 'REGISTER.PASSWORD_REQUIRED' | translate }}</small>
     </ng-template>
   </form>
 </div>

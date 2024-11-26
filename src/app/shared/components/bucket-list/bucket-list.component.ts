@@ -61,7 +61,7 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === undefined) {
+      if (event.id === 'edit bucket' || event.id === 'deleteBucket' ) {
         this.search(this.searchContent);
       }
     });

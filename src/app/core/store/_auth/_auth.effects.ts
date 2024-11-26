@@ -1,9 +1,8 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, EMPTY, map, switchMap } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { authActions } from './_auth.actions';
-import { ActionProps, ILoginPayload, ILoginResponse } from './_auth.types';
+import { ActionProps, ILoginPayload } from './_auth.types';
 import { ApiCallerService } from '../../services/api-caller.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';

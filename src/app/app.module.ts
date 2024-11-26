@@ -6,21 +6,43 @@ import { StoreModule } from '@ngrx/store';
 import { combinedReducers } from './core/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './core/store/_auth/_auth.effects';
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { apiResolverInterceptor } from './core/interceptors/api-resolver.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  ModuleTranslateLoader,
+  IModuleTranslationOptions,
+} from '@larscom/ngx-translate-module-loader';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+export function moduleHttpLoaderFactory(http: HttpClient) {
+  const baseTranslateUrl = './assets/i18n';
+
+  const options: IModuleTranslationOptions = {
+    modules: [
+      // { baseTranslateUrl },
+      { baseTranslateUrl:`${baseTranslateUrl}/auth`},
+      { baseTranslateUrl:`${baseTranslateUrl}/admin`},
+      { baseTranslateUrl:`${baseTranslateUrl}/profile`},
+      { baseTranslateUrl:`${baseTranslateUrl}/todo`},
+      { baseTranslateUrl:`${baseTranslateUrl}/todo-details`},
+      { baseTranslateUrl:`${baseTranslateUrl}/update-profile`},
+      { baseTranslateUrl:`${baseTranslateUrl}/time-ago`},
+      // { baseTranslateUrl: `${baseTranslateUrl}/bucket`}
+    ],
+  };
+
+  return new ModuleTranslateLoader(http, options);
 }
-
 @NgModule({
-  declarations:[AppComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -33,15 +55,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        useFactory: moduleHttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [
-    provideHttpClient(withInterceptors([apiResolverInterceptor])),
-  ],
+  providers: [provideHttpClient(withInterceptors([apiResolverInterceptor]))],
   exports: [TranslateModule],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    this.translate.use('en');
+  }
+}

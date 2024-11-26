@@ -54,7 +54,11 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === undefined) {
+      if (
+        event.id === 'add bucket items' ||
+        event.id === 'edit bucket items' ||
+        event.id === 'deleteBucketItem'
+      ) {
         this.search(this.searchContent);
       }
     });

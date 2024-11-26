@@ -4,10 +4,10 @@ export const MAIN_ROUTES: IRoute[] = [
   {
     route: ['me'],
     icon: 'user',
-    title: 'My Profile'
+    title: 'MY_PROFILE'
   },
   {
-    title: 'todo',
+    title: 'TODO',
     icon: 'calendar',
     route: ['todo'],
   },

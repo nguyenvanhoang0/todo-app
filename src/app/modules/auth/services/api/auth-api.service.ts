@@ -7,6 +7,8 @@ import { IRegister } from '../../types/auth.types';
 import { MessageService } from 'src/app/services/message/message.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,8 @@ export class AuthApiService {
     private _apiCallerService: ApiCallerService,
     private _message: MessageService,
     private _http: HttpClient,
-    private _router: Router
+    private _router: Router,
+    private _store: Store,
   ) {}
 
   login(payload: ILoginPayload): Observable<ILoginResponse> {
@@ -51,6 +54,7 @@ export class AuthApiService {
     this._message.createMessage('success', 'sign out success');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userInfo');
+    this._store.dispatch(authActions.logout());
     this._router.navigate(['/auth/signIn']);
   }
 }

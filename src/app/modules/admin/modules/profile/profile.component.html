@@ -1,7 +1,7 @@
 <section class="container">
   <article class="content">
     <header class="title">
-      <p>welcome</p>
+      <p>{{ 'WELCOME' | translate }}</p>
       <a
         class="out"
         (click)="confirmationForm = true"
@@ -9,16 +9,12 @@
         tabindex="0"
         role="button"
       >
-        logout<app-icon name="logout"></app-icon>
+        {{ 'LOGOUT' | translate }}<app-icon name="logout"></app-icon>
       </a>
     </header>
     <section class="user" *ngIf="userInfo$ | async as userInfo">
       <figure class="avatar">
-        <nz-avatar
-          [nzSize]="96"
-          nzIcon="user"
-          [nzSrc]="avatar"
-        ></nz-avatar>
+        <nz-avatar [nzSize]="96" nzIcon="user" [nzSrc]="avatar"></nz-avatar>
         <div
           class="edit"
           (click)="handleClickUpdate()"
@@ -45,10 +41,7 @@
 </section>
 
 <app-open-modal [isVisible]="confirmationForm" (Visible)="onConfirm($event)">
-  <app-confirmation-form
-    *ngIf="confirmationForm"
-    [content]="'Are you sure you want to sign out?'"
-    (confirm)="onConfirm($event)"
-  >
+  <app-confirmation-form *ngIf="confirmationForm" (confirm)="onConfirm($event)">
+    {{ 'ARE_YOU_SURE_YOU_WANT_TO_SIGN_OUT' | translate }}
   </app-confirmation-form>
 </app-open-modal>

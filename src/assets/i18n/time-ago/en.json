@@ -1,0 +1,13 @@
+{
+  "ONE_YEAR": "1 year ago",
+  "YEARS": "{{count}} years ago",
+  "ONE_MONTH": "1 month ago",
+  "MONTHS": "{{count}} months ago",
+  "ONE_DAY": "1 day ago",
+  "DAYS": "{{count}} days ago",
+  "ONE_HOUR": "1 hour ago",
+  "HOURS": "{{count}} hours ago",
+  "ONE_MINUTE": "1 minute ago",
+  "MINUTES": "{{count}} minutes ago",
+  "SECONDS": "{{count}} seconds ago"
+}

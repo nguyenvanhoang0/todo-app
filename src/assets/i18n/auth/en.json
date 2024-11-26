@@ -1,0 +1,22 @@
+{
+  "LOGIN": {
+    "WELCOME": "Welcome",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "PASSWORD_PLACEHOLDER": "Enter your password",
+    "LOGIN_BUTTON": "Log in",
+    "SIGNUP_LINK": "Sign up",
+    "EMAIL_REQUIRED": "Email is required.",
+    "PASSWORD_REQUIRED": "Password is required."
+  },
+  "REGISTER": {
+    "REGISTER": "Register",
+    "NAME": "Name",
+    "ENTER_YOUR_EMAIL": "Enter your email",
+    "ENTER_YOUR_PASSWORD": "Enter your password",
+    "SIGN_IN": "Sign in",
+    "USERNAME_REQUIRED": "Username is required.",
+    "EMAIL_REQUIRED": "Email is required.",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "REGISTER_BUTTON": "Register"
+  }
+}

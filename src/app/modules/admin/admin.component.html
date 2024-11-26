@@ -20,9 +20,9 @@
 
 <app-open-modal [modalId]="'Unauthorized'" [canCloseByOutsideClick]="true">
   <app-confirmation-form
-    content="session expired! please login again"
     (confirm)="onConfirm($event)"
     [cancel]="false"
   >
+  session expired! please login again
   </app-confirmation-form>
 </app-open-modal>

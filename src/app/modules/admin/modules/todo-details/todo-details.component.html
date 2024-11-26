@@ -23,7 +23,7 @@
         <app-open-form
           [buttonType]="'danger'"
           [formName]="'delete'"
-          [delete]="'Bucket'"
+          [delete]="'deleteBucket'"
           [icon]="'delete'"
           [id]="bucket.id"
           [label]="false"
@@ -40,7 +40,7 @@
       </app-open-form>
       <app-search-field (searchContent)="onSearch($event)"></app-search-field>
     </div>
-    }
+    }@else {<app-empty></app-empty>}
     <div *ngIf="TotalBucket()" class="flex">
       <div class="flex done">
         <app-icon [name]="'check'" class="icon"></app-icon>

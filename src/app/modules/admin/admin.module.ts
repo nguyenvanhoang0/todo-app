@@ -24,6 +24,7 @@ import {
 } from 'ng-zorro-antd/menu';
 import { NavBarBodyComponent } from './components/nav-bar/components/nav-bar-body/nav-bar-body.component';
 import { AccountComponent } from './components/header-menu/components/account/account.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AccountComponent } from './components/header-menu/components/account/ac
     CommonModule,
     AdminRoutingModule,
     NzAvatarModule,
+    TranslateModule,
     IconComponent,
     ConfirmationFormComponent,
     OpenModalComponent,

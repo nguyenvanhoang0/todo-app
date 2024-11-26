@@ -14,7 +14,7 @@
           <div class="d-flex flex-dir-row gap-16"
           >
             <span *ngIf="menu.icon" [nzType]="menu.icon" nz-icon></span>
-            <span>{{ menu.title }}</span>
+            <span>{{ menu.title | translate }}</span>
           </div>
         </li>
         <li

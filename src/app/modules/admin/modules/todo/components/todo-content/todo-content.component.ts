@@ -44,7 +44,7 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === undefined) {
+      if (event.id === 'edit bucket' || event.id === 'add bucket' || event.id === 'deleteBucket') {
         this.getAllTodo(this.configurationParams);
       }
     });

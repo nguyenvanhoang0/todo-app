@@ -57,7 +57,7 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
             .subscribe({
               next: () => {
                 this._message.createMessage('success', 'Update successful');
-                this._eventService.emitEvent();
+                this._eventService.emitEvent('edit bucket items');
                 this.done.emit(false);
               },
               error: (err) => {

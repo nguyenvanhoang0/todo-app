@@ -23,7 +23,7 @@ import { BucketItemService } from '../../services/bucket-item/bucket-item.servic
 export class DeleteFormComponent implements OnDestroy {
   @Input() id?: number;
   @Input() parentId?: number;
-  @Input() delete: 'Bucket' | 'Bucket item' = 'Bucket';
+  @Input() delete: 'deleteBucket' | 'deleteBucketItem' | '' = '';
   @Output() complete = new EventEmitter<void>();
   Message = EMessageType;
 
@@ -38,7 +38,7 @@ export class DeleteFormComponent implements OnDestroy {
   onDelete(): void {
     if (this.id) {
       switch (this.delete) {
-        case 'Bucket':
+        case 'deleteBucket':
           this._bucketService.deleteBucket(this.id).subscribe({
             next: () => {
               this.done(EMessageType.SUCCESS);
@@ -49,7 +49,7 @@ export class DeleteFormComponent implements OnDestroy {
             },
           });
           break;
-        case 'Bucket item':
+        case 'deleteBucketItem':
           if (this.parentId) {
             this._bucketItemService
               .deleteBucketItem(this.id, this.parentId)

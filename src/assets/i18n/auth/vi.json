@@ -1,0 +1,22 @@
+{
+  "LOGIN": {
+    "WELCOME": "Chào mừng",
+    "EMAIL_PLACEHOLDER": "Nhập email của bạn",
+    "PASSWORD_PLACEHOLDER": "Nhập mật khẩu của bạn",
+    "LOGIN_BUTTON": "Đăng nhập",
+    "SIGNUP_LINK": "Đăng ký",
+    "EMAIL_REQUIRED": "Email là bắt buộc.",
+    "PASSWORD_REQUIRED": "Mật khẩu là bắt buộc."
+  },
+  "REGISTER": {
+    "REGISTER": "Đăng ký",
+    "NAME": "Tên",
+    "ENTER_YOUR_EMAIL": "Nhập email của bạn",
+    "ENTER_YOUR_PASSWORD": "Nhập mật khẩu của bạn",
+    "SIGN_IN": "Đăng nhập",
+    "USERNAME_REQUIRED": "Tên người dùng là bắt buộc.",
+    "EMAIL_REQUIRED": "Email là bắt buộc.",
+    "PASSWORD_REQUIRED": "Mật khẩu là bắt buộc.",
+    "REGISTER_BUTTON": "Đăng ký"
+  }
+}
