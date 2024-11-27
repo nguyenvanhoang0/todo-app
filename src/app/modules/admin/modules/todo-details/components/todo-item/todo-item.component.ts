@@ -111,8 +111,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
         this.todoId,
         this._configService.getDefaultParamsConfiguration(
           this.done,
-          12,
-          this.configurationParams.page
+          this.configurationParams.page,          
         )
       );
     }
