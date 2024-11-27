@@ -24,7 +24,7 @@ export class AuthEffect {
           }),
           catchError((error) => {
             console.error('Error:', error);
-            this.message.createMessage('error', 'Login failed: ' + error.message);
+            this.message.createMessage('error', 'Login failed: ' + error.error);
             return EMPTY;
           })
         );

@@ -28,9 +28,7 @@ export class RegisterComponent implements OnDestroy {
     return this.registerFormGroup.controls;
   }
 
-  onSubmit() {
-    console.log(1233);
-    
+  onSubmit() {    
     if (this.registerFormGroup.invalid) {
       Object.values(this.registerFormControl).forEach((control) => {
         if (control.invalid) {
@@ -46,7 +44,7 @@ export class RegisterComponent implements OnDestroy {
             this.message.createMessage('success', response);
           },
           error: (err) => {
-            this.message.createMessage('error', err);
+            this.message.createMessage('error', err.error);
             console.error('Registration error:', err);
           },
         });

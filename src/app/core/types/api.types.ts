@@ -14,17 +14,10 @@ export type HttpRequestOptions = {
   withCredentials?: boolean;
 }
 
-export enum EResponseStatus {
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-  FAIL = 'FAIL'
-}
-
 export type IResponseTemplate<T = null> = {
   message: string,
   data: T,
   errors: IErrorResponse[],
-  status: EResponseStatus,
   total: number
 }
 

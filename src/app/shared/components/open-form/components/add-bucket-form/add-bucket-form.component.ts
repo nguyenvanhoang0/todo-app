@@ -39,8 +39,7 @@ export class AddBucketFormComponent implements OnDestroy {
         this.complete.emit();
       },
       error: (err) => {
-        this.message.createMessage('error', err);
-
+        this.message.createMessage('error', err.error);
         console.error(err);
       },
     });

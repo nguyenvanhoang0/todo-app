@@ -64,10 +64,11 @@
     </ng-container>
   </div>
 </div>
-<app-open-modal [isVisible]="confirmationForm" (Visible)="closeConfirmationForm($event)">
-  <app-confirmation-form
-    content="changes are not saved yet. Do you want to exit?"
-    (confirm)="closeConfirmationForm($event)"
-  >
+<app-open-modal
+  [isVisible]="confirmationForm"
+  (Visible)="closeConfirmationForm($event)"
+>
+  <app-confirmation-form (confirm)="closeConfirmationForm($event)">
+    changes are not saved yet. Do you want to exit?
   </app-confirmation-form>
 </app-open-modal>

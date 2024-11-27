@@ -70,7 +70,7 @@ export class EditBocketFormComponent implements OnDestroy, OnInit {
           this.complete.emit();
         },
         error: (err) => {
-          this.message.createMessage('error', err);
+          this.message.createMessage('error', err.error);
         },
       });
     }

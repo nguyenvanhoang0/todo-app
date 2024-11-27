@@ -22,6 +22,7 @@ export class MessageService {
       this.message.remove(this.messageId);      
     }
     this.isLoading = false;
+console.log(content);
 
     if (message) {
       const finalPrefix = prefix !== undefined ? prefix : '';
