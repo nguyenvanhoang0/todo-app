@@ -59,8 +59,10 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
           if (err.status !== 404) {
             this.message.createMessage('error', err);
             console.error('Error Fetching Bucket Details:', err);
-          }else{
+          } else {
             this.bucket = undefined;
+            this.totalBucketDone = undefined;
+            this.totalBucketNotDone = undefined;
           }
         },
       })

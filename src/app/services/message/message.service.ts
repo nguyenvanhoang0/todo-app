@@ -19,11 +19,9 @@ export class MessageService {
     message = true
   ): void {
     if (this.messageId) {
-      this.message.remove(this.messageId);      
+      this.message.remove(this.messageId);
     }
     this.isLoading = false;
-console.log(content);
-
     if (message) {
       const finalPrefix = prefix !== undefined ? prefix : '';
       let finalMessage: string;
@@ -38,7 +36,7 @@ console.log(content);
     }
   }
 
-  createMessageloading(messageView = true): void {    
+  createMessageloading(messageView = true): void {
     this.isLoading = true;
     if (messageView) {
       this.messageId = this.message.loading(EMessageType.LOADING, {

@@ -33,7 +33,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   todoItemId = 0;
 
   configurationParams: IQueryParams = {
-    limit: 12,
+    limit: 8,
     page: 1,
   };
 
@@ -111,7 +111,8 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
         this.todoId,
         this._configService.getDefaultParamsConfiguration(
           this.done,
-          this.configurationParams.page,          
+          this.configurationParams.page,
+          8
         )
       );
     }

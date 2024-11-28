@@ -109,8 +109,6 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
       this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
     } else {
-      console.log(1);
-
       this.getAllTodo(this._configService.getDefaultParamsConfiguration());
     }
   }

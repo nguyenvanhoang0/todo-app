@@ -37,9 +37,7 @@ export class OpenModalComponent implements OnInit ,OnDestroy{
     } else {
       this.isVisible = false;
       this.Visible.emit(false);
-    }
-    console.log(this.isVisible);
-    
+    }    
   }
 
   blockFormClosing(event: MouseEvent) {

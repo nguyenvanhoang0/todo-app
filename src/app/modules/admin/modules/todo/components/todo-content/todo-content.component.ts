@@ -85,8 +85,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
       this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
     } else {
-      console.log(1);
-
       this.getAllTodo(this._configService.getDefaultParamsConfiguration());
     }
   }

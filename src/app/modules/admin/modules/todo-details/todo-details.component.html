@@ -38,7 +38,9 @@
         [id]="todoId"
       >
       </app-open-form>
-      <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+      <div class="search">
+        <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+      </div>
     </div>
     }@else {<app-empty></app-empty>}
     <div *ngIf="TotalBucket()" class="flex">
@@ -66,5 +68,5 @@
 </div>
 
 <ng-template #customContent let-searchContent="searchContent">
-    <app-bucket-list [searchContent]="searchContent"></app-bucket-list>
+  <app-bucket-list [searchContent]="searchContent"></app-bucket-list>
 </ng-template>

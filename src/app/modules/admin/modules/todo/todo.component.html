@@ -2,8 +2,9 @@
   <div class="todo-content">
     <div class="title">
       <app-open-form></app-open-form>
-      <app-search-field (searchContent)="onSearch($event)"></app-search-field>
-
+      <div class="search">
+        <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+      </div>
     </div>
     <app-todo-content [searchContent]="searchContent"></app-todo-content>
   </div>

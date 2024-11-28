@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { formNameTypes } from './open-form.types';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -28,58 +34,51 @@ import { OpenModalComponent } from '../open-modal/open-modal.component';
     EditBocketFormComponent,
     DeleteFormComponent,
     AddBucketItemFormComponent,
-    EditBocketItemFormComponent
+    EditBocketItemFormComponent,
   ],
   templateUrl: './open-form.component.html',
-  styleUrl: './open-form.component.scss'
+  styleUrl: './open-form.component.scss',
 })
 export class OpenFormComponent implements OnDestroy {
   @Input() formName: formNameTypes = 'add bucket';
-  @Input() label= true;
+  @Input() label = true;
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
-  @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' | 'text' = 'default';
+  @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' | 'text' =
+    'default';
   @Input() id?: number;
   @Input() parentId?: number;
   @Input() delete: 'deleteBucket' | 'deleteBucketItem' | '' = '';
   @Input() content?: string;
   @Output() complete = new EventEmitter<void>();
   change = false;
-  confirmationForm= false;
+  confirmationForm = false;
   private subscriptions: Subscription = new Subscription();
-  constructor(private _eventService: EventService) { }
+  constructor(private _eventService: EventService) {}
 
   openForm() {
-    this.currentForm = this.formName
-    console.log(this.content);
-    
+    this.currentForm = this.formName;
   }
 
   closeForm() {
-    console.log(this.change);
-    console.log(this.confirmationForm);
-
     if (this.change === false) {
-      this.currentForm = null
-      console.log(this.currentForm);
-      
+      this.currentForm = null;
     } else {
-      this.confirmationForm = true
+      this.confirmationForm = true;
     }
   }
 
   closeConfirmationForm(confirm: boolean) {
     if (confirm === true) {
-      this.currentForm = null
-      this.confirmationForm = false
-      this.change = false
-
+      this.currentForm = null;
+      this.confirmationForm = false;
+      this.change = false;
     } else {
-      this.confirmationForm = false
+      this.confirmationForm = false;
     }
   }
 
-  changeValue() {    
+  changeValue() {
     if (this.change === false) {
       this.change = true;
     }
@@ -88,8 +87,10 @@ export class OpenFormComponent implements OnDestroy {
   done() {
     this.complete.emit();
     this.currentForm = null;
-    this.change = false
-    this._eventService.emitEvent(this.formName === 'delete'?  this.delete : this.formName);    
+    this.change = false;
+    this._eventService.emitEvent(
+      this.formName === 'delete' ? this.delete : this.formName
+    );
   }
 
   blockFormClosing(event: MouseEvent) {

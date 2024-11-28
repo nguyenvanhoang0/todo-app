@@ -49,7 +49,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;
-      console.log(123);
       this._modalService.hide('Unauthorized');
       this._authApiService.logout();
     } else {

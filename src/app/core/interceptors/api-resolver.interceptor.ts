@@ -31,9 +31,7 @@ export const apiResolverInterceptor: HttpInterceptorFn = (
     return next(reqWithHeader).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          modalService.show('Unauthorized');
-          console.log(1111111);
-          
+          modalService.show('Unauthorized');          
         }
         return throwError(() => error);
       })

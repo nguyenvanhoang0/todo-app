@@ -8,9 +8,7 @@ export class EventService {
   private eventSource = new Subject<{ id?: string | number }>();
   event$ = this.eventSource.asObservable();
 
-  emitEvent(id?: string | number): void {
-    console.log(id);
-    
+  emitEvent(id?: string | number): void {    
     this.eventSource.next({ id });
   }
 } 
