@@ -39,7 +39,7 @@ export class AddBucketItemFormComponent implements OnDestroy {
     public message: MessageService
   ) {}
 
-  onSubmit(event: Event): void {
+  onSubmit(event: Event): void {    
     if (this.parentId) {
       this.bucket.parentId = this.parentId
     }

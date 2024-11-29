@@ -2,7 +2,7 @@
   <div class="text-content">
     {{ bucketItem.content }}
     <div class="action">
-      <app-open-form
+      <app-open-form *ngIf="!bucketItem.parentId"
         [formName]="'add bucket items'"
         [icon]="'plus'"
         [id]="bucketId"
@@ -15,9 +15,7 @@
         [formName]="'edit bucket items'"
         [icon]="'edit'"
         [id]="bucketItem.id"
-        [parentId]="
-          bucketItem.parentId ? bucketItem.parentId : bucketItem.bucketId
-        "
+        [parentId]="bucketId"
         [label]="false"
         [buttonType]="'text'"
         [content]="bucketItem.content"
@@ -27,8 +25,8 @@
         [formName]="'delete'"
         [delete]="'deleteBucketItem'"
         [icon]="'delete'"
-        [id]="bucketItem.bucketId"
-        [parentId]="bucketItem.parentId"
+        [id]="bucketItem.id"
+        [parentId]="bucketId"
         [label]="false"
         [buttonType]="'text'"
       >

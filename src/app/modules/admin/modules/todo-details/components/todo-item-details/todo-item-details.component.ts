@@ -45,26 +45,22 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
     this.bucket = this.bucketItem;
     this.bucket.done = !this.bucket.done;
     this._message.createMessageloading();
-    if (this.bucketItem && this.bucketItem.parentId) {
-      const targetId = this.bucketItem.bucketId;
-
-      if (targetId) {
-        this.subscriptions.add(
-          this._bucketItemService
-            .updateBucketItem(this.bucket, this.bucketItem.parentId, targetId)
-            .subscribe({
-              next: () => {
-                this._message.createMessage('success', 'Update successful');
-                this._eventService.emitEvent('edit bucket items');
-                this.done.emit(false);
-              },
-              error: (err) => {
-                this._message.createMessage('error', 'Update failed');
-                console.error(err);
-              },
-            })
-        );
-      }
+    if (this.bucketItem) {
+      this.subscriptions.add(
+        this._bucketItemService
+          .updateBucketItem(this.bucket, this.bucketItem.id, this.bucketId)
+          .subscribe({
+            next: () => {
+              this._message.createMessage('success', 'Update successful');
+              this._eventService.emitEvent('edit bucket items');
+              this.done.emit(false);
+            },
+            error: (err) => {
+              this._message.createMessage('error', 'Update failed');
+              console.error(err);
+            },
+          })
+      );
     }
   }
 
