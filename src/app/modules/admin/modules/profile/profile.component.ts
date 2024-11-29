@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
 import { Store } from '@ngrx/store';
 import { MainState } from 'src/app/core/store/_store.types';
@@ -35,7 +35,11 @@ export class ProfileComponent implements OnDestroy , OnInit{
   }
 
   ngOnInit(): void {
-    this.getAvatar();
+    this.userInfo$.pipe(take(1)).subscribe((userInfo) => {
+      if (userInfo?.avatar) {
+        this.getAvatar();
+      }
+    });
   }
 
   getAvatar(): void {

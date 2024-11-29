@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IUpdateUserFormGroup } from './types/update-user.type';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, take } from 'rxjs';
 import { Router } from '@angular/router';
 import { UpdateUserFormService } from './services/form/update-user-form.service';
 import { UserService } from './services/user/user.service';
@@ -12,6 +12,7 @@ import { MainState } from 'src/app/core/store/_store.types';
 import { Store } from '@ngrx/store';
 import { EventService } from '../../services/event/event.service';
 import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';
+import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 
 @Component({
   selector: 'app-update-profile',
@@ -19,7 +20,8 @@ import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.servi
   styleUrl: './update-profile.component.scss',
 })
 export class UpdateProfileComponent implements OnDestroy, OnInit {
-  avatar:  string | ArrayBuffer | null = null;
+  avatar: string | ArrayBuffer | null = null;
+  accessToken = localStorage.getItem('accessToken');
 
   updateUserFormGroup: FormGroup<IUpdateUserFormGroup> =
     this._updateUserService.UpdateUserGroup;
@@ -46,7 +48,11 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.getAvatar();
+    this.userInfo$.pipe(take(1)).subscribe((userInfo) => {
+      if (userInfo?.avatar) {
+        this.getAvatar();
+      }
+    });
     this.userInfo$.subscribe((userInfo) => {
       if (userInfo) {
         this.updateUserFormGroup.patchValue({
@@ -64,12 +70,12 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
     this.subscriptions.add(
       this._authApiService.getAvatar().subscribe({
         next: (response: string) => {
-          this.avatar = response;           
+          this.avatar = response;
         },
         error: (error) => {
           this.message.createMessage('error', 'Failed to load avatar');
           console.error('Error loading avatar:', error);
-        }
+        },
       })
     );
   }
@@ -83,26 +89,43 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
         }
       });
     } else {
-      const { email, username, avatar } = this.updateUserFormGroup.getRawValue();
+      const { email, username, avatar } =
+        this.updateUserFormGroup.getRawValue();
       const formData = new FormData();
       formData.append('email', email as string);
       formData.append('username', username as string);
       if (avatar) {
         formData.append('avatar', avatar);
-      }   
+      }
       this.message.createMessageloading();
-      this._userService
-        .updateUser(formData)
-        .subscribe({
-          next: (response) => {
-            this._eventService.emitEvent("updateUser");
-            this.message.createMessage('success', response);
+      this._userService.updateUser(formData).subscribe({
+        next: (response) => {
+          this._eventService.emitEvent('updateUser');
+          this.message.createMessage('success', response);
+          this.getMe();
+        },
+        error: (err) => {
+          this.message.createMessage('error', err);
+          console.error('Update error:', err);
+        },
+      });
+    }
+  }
+
+  getMe(): void {
+    if (this.accessToken) {
+      this.subscriptions.add(
+        this._authApiService.getUserInfo(this.accessToken).subscribe({
+          next: (response: IUserInfo) => {
+            localStorage.setItem('userInfo', JSON.stringify(response));
+            this._store.dispatch(authActions.saveUserInfo(response));
           },
-          error: (err) => {
-            this.message.createMessage('error', err);
-            console.error('Update error:', err);
+          error: (error) => {
+            this.message.createMessage('error', 'Failed to load avatar');
+            console.error('Error loading avatar:', error);
           },
-        });
+        })
+      );
     }
   }
 

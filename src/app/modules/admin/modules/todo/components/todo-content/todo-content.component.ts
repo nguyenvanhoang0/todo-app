@@ -44,7 +44,11 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === 'edit bucket' || event.id === 'add bucket' || event.id === 'deleteBucket') {
+      if (
+        event.id === 'edit bucket' ||
+        event.id === 'add bucket' ||
+        event.id === 'deleteBucket'
+      ) {
         this.getAllTodo(this.configurationParams);
       }
     });
@@ -58,7 +62,7 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   onPageChange(page: number): void {
     this.configurationParams.page = page;
-    this.getAllTodo(this.configurationParams);
+    this.search(this.searchContent);
   }
 
   getAllTodo(params: IQueryParams): void {
@@ -67,6 +71,14 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.add(
       this._todoService.getBuckets(params).subscribe(
         (response) => {
+          if (
+            response.data.length === 0 &&
+            response.total > 0 &&
+            this.configurationParams.page > 1
+          ) {
+            this.configurationParams.page = this.configurationParams.page - 1;
+            this.search(this.searchContent);
+          }
           this.buckets = response.data;
           this.totalBuckets = response.total;
           this.message.createMessage('success', 'loading success', '', false);
@@ -79,13 +91,18 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     );
   }
 
-  search(query: string | null): void {
+  search(query?: string | null): void {
     if (query && query.length > 1) {
       this.configurationParams.query = query;
       this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
     } else {
-      this.getAllTodo(this._configService.getDefaultParamsConfiguration());
+      this.getAllTodo(
+        this._configService.getDefaultParamsConfiguration(
+          undefined,
+          this.configurationParams.page
+        )
+      );
     }
   }
 

@@ -2,6 +2,12 @@
   .group-bucket-item {
     text-align: left;
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+
+    &.and{
+      min-height: 504px;
+    }
 
     .bucket-item {
       padding: 6px 12px;
@@ -41,6 +47,8 @@
   }
   
   .pagination {
+flex: 1;
+align-items: end;
     margin-top: 24px;
     display: flex;
   }

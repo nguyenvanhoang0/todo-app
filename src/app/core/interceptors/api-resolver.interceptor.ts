@@ -18,10 +18,11 @@ export const apiResolverInterceptor: HttpInterceptorFn = (
   const modalService = inject(ModalService);
 
   const [reqApi] = req.url.split('?');
-  if (
-    accessToken &&
-    !API_NOT_ATTACH_ACCESS_TOKEN.some((endpoint) => reqApi.endsWith(endpoint))
-  ) {
+  const shouldSkipToken = API_NOT_ATTACH_ACCESS_TOKEN.some((endpoint) =>
+    reqApi.endsWith(endpoint)
+  );
+
+  if (accessToken && !shouldSkipToken) {
     const reqWithHeader = req.clone({
       headers: req.headers
         .set('Authorization', bearerToken)
@@ -30,8 +31,8 @@ export const apiResolverInterceptor: HttpInterceptorFn = (
 
     return next(reqWithHeader).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          modalService.show('Unauthorized');          
+        if (error.status === 401 && !shouldSkipToken) {
+          modalService.show('Unauthorized');
         }
         return throwError(() => error);
       })
@@ -40,7 +41,7 @@ export const apiResolverInterceptor: HttpInterceptorFn = (
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status === 401) {
+      if (error.status === 401 && !shouldSkipToken) {
         modalService.show('Unauthorized');
       }
       return throwError(() => error);

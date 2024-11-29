@@ -27,10 +27,8 @@
         [formName]="'delete'"
         [delete]="'deleteBucketItem'"
         [icon]="'delete'"
-        [id]="bucketItem.id"
-        [parentId]="
-          bucketItem.parentId ? bucketItem.parentId : bucketItem.bucketId
-        "
+        [id]="bucketItem.bucketId"
+        [parentId]="bucketItem.parentId"
         [label]="false"
         [buttonType]="'text'"
       >

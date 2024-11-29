@@ -1,5 +1,13 @@
 <div [ngClass]="bucketItem.length > 0 ? 'container' : ''">
-  <div class="group-bucket-item">
+  <div
+    class="group-bucket-item"
+    [ngClass]="
+      bucketItem.length < configurationParams.limit &&
+      totalBuckets > configurationParams.limit
+        ? 'and'
+        : ''
+    "
+  >
     @for (bucket of bucketItem; track bucket.id) {
     <div
       class="bucket-item"

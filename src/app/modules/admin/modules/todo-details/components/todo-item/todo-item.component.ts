@@ -77,7 +77,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   getBucketItems(id: number, params: IQueryParams): void {
     this.handleItemDetailsView(false);
     this.message.createMessageloading(false);
-    this.bucketItem = [];
+    // this.bucketItem = [];
     this.subscriptions.add(
       this._todoItemsService.getBucketItems(id, params).subscribe({
         next: (response) => {

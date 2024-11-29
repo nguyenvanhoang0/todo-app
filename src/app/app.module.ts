@@ -16,7 +16,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import {
   ModuleTranslateLoader,
   IModuleTranslationOptions,
@@ -28,13 +33,13 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
   const options: IModuleTranslationOptions = {
     modules: [
       // { baseTranslateUrl },
-      { baseTranslateUrl:`${baseTranslateUrl}/auth`},
-      { baseTranslateUrl:`${baseTranslateUrl}/admin`},
-      { baseTranslateUrl:`${baseTranslateUrl}/profile`},
-      { baseTranslateUrl:`${baseTranslateUrl}/todo`},
-      { baseTranslateUrl:`${baseTranslateUrl}/todo-details`},
-      { baseTranslateUrl:`${baseTranslateUrl}/update-profile`},
-      { baseTranslateUrl:`${baseTranslateUrl}/time-ago`},
+      { baseTranslateUrl: `${baseTranslateUrl}/auth` },
+      { baseTranslateUrl: `${baseTranslateUrl}/admin` },
+      { baseTranslateUrl: `${baseTranslateUrl}/profile` },
+      { baseTranslateUrl: `${baseTranslateUrl}/todo` },
+      { baseTranslateUrl: `${baseTranslateUrl}/todo-details` },
+      { baseTranslateUrl: `${baseTranslateUrl}/update-profile` },
+      { baseTranslateUrl: `${baseTranslateUrl}/time-ago` },
       // { baseTranslateUrl: `${baseTranslateUrl}/bucket`}
     ],
   };
@@ -60,7 +65,10 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [provideHttpClient(withInterceptors([apiResolverInterceptor]))],
+  providers: [
+    provideHttpClient(withInterceptors([apiResolverInterceptor])),
+    { provide: NZ_I18N, useValue: en_US },
+  ],
   exports: [TranslateModule],
   bootstrap: [AppComponent],
 })

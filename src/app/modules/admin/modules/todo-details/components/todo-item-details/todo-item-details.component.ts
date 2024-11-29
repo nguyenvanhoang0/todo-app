@@ -45,15 +45,13 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
     this.bucket = this.bucketItem;
     this.bucket.done = !this.bucket.done;
     this._message.createMessageloading();
-    if (this.bucketItem) {
-      const targetId = this.bucketItem.parentId
-        ? this.bucketItem.parentId
-        : this.bucketItem.bucketId;
+    if (this.bucketItem && this.bucketItem.parentId) {
+      const targetId = this.bucketItem.bucketId;
 
       if (targetId) {
         this.subscriptions.add(
           this._bucketItemService
-            .updateBucketItem(this.bucket, this.bucketItem.id, targetId)
+            .updateBucketItem(this.bucket, this.bucketItem.parentId, targetId)
             .subscribe({
               next: () => {
                 this._message.createMessage('success', 'Update successful');
