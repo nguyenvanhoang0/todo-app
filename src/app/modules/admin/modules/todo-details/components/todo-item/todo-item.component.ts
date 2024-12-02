@@ -24,9 +24,8 @@ import { ConfigurationParamsService } from 'src/app/modules/admin/services/confi
 })
 export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   @Input() done: 0 | 1 = 0;
-  @Input() searchContent?: string;
+  @Input() searchContent = '';
   @Output() totalBucket = new EventEmitter<number>();
-  // @Output() page = new EventEmitter<number>();
 
   bucketItem: IBucketItem[] = [];
   totalBuckets = 0;
@@ -63,21 +62,23 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
       }
     });
     this.configurationParams.done = this.done;
+    this._route.paramMap.subscribe((params) => {
+      this.todoId = Number(params.get('id'));
+      this.search(this.searchContent);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this._route.paramMap.subscribe((params) => {
-      this.todoId = Number(params.get('id'));
-      if (changes['searchContent']) {
-        this.search(changes['searchContent'].currentValue);
-      }
-    });
+    if (changes['searchContent'] && this.todoId) {
+      console.log(this.todoId);
+
+      this.search(changes['searchContent'].currentValue);
+    }
   }
 
   getBucketItems(id: number, params: IQueryParams): void {
     this.handleItemDetailsView(false);
     this.message.createMessageloading(false);
-    // this.bucketItem = [];
     this.subscriptions.add(
       this._todoItemsService.getBucketItems(id, params).subscribe({
         next: (response) => {

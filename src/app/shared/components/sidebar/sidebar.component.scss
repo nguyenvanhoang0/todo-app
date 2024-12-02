@@ -1,15 +1,19 @@
-.sidebar{
-    position: fixed;
-    right: -100%;
-    top: 64px;
-    min-width: 250px;
-    max-width: 340px;
-    height: 100vh;
-    transition: 0.4s;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.sidebar {
+  position: fixed;
+  right: -100%;
+  top: 64px;
+  min-width: 250px;
+  max-width: 340px;
+  height: calc(100vh - 64px);
+  transition: 0.4s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
-    &.open{
-        right: 0px;
-        transition: 0.4s;
-    }
+  .content {
+    height: 100%;
+    overflow: auto;
+  }
+  &.open {
+    right: 0px;
+    transition: 0.4s;
+  }
 }

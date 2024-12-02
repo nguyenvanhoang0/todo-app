@@ -22,13 +22,13 @@ import { EventService } from 'src/app/modules/admin/services/event/event.service
 export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
   @Input() bucketItem!: IBucketItem;
   @Input() bucketId!: number;
-
   @Output() done = new EventEmitter<boolean>();
 
   private subscriptions: Subscription = new Subscription();
   bucket: IBucketItemSimple = {
     content: '',
   };
+  viewStatus = true;
   constructor(
     private _bucketItemService: BucketItemService,
     private _eventService: EventService,
@@ -42,6 +42,7 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
   }
 
   updateStatus(): void {
+    this.viewStatus = false;
     this.bucket = this.bucketItem;
     this.bucket.done = !this.bucket.done;
     this._message.createMessageloading();
@@ -51,11 +52,13 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
           .updateBucketItem(this.bucket, this.bucketItem.id, this.bucketId)
           .subscribe({
             next: () => {
+              this.viewStatus = true;
               this._message.createMessage('success', 'Update successful');
               this._eventService.emitEvent('edit bucket items');
               this.done.emit(false);
             },
             error: (err) => {
+              this.viewStatus = true;
               this._message.createMessage('error', 'Update failed');
               console.error(err);
             },
@@ -65,6 +68,8 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
+    console.log("Destroy");
+    
     this.subscriptions.unsubscribe();
     this._message.destroy();
   }

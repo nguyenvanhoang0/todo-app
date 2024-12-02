@@ -2,7 +2,8 @@
   <div class="text-content">
     {{ bucketItem.content }}
     <div class="action">
-      <app-open-form *ngIf="!bucketItem.parentId"
+      <app-open-form
+        *ngIf="!bucketItem.parentId"
         [formName]="'add bucket items'"
         [icon]="'plus'"
         [id]="bucketId"
@@ -42,6 +43,7 @@
     }}
   </div>
   <div
+    *ngIf="viewStatus"
     class="status"
     [ngClass]="bucketItem.done ? 'finish' : 'unfinished'"
     (click)="updateStatus()"

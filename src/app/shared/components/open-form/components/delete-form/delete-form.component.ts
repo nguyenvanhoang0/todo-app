@@ -35,9 +35,7 @@ export class DeleteFormComponent implements OnDestroy {
     private _bucketItemService: BucketItemService
   ) {}
 
-  onDelete(): void {
-    // console.log(this.id);
-    
+  onDelete(): void {    
     if (this.id) {
       switch (this.delete) {
         case 'deleteBucket':

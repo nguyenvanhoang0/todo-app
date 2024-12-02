@@ -14,7 +14,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 export class TodoDetailsComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
-  searchContent?: string;
+  searchContent= '';
 
   todoId!: number;
   bucket?: IBucket;
