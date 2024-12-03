@@ -74,9 +74,9 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
           if (
             response.data.length === 0 &&
             response.total > 0 &&
-            this.configurationParams.page > 1
+            this.configurationParams.page > Math.ceil(response.total / this.configurationParams.limit)
           ) {
-            this.configurationParams.page = this.configurationParams.page - 1;
+            this.configurationParams.page = Math.ceil(response.total / this.configurationParams.limit)
             this.search(this.searchContent);
           }
           this.buckets = response.data;
