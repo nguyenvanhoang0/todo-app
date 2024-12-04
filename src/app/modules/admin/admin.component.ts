@@ -15,10 +15,12 @@ import { Store } from '@ngrx/store';
   styleUrl: './admin.component.scss',
 })
 export class AdminComponent implements OnInit, OnDestroy {
-  confirmationForm = false;
-  avatar?: string;
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+
+  confirmationForm = false;
+  avatar?: string;
+
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
 

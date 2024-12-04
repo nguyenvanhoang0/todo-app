@@ -19,12 +19,12 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class UploadImgComponent implements OnChanges {
   @Input() img: string | ArrayBuffer | null = null;
-
-  selectedImage: string | ArrayBuffer | null = null;
-  selectedFile: File | null = null;
   @Output() fileUploaded = new EventEmitter<File>();
   @Output() Uploaded = new EventEmitter<string | ArrayBuffer | null>();
 
+  selectedImage: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
+  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['img']) {
       this.selectedImage = changes['img'].currentValue;

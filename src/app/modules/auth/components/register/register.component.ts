@@ -13,9 +13,10 @@ import { MessageService } from 'src/app/services/message/message.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnDestroy {
+  private _unsubscribe$ = new Subject<void>();
+
   registerFormGroup: FormGroup<IRegisterFormGroup> =
     this._authFormService.registerFormGroup;
-  private _unsubscribe$ = new Subject<void>();
 
   constructor(
     private _router: Router,
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnDestroy {
     return this.registerFormGroup.controls;
   }
 
-  onSubmit() {    
+  onSubmit() {
     if (this.registerFormGroup.invalid) {
       Object.values(this.registerFormControl).forEach((control) => {
         if (control.invalid) {

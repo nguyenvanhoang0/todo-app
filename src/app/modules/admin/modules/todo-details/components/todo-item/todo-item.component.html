@@ -3,7 +3,7 @@
     class="group-bucket-item"
     [ngClass]="
       bucketItem.length < configurationParams.limit &&
-      totalBuckets > configurationParams.limit
+      totalBucketItems > configurationParams.limit
         ? 'and'
         : ''
     "
@@ -39,9 +39,9 @@
     <nz-skeleton [nzActive]="true"></nz-skeleton>} }
     <div class="pagination">
       <nz-pagination
-        *ngIf="totalBuckets > configurationParams.limit"
+        *ngIf="totalBucketItems > configurationParams.limit"
         [nzPageIndex]="configurationParams.page"
-        [nzTotal]="totalBuckets"
+        [nzTotal]="totalBucketItems"
         [nzPageSize]="configurationParams.limit"
         (nzPageIndexChange)="onPageChange($event)"
       ></nz-pagination>

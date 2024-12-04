@@ -25,10 +25,12 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
   @Output() done = new EventEmitter<boolean>();
 
   private subscriptions: Subscription = new Subscription();
+
   bucket: IBucketItemSimple = {
     content: '',
   };
   viewStatus = true;
+
   constructor(
     private _bucketItemService: BucketItemService,
     private _eventService: EventService,
@@ -67,9 +69,7 @@ export class TodoItemDetailsComponent implements OnDestroy, OnChanges {
     }
   }
 
-  ngOnDestroy(): void {
-    console.log("Destroy");
-    
+  ngOnDestroy(): void {    
     this.subscriptions.unsubscribe();
     this._message.destroy();
   }

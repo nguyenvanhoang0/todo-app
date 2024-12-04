@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
 import { AuthApiService } from 'src/app/modules/auth/services/api/auth-api.service';
-import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +17,6 @@ export class AccountComponent {
 
   constructor(
     private _router: Router,
-    private _message: MessageService,
     private authApiService: AuthApiService
   ) {}
 

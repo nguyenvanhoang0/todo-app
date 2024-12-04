@@ -14,13 +14,13 @@ import { MessageService } from 'src/app/services/message/message.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnDestroy , OnInit{
+  private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
+
   confirmationForm = false;
   updateForm = false;
   accountView = false;
   avatar?: string;
-
-  private subscriptions: Subscription = new Subscription();
-  private eventSubscription!: Subscription;
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);
@@ -60,7 +60,6 @@ export class ProfileComponent implements OnDestroy , OnInit{
     this._router.navigate(['admin/update-me']).then();
   }
   
-
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;

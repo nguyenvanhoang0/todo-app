@@ -20,14 +20,14 @@ import { authActions } from 'src/app/core/store/_auth/_auth.actions';
   styleUrl: './update-profile.component.scss',
 })
 export class UpdateProfileComponent implements OnDestroy, OnInit {
+  private _unsubscribe$ = new Subject<void>();
+  private subscriptions: Subscription = new Subscription();
+
   avatar: string | ArrayBuffer | null = null;
   accessToken = localStorage.getItem('accessToken');
 
   updateUserFormGroup: FormGroup<IUpdateUserFormGroup> =
     this._updateUserService.UpdateUserGroup;
-
-  private _unsubscribe$ = new Subject<void>();
-  private subscriptions: Subscription = new Subscription();
 
   userInfo$: Observable<IUserInfo | undefined> =
     this._store.select(selectUserInfo);

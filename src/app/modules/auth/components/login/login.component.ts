@@ -17,8 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  loginFormGroup: FormGroup<ILoginFormGroup> = this._authFormService.LoginFormGroup;
   private _unsubscribe$ = new Subject<void>();
+  loginFormGroup: FormGroup<ILoginFormGroup> = this._authFormService.LoginFormGroup;
 
   constructor(
     private _router: Router,

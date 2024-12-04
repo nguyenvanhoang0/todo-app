@@ -13,9 +13,9 @@ import { ModalService } from './services/modal/modal.service';
 export class OpenModalComponent implements OnInit ,OnDestroy{
   @Input() canCloseByOutsideClick = false;
   @Input() modalId= '';
+  @Input() isVisible = false;
   @Output() Visible = new EventEmitter<boolean>();
 
-  @Input() isVisible = false;
   private subscription?: Subscription;
 
   constructor(private _modalService: ModalService) {}

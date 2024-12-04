@@ -23,25 +23,25 @@ import { ConfigurationParamsService } from 'src/app/modules/admin/services/confi
   styleUrl: './todo-item.component.scss',
 })
 export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
+  private eventSubscription!: Subscription;
+  private subscriptions: Subscription = new Subscription();
+
   @Input() done: 0 | 1 = 0;
   @Input() searchContent = '';
   @Output() totalBucket = new EventEmitter<number>();
 
   bucketItem: IBucketItem[] = [];
-  totalBuckets = 0;
+  bucketSelectItem?: IBucketItem;
+  totalBucketItems = 0;
   todoItemId = 0;
+  todoId!: number;
+
+  itemDetailsView = false;
 
   configurationParams: IQueryParams = {
     limit: 8,
     page: 1,
   };
-
-  private eventSubscription!: Subscription;
-  private subscriptions: Subscription = new Subscription();
-  todoId!: number;
-
-  itemDetailsView = false;
-  bucketSelectItem?: IBucketItem;
 
   constructor(
     private _route: ActivatedRoute,
@@ -70,8 +70,6 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchContent'] && this.todoId) {
-      console.log(this.todoId);
-
       this.search(changes['searchContent'].currentValue);
     }
   }
@@ -85,12 +83,15 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
           if (
             response.data.length === 0 &&
             response.total > 0 &&
-            this.configurationParams.page > Math.ceil(response.total / this.configurationParams.limit)
+            this.configurationParams.page >
+              Math.ceil(response.total / this.configurationParams.limit)
           ) {
-            this.configurationParams.page = Math.ceil(response.total / this.configurationParams.limit);
+            this.configurationParams.page = Math.ceil(
+              response.total / this.configurationParams.limit
+            );
             this.search(this.searchContent);
           }
-          this.totalBuckets = response.total;
+          this.totalBucketItems = response.total;
           this.bucketItem = response.data;
           this.totalBucket.emit(response.total);
           this.message.createMessage('success', 'loading success', '', false);

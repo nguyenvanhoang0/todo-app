@@ -18,9 +18,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   styleUrl: './searchField.component.scss',
 })
 export class SearchFieldComponent implements OnInit, OnDestroy {
-  searchControl = new FormControl('', { updateOn: 'change' });
   @Output() searchContent = new EventEmitter<string>();
   private destroy$ = new Subject<void>();
+  searchControl = new FormControl('', { updateOn: 'change' });
 
   content?: string;
 

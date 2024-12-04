@@ -3,5 +3,6 @@ export type formNameTypes =
   | 'add bucket items'
   | 'edit bucket'
   | 'edit bucket items'
-  | 'delete'
-  ;
+  | 'delete';
+  export type buttonType = 'success' | 'warning' | 'danger' | 'default' | 'text';
+  export type deleteType = 'deleteBucket' | 'deleteBucketItem' | '';

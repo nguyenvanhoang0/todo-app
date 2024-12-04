@@ -40,6 +40,7 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
 
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+
   configurationParams: IQueryParams = {
     limit: 12,
     page: 1,
@@ -54,14 +55,14 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
     private _eventService: EventService,
     private _configService: ConfigurationParamsService,
     private _route: ActivatedRoute,
-
     private _router: Router,
+
     public message: MessageService
   ) {}
 
   ngOnInit(): void {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === 'edit bucket' || event.id === 'deleteBucket' ) {
+      if (event.id === 'edit bucket' || event.id === 'deleteBucket') {
         this.search(this.searchContent);
       }
     });
@@ -81,7 +82,6 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
 
   getAllTodo(params: IQueryParams): void {
     this.message.createMessageloading(false);
-
     this.subscriptions.add(
       this._todoService.getBuckets(params).subscribe(
         (response) => {
@@ -122,7 +122,6 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
       this.eventSubscription.unsubscribe();
     }
     this.subscriptions.unsubscribe();
-
     this.message.destroy();
   }
 }

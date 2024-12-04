@@ -37,7 +37,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     private _todoService: TodoService,
     private _eventService: EventService,
     private _configService: ConfigurationParamsService,
-
     private _router: Router,
     public message: MessageService
   ) {}
