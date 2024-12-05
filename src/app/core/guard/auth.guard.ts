@@ -15,11 +15,11 @@ export const authGuard: CanActivateFn = () => {
   if (!accessToken) {
     return router.navigate(['/auth/signIn']);
   }
-  return authService.getUserInfo(accessToken).pipe(
+  return authService.getUserInfo().pipe(
     map(res => {
       localStorage.setItem("userInfo", JSON.stringify(res));
       store.dispatch(authActions.saveUserInfo(res));      
-      return !!res;
+      return true;
     }),
     catchError((error) => {
       console.error('Error fetching user info:', error);

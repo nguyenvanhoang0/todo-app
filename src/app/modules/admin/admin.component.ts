@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/shared/components/open-modal/services/modal/modal.service';
 import { AuthApiService } from '../auth/services/api/auth-api.service';
-import { Observable, Subscription, take } from 'rxjs';
+import { filter, Observable, Subscription, take } from 'rxjs';
 import { MessageService } from 'src/app/services/message/message.service';
 import { EventService } from './services/event/event.service';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
@@ -35,10 +35,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.subscribe((event) => {
-      if (event.id === 'updateUser') {
-        this.getAvatar();
-      }
+    this.eventSubscription = this._eventService.event$.pipe(
+      filter(event => event.id === 'updateUser')
+    ).subscribe(() => {
+      this.getAvatar();
     });
     this.userInfo$.pipe(take(1)).subscribe((userInfo) => {
       if (userInfo?.avatar) {

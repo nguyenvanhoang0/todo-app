@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ILoginFormGroup } from '../../types/auth.types';
 import { FormGroup } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 import { AuthFormService } from '../../services/form/auth-form.service';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 import { MessageService } from 'src/app/services/message/message.service';
 import { TranslateService } from '@ngx-translate/core';
-// import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private _unsubscribe$ = new Subject<void>();
+  // private _unsubscribe$ = new Subject<void>();
   loginFormGroup: FormGroup<ILoginFormGroup> = this._authFormService.LoginFormGroup;
 
   constructor(
@@ -57,26 +56,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   subscribeLoginSuccessAction() {
+    const destroyRef = inject(DestroyRef); 
     this._$actions.pipe(
-      takeUntil(this._unsubscribe$),
+      takeUntilDestroyed(destroyRef),
       ofType(authActions.loginSuccess.type)
-    ).subscribe((() => {
+    ).subscribe(() => {
       this._router.navigate(['admin']).then();
-    }))
+    });
   }
-
-  // subscribeLoginSuccessAction() {
-  //   this._$actions.pipe(
-  //     takeUntilDestroyed(this), 
-  //     ofType(authActions.loginSuccess) 
-  //   ).subscribe(() => {
-  //     this._router.navigate(['admin']); 
-  //   });
-  // }
-
   ngOnDestroy(): void {
-    this._unsubscribe$.next();  
-    this._unsubscribe$.complete();
     this.message.destroy()
   }
 }

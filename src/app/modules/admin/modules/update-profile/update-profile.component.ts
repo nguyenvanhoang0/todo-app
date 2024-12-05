@@ -115,7 +115,7 @@ export class UpdateProfileComponent implements OnDestroy, OnInit {
   getMe(): void {
     if (this.accessToken) {
       this.subscriptions.add(
-        this._authApiService.getUserInfo(this.accessToken).subscribe({
+        this._authApiService.getUserInfo().subscribe({
           next: (response: IUserInfo) => {
             localStorage.setItem('userInfo', JSON.stringify(response));
             this._store.dispatch(authActions.saveUserInfo(response));

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from 'src/app/core/services/api-caller.service';
-import { ILoginPayload, ILoginResponse, IUserInfoResponse } from 'src/app/core/store/_auth/_auth.types';
+import {
+  ILoginPayload,
+  ILoginResponse,
+  IUserInfoResponse,
+} from 'src/app/core/store/_auth/_auth.types';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IRegister } from '../../types/auth.types';
@@ -21,7 +25,7 @@ export class AuthApiService {
     private _message: MessageService,
     private _http: HttpClient,
     private _router: Router,
-    private _store: Store,
+    private _store: Store
   ) {}
 
   login(payload: ILoginPayload): Observable<ILoginResponse> {
@@ -31,16 +35,16 @@ export class AuthApiService {
     );
   }
 
-  getUserInfo(accessToken: string): Observable<IUserInfoResponse> {
-    const params = { access_token: accessToken };
-    return this._apiCallerService.get<
-      { access_token: string },
-      IUserInfoResponse
-    >(this.apiUrl.getUserInfo, params);
+  getUserInfo(): Observable<IUserInfoResponse> {
+    return this._apiCallerService.get<null, IUserInfoResponse>(
+      this.apiUrl.getUserInfo
+    );
   }
 
   getAvatar(): Observable<string> {
-    return this._http.get(`${environment.apiUrl}${this.apiUrl.avatar}`, { responseType: 'text'});
+    return this._http.get(`${environment.apiUrl}${this.apiUrl.avatar}`, {
+      responseType: 'text',
+    });
   }
 
   Register(data: IRegister): Observable<string> {
