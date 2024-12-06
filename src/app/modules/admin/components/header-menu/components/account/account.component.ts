@@ -29,6 +29,10 @@ export class AccountComponent {
     this.Visible.emit(false);
   }
 
+  handleClickSignIn() {
+    this._router.navigate(['/auth/signIn']);
+  }
+
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;

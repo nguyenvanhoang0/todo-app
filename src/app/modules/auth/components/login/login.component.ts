@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ILoginFormGroup } from '../../types/auth.types';
 import { FormGroup } from '@angular/forms';
@@ -16,7 +16,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // private _unsubscribe$ = new Subject<void>();
   loginFormGroup: FormGroup<ILoginFormGroup> = this._authFormService.LoginFormGroup;
 
   constructor(
@@ -24,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _authFormService: AuthFormService,
     private _$actions: Actions,
     private _store: Store,
+    private _destroyRef: DestroyRef,
     public message: MessageService,
     public translate: TranslateService
   ) {}
@@ -56,14 +56,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   subscribeLoginSuccessAction() {
-    const destroyRef = inject(DestroyRef); 
     this._$actions.pipe(
-      takeUntilDestroyed(destroyRef),
+      takeUntilDestroyed(this._destroyRef),
       ofType(authActions.loginSuccess.type)
     ).subscribe(() => {
       this._router.navigate(['admin']).then();
     });
   }
+
   ngOnDestroy(): void {
     this.message.destroy()
   }

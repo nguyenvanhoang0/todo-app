@@ -31,7 +31,8 @@
         <div>{{ userInfo.email }}</div>
       </nz-content>
       <ul class="action">
-        <li>Other profile</li>
+        <li (click)="handleClickSignIn()" (keydown.enter)="handleClickSignIn()"
+        tabindex="0">Other profile</li>
         <li
           (click)="confirmationForm = true"
           (keydown.enter)="confirmationForm = true"

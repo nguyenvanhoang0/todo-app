@@ -43,6 +43,7 @@ export class RegisterComponent implements OnDestroy {
         .subscribe({
           next: (response) => {
             this.message.createMessage('success', response);
+            this._router.navigate(['/auth/signIn']);
           },
           error: (err) => {
             this.message.createMessage('error', err.error);
