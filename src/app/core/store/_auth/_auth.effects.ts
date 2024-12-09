@@ -19,7 +19,6 @@ export class AuthEffect {
         return this._authApiService.login(payload).pipe(
           map((response) => {
             const accessToken = response.access_token;
-            this.message.createMessage('success', 'Login Success');
             return authActions.loginSuccess({ access_token: accessToken });
           }),
           catchError((error) => {

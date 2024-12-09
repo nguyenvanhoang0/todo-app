@@ -112,8 +112,8 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
       this.getBucketItems(
         this.todoId,
         this._configService.getDefaultParamsConfiguration(
-          this.done,
           this.configurationParams.page,
+          this.done,
           8
         )
       );

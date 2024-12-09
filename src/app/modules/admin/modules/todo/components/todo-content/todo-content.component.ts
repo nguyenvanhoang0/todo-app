@@ -12,7 +12,7 @@ import { IBucket } from '../../types/todo.type';
 import { TodoService } from '../../services/todo/todo.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigurationParamsService } from 'src/app/modules/admin/services/configuration-params/configuration-params.service';
 
 @Component({
@@ -25,6 +25,8 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
 
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+  private hasInitialized = false;
+
   configurationParams: IQueryParams = {
     limit: 12,
     page: 1,
@@ -38,10 +40,32 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     private _eventService: EventService,
     private _configService: ConfigurationParamsService,
     private _router: Router,
+    private _route: ActivatedRoute,
+
     public message: MessageService
   ) {}
 
   ngOnInit(): void {
+    this.listenToPageChanges();
+    this.listenToBucketChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchContent'] && this.hasInitialized) {
+      this.search(changes['searchContent'].currentValue);
+    }
+  }
+
+  listenToPageChanges() {
+    this._route.queryParamMap.subscribe((params) => {
+      const pageParam = params.get('page');
+      this.configurationParams.page = pageParam ? +pageParam : 1;
+      this.hasInitialized = true;
+      this.search(this.searchContent);
+    });
+  }
+
+  listenToBucketChanges() {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
       if (
         event.id === 'edit bucket' ||
@@ -53,30 +77,25 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['searchContent']) {
-      this.search(changes['searchContent'].currentValue);
-    }
-  }
-
   onPageChange(page: number): void {
-    this.configurationParams.page = page;
-    this.search(this.searchContent);
+    this._router.navigate(['admin/todo'], { queryParams: { page } });
   }
 
   getAllTodo(params: IQueryParams): void {
+    this.buckets = []
     this.message.createMessageloading(false);
-
     this.subscriptions.add(
       this._todoService.getBuckets(params).subscribe(
         (response) => {
+          const page = Math.ceil(
+            response.total / this.configurationParams.limit
+          );
           if (
             response.data.length === 0 &&
             response.total > 0 &&
-            this.configurationParams.page > Math.ceil(response.total / this.configurationParams.limit)
+            this.configurationParams.page > page
           ) {
-            this.configurationParams.page = Math.ceil(response.total / this.configurationParams.limit)
-            this.search(this.searchContent);
+            this.onPageChange(page);
           }
           this.buckets = response.data;
           this.totalBuckets = response.total;
@@ -93,12 +112,10 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   search(query?: string | null): void {
     if (query && query.length > 1) {
       this.configurationParams.query = query;
-      this.configurationParams.page = 1;
       this.getAllTodo(this.configurationParams);
     } else {
       this.getAllTodo(
         this._configService.getDefaultParamsConfiguration(
-          undefined,
           this.configurationParams.page
         )
       );
