@@ -9,6 +9,7 @@ import { authActions } from 'src/app/core/store/_auth/_auth.actions';
 import { MessageService } from 'src/app/services/message/message.service';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'; 
+import { RedirectService } from 'src/app/services/redirect/redirect.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _$actions: Actions,
     private _store: Store,
     private _destroyRef: DestroyRef,
+    private _redirectService: RedirectService,
+
     public message: MessageService,
     public translate: TranslateService
   ) {}
@@ -34,6 +37,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeLoginSuccessAction();
+    const redirectUrl = this._redirectService.getRedirectUrl();
+      console.log(redirectUrl);
   }
 
   onSubmit() {
@@ -60,7 +65,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       takeUntilDestroyed(this._destroyRef),
       ofType(authActions.loginSuccess.type)
     ).subscribe(() => {
-      this._router.navigate(['admin']).then();
+      const redirectUrl = this._redirectService.getRedirectUrl();      
+      if (redirectUrl) {
+        this._redirectService.clearRedirectUrl();
+        this._router.navigateByUrl(redirectUrl);
+      } else {
+        this._router.navigate(['admin']).then();
+      }
     });
   }
 

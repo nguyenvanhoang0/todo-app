@@ -1,4 +1,4 @@
-<div [ngClass]="buckets.length > 0 ? 'content' : ''">
+<div class="group-bucket" [ngClass]="buckets.length > 0 ? 'content' : ''">
   @for (bucket of buckets; track bucket.title) {
   <div
     class="bucket"
@@ -9,7 +9,7 @@
     <div class="bucket-content">
       <app-text [line]="1">{{bucket.title}}</app-text>
       <div>
-        {{
+        {{  
           bucket.updatedAt
             ? (bucket.updatedAt | timeAgo)
             : (bucket.createdAt | timeAgo)

@@ -3,9 +3,9 @@
     <div class="title">
       <app-open-form></app-open-form>
       <div class="search">
-        <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+        <app-search-field (searchContent)="onSearch($event)" [value]="searchContent"></app-search-field>
       </div>
     </div>
-    <app-todo-content [searchContent]="searchContent"></app-todo-content>
+    <app-todo-content ></app-todo-content>
   </div>
 </div>

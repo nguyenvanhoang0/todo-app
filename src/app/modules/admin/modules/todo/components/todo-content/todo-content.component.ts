@@ -1,10 +1,7 @@
 import {
   Component,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
@@ -20,12 +17,9 @@ import { ConfigurationParamsService } from 'src/app/modules/admin/services/confi
   templateUrl: './todo-content.component.html',
   styleUrl: './todo-content.component.scss',
 })
-export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() searchContent?: string;
-
+export class TodoContentComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
-  private hasInitialized = false;
 
   configurationParams: IQueryParams = {
     limit: 12,
@@ -46,22 +40,16 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.listenToPageChanges();
+    this.listenToParamsChanges();
     this.listenToBucketChanges();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['searchContent'] && this.hasInitialized) {
-      this.search(changes['searchContent'].currentValue);
-    }
-  }
-
-  listenToPageChanges() {
+  listenToParamsChanges() {
     this._route.queryParamMap.subscribe((params) => {
       const pageParam = params.get('page');
+      const searchParam = params.get('search');
       this.configurationParams.page = pageParam ? +pageParam : 1;
-      this.hasInitialized = true;
-      this.search(this.searchContent);
+      this.search(searchParam ? searchParam : undefined);
     });
   }
 
@@ -78,11 +66,14 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onPageChange(page: number): void {
-    this._router.navigate(['admin/todo'], { queryParams: { page } });
+    const currentParams = { ...this._route.snapshot.queryParams };
+    this._router.navigate(['admin/todo'], {
+      queryParams: { ...currentParams, page },
+    });
   }
 
   getAllTodo(params: IQueryParams): void {
-    this.buckets = []
+    this.buckets = [];
     this.message.createMessageloading(false);
     this.subscriptions.add(
       this._todoService.getBuckets(params).subscribe(
@@ -131,7 +122,6 @@ export class TodoContentComponent implements OnInit, OnDestroy, OnChanges {
       this.eventSubscription.unsubscribe();
     }
     this.subscriptions.unsubscribe();
-
     this.message.destroy();
   }
 }
