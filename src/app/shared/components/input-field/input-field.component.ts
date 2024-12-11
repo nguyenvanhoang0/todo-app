@@ -17,7 +17,7 @@ import { WordLimitDirective } from 'src/app/core/directive/word-limit.directive'
     NzSkeletonModule,
     NzSelectModule,
     NzRadioModule,
-    WordLimitDirective
+    WordLimitDirective,
   ],
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',

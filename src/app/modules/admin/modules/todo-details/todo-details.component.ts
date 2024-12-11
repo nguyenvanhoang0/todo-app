@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoDetailsService } from './services/todo/todo-details.service';
 import { Subscription } from 'rxjs';
 import { IBucket } from '../todo/types/todo.type';
@@ -14,20 +14,31 @@ import { MessageService } from 'src/app/services/message/message.service';
 export class TodoDetailsComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
-  searchContent= '';
+  searchContent = this.getSearchContent();
 
   todoId!: number;
   bucket?: IBucket;
   totalBucketDone?: number;
   totalBucketNotDone?: number;
   constructor(
+    private _router: Router,
     private _route: ActivatedRoute,
     private _eventService: EventService,
     private _todoDetailsService: TodoDetailsService,
+    private _cdr: ChangeDetectorRef,
     public message: MessageService
   ) {}
 
   ngOnInit(): void {
+    // const currentParams = { ...this._route.snapshot.queryParams };
+    // this.searchContent = currentParams ? currentParams['search'] || '' : '';
+    // console.log(this.searchContent);
+
+    this.listenToBucketChanges();
+    this.getIDBucket();
+  }
+
+  listenToBucketChanges() {
     this.eventSubscription = this._eventService.event$.subscribe((event) => {
       if (
         event.id === 'edit bucket' ||
@@ -37,7 +48,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
         this.getBucketDetails(this.todoId);
       }
     });
-    this.getIDBucket();
   }
 
   getIDBucket() {
@@ -45,6 +55,11 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
       this.todoId = Number(params.get('id'));
       this.getBucketDetails(this.todoId);
     });
+  }
+
+  getSearchContent(): string {
+    const currentParams = { ...this._route.snapshot.queryParams };
+    return currentParams ? currentParams['search'] || '' : '';
   }
 
   getBucketDetails(id: number): void {
@@ -60,7 +75,7 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
             this.message.createMessage('error', err);
             console.error('Error Fetching Bucket Details:', err);
           } else {
-            this.message.createMessage('error', err,'',false);
+            this.message.createMessage('error', err, '', false);
             this.bucket = undefined;
             this.totalBucketDone = undefined;
             this.totalBucketNotDone = undefined;
@@ -78,8 +93,11 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.totalBucketNotDone = Total;
   }
 
-  onSearch(query: string): void {
-    this.searchContent = query;
+  onSearch(search: string): void {
+    const currentParams = { ...this._route.snapshot.queryParams };
+    this._router.navigate([`admin/todo-details/${this.todoId}`], {
+      queryParams: { ...currentParams, search },
+    });
   }
 
   TotalBucket(): number {

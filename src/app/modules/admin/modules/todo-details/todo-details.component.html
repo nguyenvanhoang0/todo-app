@@ -39,11 +39,14 @@
       >
       </app-open-form>
       <div class="search">
-        <app-search-field (searchContent)="onSearch($event)"></app-search-field>
+        <app-search-field
+          (searchContent)="onSearch($event)"
+          [value]="searchContent"
+        ></app-search-field>
       </div>
     </div>
     }@else {@if (message.isLoading) {
-      <nz-skeleton [nzActive]="true"></nz-skeleton>
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
     }@else {<app-empty></app-empty>}}
     <div *ngIf="TotalBucket()" class="flex">
       <div class="flex done">
@@ -53,15 +56,15 @@
       <p>/</p>
       <p>{{ TotalBucket() }}</p>
     </div>
-    @if(bucket){
+    @if(bucket && todoId){
     <app-todo-item
       [done]="0"
-      [searchContent]="searchContent"
+      [todoId]="todoId"
       (totalBucket)="getTotalBucketNotDone($event)"
     ></app-todo-item>
     <app-todo-item
       [done]="1"
-      [searchContent]="searchContent"
+      [todoId]="todoId"
       (totalBucket)="getTotalBucketDone($event)"
     ></app-todo-item>
     @if(!TotalBucket()&& !message.isLoading){ <app-empty></app-empty>

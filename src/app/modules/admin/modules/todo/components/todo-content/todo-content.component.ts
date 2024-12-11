@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { IBucket } from '../../types/todo.type';
@@ -48,8 +44,10 @@ export class TodoContentComponent implements OnInit, OnDestroy {
     this._route.queryParamMap.subscribe((params) => {
       const pageParam = params.get('page');
       const searchParam = params.get('search');
-      this.configurationParams.page = pageParam ? +pageParam : 1;
-      this.search(searchParam ? searchParam : undefined);
+      this.search(
+        pageParam ? +pageParam : 1,
+        searchParam ? searchParam : undefined
+      );
     });
   }
 
@@ -60,7 +58,7 @@ export class TodoContentComponent implements OnInit, OnDestroy {
         event.id === 'add bucket' ||
         event.id === 'deleteBucket'
       ) {
-        this.getAllTodo(this.configurationParams);
+        this.search(this.configurationParams.page,this.configurationParams.query);
       }
     });
   }
@@ -100,9 +98,11 @@ export class TodoContentComponent implements OnInit, OnDestroy {
     );
   }
 
-  search(query?: string | null): void {
+  search(page: number, query?: string | null): void {
+    this.configurationParams.query = query;
+    this.configurationParams.page = page;
+
     if (query && query.length > 1) {
-      this.configurationParams.query = query;
       this.getAllTodo(this.configurationParams);
     } else {
       this.getAllTodo(

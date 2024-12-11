@@ -2,9 +2,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -18,10 +20,12 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   templateUrl: './searchField.component.html',
   styleUrl: './searchField.component.scss',
 })
-export class SearchFieldComponent implements OnInit, OnDestroy {
+export class SearchFieldComponent implements OnInit, OnDestroy, OnChanges {
   @Input() set value(val: string | undefined) {
+    console.log('Setter triggered:', val);
     this.searchControl.setValue(val || '', { emitEvent: false });
   }
+
   @Output() searchContent = new EventEmitter<string>();
   private destroy$ = new Subject<void>();
   searchControl = new FormControl('', { updateOn: 'change' });
@@ -30,6 +34,12 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchWithDebounce();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      console.log('New value received:', changes['value'].currentValue);
+    }
   }
 
   searchWithDebounce(): void {

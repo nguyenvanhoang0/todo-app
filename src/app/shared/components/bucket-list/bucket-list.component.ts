@@ -45,7 +45,7 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
     limit: 12,
     page: 1,
   };
-
+  searchParam?: string;
   buckets: IBucket[] = [];
   totalBuckets = 0;
   todoId!: number;
@@ -67,12 +67,22 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
       }
     });
     this.getIDBucket();
+    this.listenToParamsChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchContent']) {
       this.search(changes['searchContent'].currentValue);
     }
+  }
+
+  listenToParamsChanges(): void {
+    this._route.queryParamMap.subscribe((params) => {
+      const searchParam = params.get('search')
+        ? params.get('search')
+        : undefined;
+      this.searchParam = searchParam ? searchParam : undefined;
+    });
   }
 
   onPageChange(page: number): void {
@@ -114,7 +124,10 @@ export class BucketListComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   navigateToDetails(id: number) {
-    this._router.navigate(['admin/todo-details', id]);
+    const currentParams = { ...this._route.snapshot.queryParams };
+    this._router.navigate([`admin/todo-details/${id}`], {
+      queryParams: { ...currentParams, search: this.searchParam },
+    });
   }
 
   ngOnDestroy() {

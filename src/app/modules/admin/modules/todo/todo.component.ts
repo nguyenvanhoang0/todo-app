@@ -6,12 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })
-export class TodoComponent implements OnInit{
+export class TodoComponent implements OnInit {
   searchContent?: string;
-  constructor(
-    private _router: Router,
-    private _route: ActivatedRoute,
-  ) {}
+  constructor(private _router: Router, private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const currentParams = { ...this._route.snapshot.queryParams };
