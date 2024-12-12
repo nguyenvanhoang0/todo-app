@@ -40,6 +40,7 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
       { baseTranslateUrl: `${baseTranslateUrl}/todo-details` },
       { baseTranslateUrl: `${baseTranslateUrl}/update-profile` },
       { baseTranslateUrl: `${baseTranslateUrl}/time-ago` },
+      { baseTranslateUrl: `${baseTranslateUrl}/error-messages` },
       // { baseTranslateUrl: `${baseTranslateUrl}/bucket`}
     ],
   };

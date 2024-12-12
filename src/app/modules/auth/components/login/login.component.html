@@ -15,9 +15,19 @@
             type="email"
             formControlName="email"
             placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}"
+            autocomplete="email"
           />
         </nz-input-group>
       </nz-form-control>
+      <!-- <span
+        [error]="loginFormGroup.get('email')?.errors"
+        [params]="{ fieldName: 'Email' }"
+        [show]="
+          loginFormGroup.get('email')?.dirty ||
+          (loginFormGroup.get('email')?.touched ?? false)
+        "
+        class="text-danger"
+      ></span> -->
     </nz-form-item>
 
     <nz-form-item class="item">
@@ -33,13 +43,18 @@
             type="password"
             formControlName="password"
             placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}"
+            autocomplete="current-password"
           />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
 
     <div nz-form-item>
-      <button nz-button nzType="primary" [disabled]="message.isLoading || loginFormGroup.invalid">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="message.isLoading || loginFormGroup.invalid"
+      >
         {{ 'LOGIN.LOGIN_BUTTON' | translate }}
       </button>
     </div>
@@ -54,11 +69,26 @@
     </a>
 
     <ng-template #emailErrorTpl>
-      <small class="error-message">{{ 'LOGIN.EMAIL_REQUIRED' | translate }}</small>
+      <span
+        [error]="loginFormGroup.get('email')?.errors"
+        [params]="{ fieldName: 'email' }"
+        [show]="
+          loginFormGroup.get('email')?.dirty ||
+          (loginFormGroup.get('email')?.touched ?? false)
+        "
+      ></span>
     </ng-template>
 
     <ng-template #passwordErrorTpl>
-      <small class="error-message">{{ 'LOGIN.PASSWORD_REQUIRED' | translate }}</small>
+      <span
+        [error]="loginFormGroup.get('password')?.errors"
+        [params]="{ fieldName: 'password' }"
+        [show]="
+          loginFormGroup.get('password')?.dirty ||
+          (loginFormGroup.get('password')?.touched ?? false)
+        "
+      ></span>
     </ng-template>
   </form>
 </div>
+<!-- {{ loginFormGroup.get('email')?.errors }} -->

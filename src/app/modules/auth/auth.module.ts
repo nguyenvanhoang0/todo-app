@@ -12,9 +12,15 @@ import { NzFormPatchModule } from 'ng-zorro-antd/core/form';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ChangeLanguageComponent } from 'src/app/shared/components/change-language/change-language.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ErrorMessageDirective } from 'src/app/core/directive/error-message.directive';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AuthComponent,
+    ErrorMessageDirective,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -25,7 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NzGridModule,
     NzFormPatchModule,
     NzFormModule,
-    ChangeLanguageComponent
+    ChangeLanguageComponent,
   ],
 })
 export class AuthModule {}

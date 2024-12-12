@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ILoginFormGroup,
-  IRegisterFormGroup,
-} from '../../types/auth.types';
+import { ILoginFormGroup, IRegisterFormGroup } from '../../types/auth.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
@@ -33,8 +30,8 @@ export class AuthFormService {
   private initLoginForm() {
     const fb = this._formBuilder.nonNullable;
     this._loginFormGroup = fb.group({
-      email: fb.control('', [Validators.required]),
-      password: fb.control('', [Validators.required]),
+      email: fb.control('', [Validators.required, Validators.email]),
+      password: fb.control('', [Validators.required, Validators.minLength(3)]),
     });
   }
 

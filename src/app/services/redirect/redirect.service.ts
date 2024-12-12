@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RedirectService {
   private redirectUrl: string | null = null;
@@ -16,5 +16,9 @@ export class RedirectService {
 
   clearRedirectUrl() {
     this.redirectUrl = null;
+  }
+
+  saveUrl(url: string) {
+    localStorage.setItem('redirectUrl', url);
   }
 }

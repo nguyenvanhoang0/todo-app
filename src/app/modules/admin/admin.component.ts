@@ -8,6 +8,7 @@ import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
 import { MainState } from 'src/app/core/store/_store.types';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -29,17 +30,18 @@ export class AdminComponent implements OnInit, OnDestroy {
     private _authApiService: AuthApiService,
     private _message: MessageService,
     private _eventService: EventService,
+    private _router: Router,
     private _store: Store<MainState>
   ) {
     this.userInfo$.subscribe();
   }
 
   ngOnInit(): void {
-    this.eventSubscription = this._eventService.event$.pipe(
-      filter(event => event.id === 'updateUser')
-    ).subscribe(() => {
-      this.getAvatar();
-    });
+    this.eventSubscription = this._eventService.event$
+      .pipe(filter((event) => event.id === 'updateUser'))
+      .subscribe(() => {
+        this.getAvatar();
+      });
     this.userInfo$.pipe(take(1)).subscribe((userInfo) => {
       if (userInfo?.avatar) {
         this.getAvatar();

@@ -15,6 +15,7 @@
             type="text"
             formControlName="username"
             placeholder="{{ 'REGISTER.NAME' | translate }}"
+            autocomplete="username"
           />
         </nz-input-group>
       </nz-form-control>
@@ -33,6 +34,7 @@
             type="email"
             formControlName="email"
             placeholder="{{ 'REGISTER.ENTER_YOUR_EMAIL' | translate }}"
+            autocomplete="email"
           />
         </nz-input-group>
       </nz-form-control>
@@ -51,13 +53,18 @@
             type="password"
             formControlName="password"
             placeholder="{{ 'REGISTER.ENTER_YOUR_PASSWORD' | translate }}"
+            autocomplete="current-password"
           />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
 
     <div nz-form-item>
-      <button nz-button nzType="primary" [disabled]="registerFormGroup.invalid || message.isLoading">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="registerFormGroup.invalid || message.isLoading"
+      >
         {{ 'REGISTER.REGISTER_BUTTON' | translate }}
       </button>
     </div>
@@ -72,15 +79,21 @@
     </a>
 
     <ng-template #usernameErrorTpl>
-      <small class="error-message">{{ 'REGISTER.USERNAME_REQUIRED' | translate }}</small>
+      <small class="error-message">{{
+        'REGISTER.USERNAME_REQUIRED' | translate
+      }}</small>
     </ng-template>
 
     <ng-template #emailErrorTpl>
-      <small class="error-message">{{ 'REGISTER.EMAIL_REQUIRED' | translate }}</small>
+      <small class="error-message">{{
+        'REGISTER.EMAIL_REQUIRED' | translate
+      }}</small>
     </ng-template>
 
     <ng-template #passwordErrorTpl>
-      <small class="error-message">{{ 'REGISTER.PASSWORD_REQUIRED' | translate }}</small>
+      <small class="error-message">{{
+        'REGISTER.PASSWORD_REQUIRED' | translate
+      }}</small>
     </ng-template>
   </form>
 </div>
