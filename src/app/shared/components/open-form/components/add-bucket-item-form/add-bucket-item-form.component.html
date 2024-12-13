@@ -1,15 +1,20 @@
 <p class="title">add Bucket item</p>
 <div>
-  <form nz-form (ngSubmit)="onSubmit($event)">
+  <form nz-form [formGroup]="bucketItemFormGroup" (ngSubmit)="onSubmit()">
     <div class="basic">
-      <app-input-field
-        id="title"
-        label="title"
-        [(value)]="bucket.content"
-        type="text"
-        [required]="true"
-      >
-      </app-input-field>
+      <app-custom-input
+        formControlName="content"
+        placeholder="Content"
+      ></app-custom-input>
+      <nz-time-picker
+        formControlName="time"
+        [nzFormat]="'HH:mm:ss'"
+      ></nz-time-picker>
+      <nz-date-picker
+        formControlName="date"
+        [nzPlaceHolder]="'Chọn ngày'"
+        [nzFormat]="'yyyy-MM-dd'"
+      ></nz-date-picker>
     </div>
     <div class="group-button">
       <button nz-button nzType="text" type="reset">Reset</button>
@@ -26,3 +31,9 @@
     </div>
   </form>
 </div>
+<!-- <form
+  nz-form
+  [formGroup]="bucketItemFormGroup"
+  (ngSubmit)="onSubmit()"
+  *ngIf="bucketItemFormGroup"
+></form> -->

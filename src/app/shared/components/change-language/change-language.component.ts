@@ -24,7 +24,7 @@ export class ChangeLanguageComponent {
   ) {
     this.language = localStorage.getItem('lang') || LanguageCode.EN;
     this.translate.use(this.language);
-    this.setZorroLanguage(this.language);
+    // this.setZorroLanguage(this.language);
   }
 
   openchangeLanguageForm(value: boolean) {
@@ -33,23 +33,23 @@ export class ChangeLanguageComponent {
 
   changeLanguage(lang: string) {
     this.translate.use(lang as LanguageCode);
-    this.setZorroLanguage(lang);
+    // this.setZorroLanguage(lang);
     this.language = lang;
     localStorage.setItem('lang', lang);
     this.changeLanguageForm = false;
   }
 
-  private setZorroLanguage(lang: string): void {
-    switch (lang) {
-      case LanguageCode.VI:
-        this.nzI18n.setLocale(vi_VN);
-        break;
-      case LanguageCode.EN:
-        this.nzI18n.setLocale(en_US);
-        break;
-      default:
-        this.nzI18n.setLocale(en_US);
-        break;
-    }
-  }
+  // private setZorroLanguage(lang: string): void {
+  //   switch (lang) {
+  //     case LanguageCode.VI:
+  //       this.nzI18n.setLocale(vi_VN);
+  //       break;
+  //     case LanguageCode.EN:
+  //       this.nzI18n.setLocale(en_US);
+  //       break;
+  //     default:
+  //       this.nzI18n.setLocale(en_US);
+  //       break;
+  //   }
+  // }
 }

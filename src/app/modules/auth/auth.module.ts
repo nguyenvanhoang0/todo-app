@@ -13,6 +13,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { ChangeLanguageComponent } from 'src/app/shared/components/change-language/change-language.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageDirective } from 'src/app/core/directive/error-message.directive';
+import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ErrorMessageDirective } from 'src/app/core/directive/error-message.dire
     NzFormPatchModule,
     NzFormModule,
     ChangeLanguageComponent,
+    CustomInputComponent,
   ],
 })
 export class AuthModule {}
