@@ -16,12 +16,7 @@ import { ErrorMessageDirective } from 'src/app/core/directive/error-message.dire
 import { CustomInputComponent } from 'src/app/shared/components/custom-input/custom-input.component';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    AuthComponent,
-    // ErrorMessageDirective,
-  ],
+  declarations: [LoginComponent, RegisterComponent, AuthComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -35,7 +30,6 @@ import { CustomInputComponent } from 'src/app/shared/components/custom-input/cus
     ChangeLanguageComponent,
     CustomInputComponent,
     ErrorMessageDirective,
-
   ],
 })
 export class AuthModule {}

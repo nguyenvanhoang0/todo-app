@@ -1,6 +1,12 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ErrorMessageDirective } from 'src/app/core/directive/error-message.directive';
 import { IErrorMessages } from 'src/app/core/types/error.type';
@@ -10,8 +16,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 @Component({
   selector: 'app-custom-input',
   standalone: true,
-  imports: [CommonModule,NzInputModule,ErrorMessageDirective, NzFormPatchModule,
-    NzFormModule,],
+  imports: [
+    CommonModule,
+    NzInputModule,
+    ErrorMessageDirective,
+    NzFormPatchModule,
+    NzFormModule,
+  ],
   templateUrl: './custom-input.component.html',
   styleUrl: './custom-input.component.scss',
   providers: [
@@ -29,15 +40,15 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 })
 export class CustomInputComponent implements ControlValueAccessor {
   @Input() value = '';
-  @Input() error?: IErrorMessages | null | undefined = null;; // Để nhận form control
-  @Input() label?: string; // Nhãn của input
-  @Input() id?: string; // Nhãn của input
-  
-  @Input() placeholder = ''; // Placeholder cho input
-  @Input() type = 'text'; // Loại input (text, password, email,...)
-  @Input() required = false; // Đánh dấu trường bắt buộc
-  @Input() minLength?: number; // Độ dài tối thiểu
-  @Input() maxLength?: number; // Độ dài tối đa
+  @Input() error?: IErrorMessages | null | undefined = null;
+  @Input() label?: string;
+  @Input() id?: string;
+
+  @Input() placeholder = '';
+  @Input() type = 'text';
+  @Input() required = false;
+  @Input() minLength?: number;
+  @Input() maxLength?: number;
   /* eslint-disable @typescript-eslint/no-empty-function */
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};

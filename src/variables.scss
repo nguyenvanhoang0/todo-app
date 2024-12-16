@@ -1,4 +1,4 @@
-@import "themes/palettes";
+@import 'themes/palettes';
 
 :root {
   --primary: #{$pink8};
@@ -12,24 +12,28 @@
   --red3: #{$red3};
   --red2: #{$red2};
 
-
   --blue-border: #{$blue6};
-  --blue12 : #{$blue12};
-  --blue11 : #{$blue11};
-  --blue8 : #{$blue8};
-  --blue6 : #{$blue6};
-  --blue4 : #{$blue4};
-  --blue3 : #{$blue3};
-  --blue2 : #{$blue2};
+  --blue12: #{$blue12};
+  --blue11: #{$blue11};
+  --blue8: #{$blue8};
+  --blue6: #{$blue6};
+  --blue4: #{$blue4};
+  --blue3: #{$blue3};
+  --blue2: #{$blue2};
 
-  --green1 : #{$green1};
-  --green2 : #{$green2};
-  --green3 : #{$green3};
-  --green4 : #{$green4};
-  --green6 : #{$green6};
-  --green8 : #{$green8};
-  --green10 : #{$green10};
-  
+  --green1: #{$green1};
+  --green2: #{$green2};
+  --green3: #{$green3};
+  --green4: #{$green4};
+  --green6: #{$green6};
+  --green8: #{$green8};
+  --green10: #{$green10};
+
+  --orange3: #{$orange3};
+  --orange4: #{$orange4};
+  --orange5: #{$orange5};
+  --orange6: #{$orange6};
+
   --white: #{$gray1};
   --white1: #{$white1};
 

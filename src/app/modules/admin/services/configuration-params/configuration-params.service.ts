@@ -12,7 +12,11 @@ export class ConfigurationParamsService {
 
   paramsConfiguration: IQueryParams = this.defaultParamsConfiguration;
 
-  getDefaultParamsConfiguration(page?: number,done?: 0 | 1,  limit?: number ): IQueryParams {
+  getDefaultParamsConfiguration(
+    page?: number,
+    done?: 0 | 1,
+    limit?: number
+  ): IQueryParams {
     return {
       ...this.defaultParamsConfiguration,
       ...(done !== undefined ? { done } : {}),

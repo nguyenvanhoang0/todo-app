@@ -15,16 +15,21 @@ export class BucketItemService {
 
   constructor(private apiCallerService: ApiCallerService) {}
 
-  createBucketItem(bucketId: number, bucketItem: IBucketItemSimple): Observable<IResponseTemplate<IBucketItem[]>> {
-    console.log(bucketItem);
-    
+  createBucketItem(
+    bucketId: number,
+    bucketItem: IBucketItemSimple
+  ): Observable<IResponseTemplate<IBucketItem[]>> {
     return this.apiCallerService.post(
       `${this.apiBucket.getBucketById}${bucketId}${this.apiBucketItem.createBucketItem}`,
       bucketItem
     );
   }
 
-  updateBucketItem(bucketItem: IBucketItemSimple, id: number , parentId: number): Observable<string> {
+  updateBucketItem(
+    bucketItem: IBucketItemSimple,
+    id: number,
+    parentId: number
+  ): Observable<string> {
     return this.apiCallerService.patch<IBucketItemSimple, string>(
       `${this.apiBucket.getBucketById}${parentId}${this.apiBucketItem.createBucketItem}/${id}`,
       bucketItem

@@ -14,12 +14,16 @@ import { MessageService } from 'src/app/services/message/message.service';
 export class TodoDetailsComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+  private routeSubscription: Subscription | undefined;
+
   searchContent = this.getSearchContent();
 
   todoId!: number;
   bucket?: IBucket;
   totalBucketDone?: number;
   totalBucketNotDone?: number;
+  total?: number;
+  filter = true;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
@@ -30,10 +34,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // const currentParams = { ...this._route.snapshot.queryParams };
-    // this.searchContent = currentParams ? currentParams['search'] || '' : '';
-    // console.log(this.searchContent);
-
     this.listenToBucketChanges();
     this.getIDBucket();
   }
@@ -51,7 +51,7 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   }
 
   getIDBucket() {
-    this._route.paramMap.subscribe((params) => {
+    this.routeSubscription = this._route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
       this.getBucketDetails(this.todoId);
     });
@@ -87,10 +87,16 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   getTotalBucketDone(Total: number) {
     this.totalBucketDone = Total;
+    this.TotalBucket();
   }
 
   getTotalBucketNotDone(Total: number) {
     this.totalBucketNotDone = Total;
+    this.TotalBucket();
+  }
+
+  getTotalBucket(Total: number) {
+    this.total = Total;
   }
 
   onSearch(search: string): void {
@@ -100,14 +106,23 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  TotalBucket(): number {
-    return (
+  onfilter() {
+    this.filter = !this.filter;
+    if (this.filter) {
+      this.totalBucketNotDone = 0;
+    }
+  }
+
+  TotalBucket() {
+    this.total =
       (this.totalBucketDone ? this.totalBucketDone : 0) +
-      (this.totalBucketNotDone ? this.totalBucketNotDone : 0)
-    );
+      (this.totalBucketNotDone ? this.totalBucketNotDone : 0);
   }
 
   ngOnDestroy() {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
     this.eventSubscription.unsubscribe();
     this.subscriptions.unsubscribe();
     this.message.destroy();

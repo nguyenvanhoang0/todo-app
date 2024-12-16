@@ -13,7 +13,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      // border-bottom: 1px solid gray;
       padding-bottom: 12px;
 
       .title {
@@ -23,7 +22,7 @@
         text-align: left;
         max-width: 60%;
 
-        .icon{
+        .icon {
           font-size: medium;
         }
       }
@@ -39,9 +38,25 @@
       justify-content: space-between;
       .search {
         width: 42%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        .icon {
+          padding: 8px;
+          transition: 0.2s;
+          border-radius: 4px;
+          &.filter {
+            color: var(--pink12);
+            // background-color: var(--pink14);
+          }
+          &:hover {
+            background-color: var(--pink14);
+            transition: 0.2s;
+          }
+        }
       }
     }
-    .done{
+    .done {
       color: var(--green6);
     }
   }

@@ -1,17 +1,37 @@
 <div>
-  <form nz-form (ngSubmit)="onSubmit($event)">
+  <form nz-form [formGroup]="bucketItemFormGroup" (ngSubmit)="onSubmit($event)">
     <div class="basic">
-      <app-input-field
-        id="title"
-        [(value)]="bucketItem.content"
-        type="text"
-        [required]="true"
-      >
-      </app-input-field>
+      <app-custom-input
+        formControlName="content"
+        placeholder="Content"
+        [error]="bucketItemFormGroup.get('content')?.errors"
+        [id]="'Content'"
+      ></app-custom-input>
+      <div class="flex">
+        <nz-date-picker
+          formControlName="date"
+          [nzPlaceHolder]="'Chọn ngày'"
+          [nzFormat]="'yyyy-MM-dd'"
+          (nzOnOpenChange)="handleStartOpenChange($event)"
+        ></nz-date-picker>
+        <nz-time-picker
+          #timePicker
+          formControlName="time"
+          [nzFormat]="'HH:mm'"
+          (nzOpenChange)="handleEndOpenChange($event)"
+        ></nz-time-picker>
+      </div>
     </div>
     <div class="group-button">
       <button nz-button nzType="text" type="reset">Reset</button>
-      <button nz-button nzType="primary" type="submit" class="submit" [disabled]="message.isLoading" nzDanger>
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        class="submit"
+        [disabled]="message.isLoading"
+        nzDanger
+      >
         Submit
       </button>
     </div>

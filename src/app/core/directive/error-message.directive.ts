@@ -28,10 +28,6 @@ export class ErrorMessageDirective implements OnChanges {
   ) {}
 
   ngOnChanges(): void {
-    console.log(this.show);
-    console.log(this.error);
-    console.log(this.params);
-    
     const displayError = this.show && !!this.error && !!this.params;
     if (this.error && this.params) {
       const message = this.getErrorMessage(this.error, this.params);

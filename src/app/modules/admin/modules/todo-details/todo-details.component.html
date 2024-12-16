@@ -39,6 +39,15 @@
       >
       </app-open-form>
       <div class="search">
+        <div
+          class="icon"
+          [ngClass]="filter ? 'filter' : ''"
+          (click)="onfilter()"
+          (keydown.enter)="onfilter()"
+          tabindex="0"
+        >
+          <app-icon [name]="'filter'"></app-icon>
+        </div>
         <app-search-field
           (searchContent)="onSearch($event)"
           [value]="searchContent"
@@ -48,15 +57,17 @@
     }@else {@if (message.isLoading) {
     <nz-skeleton [nzActive]="true"></nz-skeleton>
     }@else {<app-empty></app-empty>}}
-    <div *ngIf="TotalBucket()" class="flex">
+
+    <div *ngIf="total && filter" class="flex">
       <div class="flex done">
         <app-icon [name]="'check'" class="icon"></app-icon>
         <p>{{ totalBucketDone ? totalBucketDone : 0 }}</p>
       </div>
       <p>/</p>
-      <p>{{ TotalBucket() }}</p>
+      <p>{{ total }}</p>
     </div>
-    @if(bucket && todoId){
+
+    @if(bucket && todoId ){ @if(filter){
     <app-todo-item
       [done]="0"
       [todoId]="todoId"
@@ -67,8 +78,14 @@
       [todoId]="todoId"
       (totalBucket)="getTotalBucketDone($event)"
     ></app-todo-item>
-    @if(!TotalBucket()&& !message.isLoading){ <app-empty></app-empty>
-    } }
+    @if(!total&& !message.isLoading){ <app-empty></app-empty>
+    } }@else {
+    <app-todo-item
+      [todoId]="todoId"
+      (totalBucket)="getTotalBucket($event)"
+    ></app-todo-item>
+    @if(!total&&!message.isLoading){ <app-empty></app-empty>
+    } } }
   </div>
 </div>
 

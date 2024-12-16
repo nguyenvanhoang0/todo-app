@@ -5,7 +5,12 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
-import { buttonType, deleteType, formNameTypes } from './open-form.types';
+import {
+  buttonType,
+  contentForm,
+  deleteType,
+  formNameTypes,
+} from './open-form.types';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -49,6 +54,7 @@ export class OpenFormComponent implements OnDestroy {
   @Input() parentId?: number;
   @Input() delete: deleteType | '' = '';
   @Input() content?: string;
+  @Input() contents?: contentForm;
   @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();

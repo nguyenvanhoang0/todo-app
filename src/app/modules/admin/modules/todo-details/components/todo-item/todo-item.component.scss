@@ -5,8 +5,8 @@
     display: flex;
     flex-direction: column;
 
-    &.and{
-      min-height: 504px;
+    &.and {
+      min-height: 564px;
     }
 
     .bucket-item {
@@ -16,10 +16,10 @@
       justify-content: space-between;
       border-radius: 6px;
       transition: 0.2s;
+      margin: 3px 0px;
 
       &.finish {
         border-radius: 0px;
-        margin-bottom: 6px;
         border-left: 6px solid var(--green4);
         background: linear-gradient(to right, #b7eb8f, #d9f7be);
         transition: 0.2s;
@@ -28,6 +28,16 @@
           background: var(--red2);
           transition: 0.2s;
         }
+      }
+
+      &.warning {
+        background-color: var(--orange3);
+        border: 1px solid var(--orange6);
+      }
+
+      &.late {
+        background-color: var(--pink14);
+        border: 1px solid var(--pink12);
       }
 
       .content {
@@ -45,10 +55,10 @@
       }
     }
   }
-  
+
   .pagination {
-flex: 1;
-align-items: end;
+    flex: 1;
+    align-items: end;
     margin-top: 24px;
     display: flex;
   }

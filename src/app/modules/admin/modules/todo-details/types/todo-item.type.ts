@@ -6,4 +6,5 @@ export type IBucketItem = {
   done: boolean;
   createdAt: Date;
   updatedAt?: Date;
+  deadline?: string;
 };

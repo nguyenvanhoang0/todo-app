@@ -24,22 +24,22 @@ import { ConfigurationParamsService } from 'src/app/modules/admin/services/confi
 })
 export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   private eventSubscription!: Subscription;
+  private routeSubscription: Subscription | undefined;
+
   private subscriptions: Subscription = new Subscription();
   private destroy$ = new Subject<void>();
 
-  @Input() done: 0 | 1 = 0;
+  @Input() done: 0 | 1 | undefined;
   @Input() todoId!: number;
   @Output() totalBucket = new EventEmitter<number>();
 
   bucketItem: IBucketItem[] = [];
   bucketSelectItem?: IBucketItem;
   totalBucketItems = 0;
-  // todoId!: number;
   searchContent = '';
 
   itemDetailsView = false;
   firstFoad = true;
-  // blockload = false;
   configurationParams: IQueryParams = {
     limit: 8,
     page: 1,
@@ -55,20 +55,21 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.configurationParams.done = this.done;
+    if (this.done !== undefined) {
+      this.configurationParams.done = this.done;
+    }
     this.listenToBucketitemChanges();
     this.listenToParamsChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['todoId'].firstChange && changes['todoId']) {
-      // this.blockload = true;
       this.search(this.configurationParams.query);
     }
   }
 
   listenToParamsChanges(): void {
-    this._route.queryParamMap.subscribe((params) => {
+    this.routeSubscription = this._route.queryParamMap.subscribe((params) => {
       const pageParam = params.get(this.done ? 'pageDone' : 'page');
       const searchParam = params.get('search');
       const newPage = pageParam ? +pageParam : 1;
@@ -126,7 +127,6 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
           }
           this.totalBucketItems = response.total;
           this.bucketItem = response.data;
-          // this.blockload = false;
           this.totalBucket.emit(response.total);
           this.message.createMessage('success', 'loading success', '', false);
         },
@@ -164,6 +164,28 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     });
   }
 
+  checkDeadlineStatus(deadline?: string): string {
+    const now = new Date();
+
+    if (deadline) {
+      const timeDeadline = new Date(deadline);
+      const diffInMilliseconds = timeDeadline.getTime() - now.getTime();
+
+      if (diffInMilliseconds > 6 * 60 * 60 * 1000) {
+        return 'normal';
+      } else if (
+        diffInMilliseconds > 0 &&
+        diffInMilliseconds <= 6 * 60 * 60 * 1000
+      ) {
+        return 'warning';
+      } else {
+        return 'late';
+      }
+    } else {
+      return 'normal';
+    }
+  }
+
   handleItemDetailsView(value: boolean) {
     this.itemDetailsView = value;
   }
@@ -180,6 +202,9 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   ngOnDestroy() {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
+    }
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
     }
     this.subscriptions.unsubscribe();
     this.destroy$.next();

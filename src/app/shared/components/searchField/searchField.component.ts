@@ -22,7 +22,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 })
 export class SearchFieldComponent implements OnInit, OnDestroy, OnChanges {
   @Input() set value(val: string | undefined) {
-    console.log('Setter triggered:', val);
     this.searchControl.setValue(val || '', { emitEvent: false });
   }
 

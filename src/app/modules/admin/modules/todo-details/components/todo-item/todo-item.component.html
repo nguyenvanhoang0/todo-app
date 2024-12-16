@@ -1,17 +1,12 @@
 <div [ngClass]="bucketItem.length > 0 ? 'container' : ''">
   <div
     class="group-bucket-item"
-    [ngClass]="
-      bucketItem.length < configurationParams.limit &&
-      totalBucketItems > configurationParams.limit
-        ? 'and'
-        : ''
-    "
+    [ngClass]="totalBucketItems > configurationParams.limit ? 'and' : ''"
   >
     @for (bucket of bucketItem; track bucket.id) {
     <div
       class="bucket-item"
-      [ngClass]="bucket.done ? 'finish' : 'unfinished'"
+      [ngClass]="bucket.done ? 'finish' : checkDeadlineStatus(bucket.deadline)"
       (click)="openItemDetailsView(true, bucket)"
       (keydown.enter)="openItemDetailsView(true, bucket)"
       tabindex="0"
@@ -32,6 +27,7 @@
         [label]="false"
         [buttonType]="'text'"
         [content]="bucket.content"
+        [contents]="{ BucketItem: bucket }"
       >
       </app-open-form>
     </div>
