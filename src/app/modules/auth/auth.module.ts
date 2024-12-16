@@ -20,7 +20,7 @@ import { CustomInputComponent } from 'src/app/shared/components/custom-input/cus
     LoginComponent,
     RegisterComponent,
     AuthComponent,
-    ErrorMessageDirective,
+    // ErrorMessageDirective,
   ],
   imports: [
     CommonModule,
@@ -34,6 +34,8 @@ import { CustomInputComponent } from 'src/app/shared/components/custom-input/cus
     NzFormModule,
     ChangeLanguageComponent,
     CustomInputComponent,
+    ErrorMessageDirective,
+
   ],
 })
 export class AuthModule {}

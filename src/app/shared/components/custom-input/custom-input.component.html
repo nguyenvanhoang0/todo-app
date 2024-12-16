@@ -1,1 +1,30 @@
-<input [value]="value" (input)="onInputChange($event)" />
+<div class="custom-input-wrapper">
+  <label *ngIf="label" class="custom-input-label">{{ label }}</label>
+  <nz-form-item>
+    <nz-form-control
+      [nzSpan]="14"
+      [nzErrorTip]="errorTpl"
+      [nzValidateStatus]="error && (isDirty || isTouched) ? 'error' : 'success'"
+    >
+      <input
+        nz-input
+        class="custom-input"
+        [value]="value"
+        (input)="onInputChange($event)"
+        (blur)="onBlur()"
+        [disabled]="isDisabled"
+        [placeholder]="placeholder"
+        [type]="type"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <ng-template #errorTpl>
+    <span
+      [error]="error"
+      [params]="{ fieldName: id || 'This field' }"
+      [show]="isDirty || isTouched"
+      class="error-message"
+    ></span>
+  </ng-template>
+</div>

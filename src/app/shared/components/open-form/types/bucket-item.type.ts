@@ -4,14 +4,14 @@ export type IBucketItemSimple = {
   content: string;
   parentId?: number;
   done?: boolean;
-  deadline?: Date;
+  deadline?: string;
 };
 
 export type IBucketItemFormGroup = {
   content: FormControl<string>;
-  parentId: FormControl<number>;
+  // parentId: FormControl<number | undefined>;
   done: FormControl<boolean>;
-  deadline: FormControl<Date>;
+  deadline: FormControl<string>;
   time: FormControl<Date>;
   date: FormControl<Date>;
 };

@@ -5,16 +5,22 @@
       <app-custom-input
         formControlName="content"
         placeholder="Content"
+        [error]="bucketItemFormGroup.get('content')?.errors"
+        [id]="'Content'"
       ></app-custom-input>
-      <nz-time-picker
-        formControlName="time"
-        [nzFormat]="'HH:mm:ss'"
-      ></nz-time-picker>
+      <div class="flex">
+        
       <nz-date-picker
         formControlName="date"
         [nzPlaceHolder]="'Chọn ngày'"
         [nzFormat]="'yyyy-MM-dd'"
       ></nz-date-picker>
+      <nz-time-picker
+        formControlName="time"
+        [nzFormat]="'HH:mm:ss'"
+      ></nz-time-picker>
+      </div>
+      
     </div>
     <div class="group-button">
       <button nz-button nzType="text" type="reset">Reset</button>

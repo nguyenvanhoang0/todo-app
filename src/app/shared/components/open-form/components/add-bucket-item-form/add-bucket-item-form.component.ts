@@ -17,19 +17,22 @@ import { BucketItemFormService } from '../../services/bucket-item-form/bucket-it
 import { CustomInputComponent } from '../../../custom-input/custom-input.component';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DateTimeService } from 'src/app/services/date-time/date-time.service';
+import { NzFormPatchModule } from 'ng-zorro-antd/core/form';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 @Component({
   selector: 'app-add-bucket-item-form',
   standalone: true,
   imports: [
     CommonModule,
-    InputFieldComponent,
     NzButtonModule,
     FormsModule,
     ReactiveFormsModule,
     CustomInputComponent,
     NzTimePickerModule,
     NzDatePickerModule,
+   
   ],
   templateUrl: './add-bucket-item-form.component.html',
   styleUrl: './add-bucket-item-form.component.scss',
@@ -52,6 +55,7 @@ export class AddBucketItemFormComponent implements OnDestroy {
   constructor(
     private _bucketService: BucketItemService,
     private _bucketItemFormService: BucketItemFormService,
+    private _dateTimeService: DateTimeService,
     public message: MessageService
   ) {}
 
@@ -61,8 +65,9 @@ export class AddBucketItemFormComponent implements OnDestroy {
 
   onSubmit(): void {
     console.log(this.selectedTime);
-
+    this.updateDeadline();
     if (this.parentId) {
+      // this.bucketItemFormGroup.get('parentId')?.setValue(this.parentId);
       // this.bucket.parentId = this.parentId;
     }
     if (this.bucketItemFormGroup.invalid) {
@@ -92,10 +97,34 @@ export class AddBucketItemFormComponent implements OnDestroy {
     }
   }
 
+  private updateDeadline() {
+    const time = this.bucketItemFormGroup.get('time')?.value;
+    const date = this.bucketItemFormGroup.get('date')?.value;
+    console.log(time);
+    console.log(date);
+
+    if (time && date) {
+      const deadline = new Date(date);
+      deadline.setHours(
+        time.getHours(),
+        time.getMinutes(),
+        time.getSeconds(),
+        0
+      );
+      console.log(deadline);
+      console.log(this._dateTimeService.toLocalISOString(deadline));
+
+      this.bucketItemFormGroup
+        .get('deadline')
+        ?.setValue(this._dateTimeService.toLocalISOString(deadline));
+    }
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
     this.message.destroy();
+    this._bucketItemFormService.destroy();
   }
 }

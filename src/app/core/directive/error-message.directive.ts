@@ -6,12 +6,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-type IErrorMessages = {
-  required?: boolean;
-  minlength?: { requiredLength: number; actualLength: number };
-  maxlength?: { requiredLength: number; actualLength: number };
-  email?: boolean;
-};
+import { IErrorMessages } from '../types/error.type';
 
 type IParams = {
   fieldName: string;
@@ -19,6 +14,7 @@ type IParams = {
 
 @Directive({
   selector: '[error]',
+  standalone: true,
 })
 export class ErrorMessageDirective implements OnChanges {
   @Input() error: IErrorMessages | null | undefined = null;
@@ -32,6 +28,10 @@ export class ErrorMessageDirective implements OnChanges {
   ) {}
 
   ngOnChanges(): void {
+    console.log(this.show);
+    console.log(this.error);
+    console.log(this.params);
+    
     const displayError = this.show && !!this.error && !!this.params;
     if (this.error && this.params) {
       const message = this.getErrorMessage(this.error, this.params);

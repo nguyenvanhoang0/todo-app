@@ -16,6 +16,8 @@ export class BucketItemService {
   constructor(private apiCallerService: ApiCallerService) {}
 
   createBucketItem(bucketId: number, bucketItem: IBucketItemSimple): Observable<IResponseTemplate<IBucketItem[]>> {
+    console.log(bucketItem);
+    
     return this.apiCallerService.post(
       `${this.apiBucket.getBucketById}${bucketId}${this.apiBucketItem.createBucketItem}`,
       bucketItem
