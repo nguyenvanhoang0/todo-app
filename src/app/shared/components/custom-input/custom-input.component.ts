@@ -1,12 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  AbstractControl,
-  ControlValueAccessor,
-  FormControl,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ErrorMessageDirective } from 'src/app/core/directive/error-message.directive';
 import { IErrorMessages } from 'src/app/core/types/error.type';

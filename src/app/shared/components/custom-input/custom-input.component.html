@@ -1,5 +1,5 @@
 <div class="custom-input-wrapper">
-  <label *ngIf="label" class="custom-input-label">{{ label }}</label>
+  <label *ngIf="label" class="custom-input-label" [for]="id">{{ label }}</label>
   <nz-form-item>
     <nz-form-control
       [nzSpan]="14"
@@ -10,6 +10,8 @@
         nz-input
         class="custom-input"
         [value]="value"
+        [id]="id"
+        [name]="id"
         (input)="onInputChange($event)"
         (blur)="onBlur()"
         [disabled]="isDisabled"

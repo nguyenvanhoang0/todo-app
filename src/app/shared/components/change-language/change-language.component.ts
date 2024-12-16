@@ -4,7 +4,7 @@ import { IconComponent } from '../icon/icon.component';
 import { OpenModalComponent } from '../open-modal/open-modal.component';
 import { LanguageCode, LANGUAGES } from 'src/app/core/enums/languages.enums';
 import { TranslateService } from '@ngx-translate/core';
-import { NzI18nService, en_US, vi_VN } from 'ng-zorro-antd/i18n';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-change-language',
