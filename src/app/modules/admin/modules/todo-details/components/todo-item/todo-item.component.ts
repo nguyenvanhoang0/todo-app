@@ -9,13 +9,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { IBucketItem } from '../../types/todo-item.type';
+import { IBucketItem, IBucketItemWithStatus } from '../../types/todo-item.type';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { MessageService } from 'src/app/services/message/message.service';
 import { TodoItemService } from '../../services/todo-item/todo-item.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigurationParamsService } from 'src/app/modules/admin/services/configuration-params/configuration-params.service';
+import { DateTimeService } from 'src/app/services/date-time/date-time.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -33,7 +34,8 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   @Input() todoId!: number;
   @Output() totalBucket = new EventEmitter<number>();
 
-  bucketItem: IBucketItem[] = [];
+  // bucketItem: IBucketItem[] = [];
+  bucketItemWithStatus: IBucketItemWithStatus[] = [];
   bucketSelectItem?: IBucketItem;
   totalBucketItems = 0;
   searchContent = '';
@@ -51,6 +53,8 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     private _eventService: EventService,
     private _todoItemsService: TodoItemService,
     private _configService: ConfigurationParamsService,
+    private _dateTimeService: DateTimeService,
+
     public message: MessageService
   ) {}
 
@@ -126,7 +130,10 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
             this.onPageChange(page);
           }
           this.totalBucketItems = response.total;
-          this.bucketItem = response.data;
+          // this.bucketItem = response.data;
+          this.bucketItemWithStatus = response.data.map((item) =>
+            this.transformBucketItem(item)
+          );
           this.totalBucket.emit(response.total);
           this.message.createMessage('success', 'loading success', '', false);
         },
@@ -164,26 +171,11 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     });
   }
 
-  checkDeadlineStatus(deadline?: string): string {
-    const now = new Date();
-
-    if (deadline) {
-      const timeDeadline = new Date(deadline);
-      const diffInMilliseconds = timeDeadline.getTime() - now.getTime();
-
-      if (diffInMilliseconds > 6 * 60 * 60 * 1000) {
-        return 'normal';
-      } else if (
-        diffInMilliseconds > 0 &&
-        diffInMilliseconds <= 6 * 60 * 60 * 1000
-      ) {
-        return 'warning';
-      } else {
-        return 'late';
-      }
-    } else {
-      return 'normal';
-    }
+  transformBucketItem(bucketItem: IBucketItem): IBucketItemWithStatus {
+    return {
+      ...bucketItem,
+      status: this._dateTimeService.checkDeadlineStatus(bucketItem.deadline),
+    };
   }
 
   handleItemDetailsView(value: boolean) {

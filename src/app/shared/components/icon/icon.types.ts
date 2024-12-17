@@ -1,4 +1,5 @@
 export type IconNameTypes =
+  | undefined
   | 'plus'
   | 'notification'
   | 'close'
@@ -41,6 +42,9 @@ export type IconNameTypes =
   | 'upload'
   | 'lock'
   | 'book'
-  | 'folder';
+  | 'folder'
+  | 'warning'
+  | 'close-circle'
+  | 'check-circle';
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';

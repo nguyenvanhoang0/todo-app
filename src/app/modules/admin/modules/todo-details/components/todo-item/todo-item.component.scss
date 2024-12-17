@@ -17,6 +17,8 @@
       border-radius: 6px;
       transition: 0.2s;
       margin: 3px 0px;
+      position: relative;
+      text-align: left;
 
       &.finish {
         border-radius: 0px;
@@ -28,24 +30,48 @@
           background: var(--red2);
           transition: 0.2s;
         }
+
+        .status {
+          color: var(--green4);
+        }
       }
 
       &.warning {
         background-color: var(--orange3);
         border: 1px solid var(--orange6);
+        border-left: 6px solid var(--orange6);
+
+        .status {
+          color: var(--orange6);
+        }
       }
 
-      &.late {
+      &.close-circle {
         background-color: var(--pink14);
         border: 1px solid var(--pink12);
+        border-left: 6px solid var(--pink12);
+
+        .status {
+          color: var(--pink12);
+        }
       }
 
-      .content {
+      .status {
+        position: absolute;
+        left: -42px;
         font-size: large;
       }
 
-      .time {
-        font-size: x-small;
+      .title {
+        width: 40%;
+
+        .content {
+          font-size: medium;
+        }
+
+        .time {
+          font-size: x-small;
+        }
       }
 
       &:hover {

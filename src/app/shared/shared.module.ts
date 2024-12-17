@@ -11,6 +11,7 @@ import { TimeAgoPipe } from '../core/pipe/time-ago.pipe';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BucketListComponent } from './components/bucket-list/bucket-list.component';
 import { SearchFieldComponent } from './components/searchField/searchField.component';
+import { TimeLeftPipe } from '../core/pipe/timeLeft.pipe';
 
 const COMPONENTS = [
   IconComponent,
@@ -23,14 +24,12 @@ const COMPONENTS = [
   OpenFormComponent,
   SidebarComponent,
   BucketListComponent,
-  SearchFieldComponent
-]
+  SearchFieldComponent,
+];
 
 @NgModule({
-  declarations: [TimeAgoPipe],
-  imports: [
-    COMPONENTS,
-  ],
-  exports: [TimeAgoPipe],
+  declarations: [TimeAgoPipe, TimeLeftPipe],
+  imports: [COMPONENTS],
+  exports: [TimeAgoPipe, TimeLeftPipe],
 })
-export class SharedModule { }
+export class SharedModule {}

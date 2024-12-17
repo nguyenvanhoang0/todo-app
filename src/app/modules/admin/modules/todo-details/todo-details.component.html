@@ -38,17 +38,19 @@
         [id]="todoId"
       >
       </app-open-form>
+
       <div class="search">
-        <div
+        <app-icon
           class="icon"
           [ngClass]="filter ? 'filter' : ''"
           (click)="onfilter()"
           (keydown.enter)="onfilter()"
           tabindex="0"
-        >
-          <app-icon [name]="'filter'"></app-icon>
-        </div>
+          [name]="'filter'"
+        ></app-icon>
+
         <app-search-field
+          class="search-field"
           (searchContent)="onSearch($event)"
           [value]="searchContent"
         ></app-search-field>

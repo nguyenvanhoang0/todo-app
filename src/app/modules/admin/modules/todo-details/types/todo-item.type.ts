@@ -8,3 +8,7 @@ export type IBucketItem = {
   updatedAt?: Date;
   deadline?: string;
 };
+
+export type IBucketItemWithStatus = IBucketItem & {
+  status?: 'warning' | 'close-circle';
+};

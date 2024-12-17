@@ -41,6 +41,9 @@
         display: flex;
         align-items: center;
         gap: 12px;
+        .search-field {
+          flex: 1;
+        }
         .icon {
           padding: 8px;
           transition: 0.2s;

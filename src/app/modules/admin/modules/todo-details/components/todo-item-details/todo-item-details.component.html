@@ -1,38 +1,42 @@
+<div class="title">
+  <p>todo content</p>
+  <div class="action">
+    <app-open-form
+      *ngIf="!bucketItem.parentId"
+      [formName]="'add bucket items'"
+      [icon]="'plus'"
+      [id]="bucketId"
+      [parentId]="bucketItem.id"
+      [label]="false"
+      [buttonType]="'text'"
+    >
+    </app-open-form>
+    <app-open-form
+      [formName]="'edit bucket items'"
+      [icon]="'edit'"
+      [id]="bucketItem.id"
+      [parentId]="bucketId"
+      [label]="false"
+      [buttonType]="'text'"
+      [content]="bucketItem.content"
+      [contents]="{ BucketItem: bucketItem }"
+    >
+    </app-open-form>
+    <app-open-form
+      [formName]="'delete'"
+      [delete]="'deleteBucketItem'"
+      [icon]="'delete'"
+      [id]="bucketItem.id"
+      [parentId]="bucketId"
+      [label]="false"
+      [buttonType]="'text'"
+    >
+    </app-open-form>
+  </div>
+</div>
 <div class="content" *ngIf="bucketItem">
   <div class="text-content">
     {{ bucketItem.content }}
-    <div class="action">
-      <app-open-form
-        *ngIf="!bucketItem.parentId"
-        [formName]="'add bucket items'"
-        [icon]="'plus'"
-        [id]="bucketId"
-        [parentId]="bucketItem.id"
-        [label]="false"
-        [buttonType]="'text'"
-      >
-      </app-open-form>
-      <app-open-form
-        [formName]="'edit bucket items'"
-        [icon]="'edit'"
-        [id]="bucketItem.id"
-        [parentId]="bucketId"
-        [label]="false"
-        [buttonType]="'text'"
-        [content]="bucketItem.content"
-      >
-      </app-open-form>
-      <app-open-form
-        [formName]="'delete'"
-        [delete]="'deleteBucketItem'"
-        [icon]="'delete'"
-        [id]="bucketItem.id"
-        [parentId]="bucketId"
-        [label]="false"
-        [buttonType]="'text'"
-      >
-      </app-open-form>
-    </div>
   </div>
   <div>
     most recent changes:

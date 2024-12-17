@@ -53,4 +53,28 @@ export class DateTimeService {
       deadlineDate.getDate()
     );
   }
+
+  checkDeadlineStatus(
+    deadline?: string
+  ): 'warning' | 'close-circle' | undefined {
+    const now = new Date();
+
+    if (deadline) {
+      const timeDeadline = new Date(deadline);
+      const diffInMilliseconds = timeDeadline.getTime() - now.getTime();
+
+      if (diffInMilliseconds > 6 * 60 * 60 * 1000) {
+        return undefined;
+      } else if (
+        diffInMilliseconds > 0 &&
+        diffInMilliseconds <= 6 * 60 * 60 * 1000
+      ) {
+        return 'warning';
+      } else {
+        return 'close-circle';
+      }
+    } else {
+      return undefined;
+    }
+  }
 }

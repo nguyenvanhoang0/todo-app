@@ -1,20 +1,34 @@
-<div [ngClass]="bucketItem.length > 0 ? 'container' : ''">
+<div [ngClass]="bucketItemWithStatus.length > 0 ? 'container' : ''">
   <div
     class="group-bucket-item"
     [ngClass]="totalBucketItems > configurationParams.limit ? 'and' : ''"
   >
-    @for (bucket of bucketItem; track bucket.id) {
+    @for (bucket of bucketItemWithStatus; track bucket.id) {
     <div
       class="bucket-item"
-      [ngClass]="bucket.done ? 'finish' : checkDeadlineStatus(bucket.deadline)"
+      [ngClass]="bucket.done ? 'finish' : bucket.status"
       (click)="openItemDetailsView(true, bucket)"
       (keydown.enter)="openItemDetailsView(true, bucket)"
       tabindex="0"
     >
-      <div>
+      <app-icon
+        class="status"
+        [name]="
+          bucket.done
+            ? 'check-circle'
+            : bucket.status
+            ? bucket.status
+            : undefined
+        "
+      ></app-icon>
+
+      <div class="title">
         <app-text [line]="1" class="content">{{ bucket.content }}</app-text>
         <p class="time">{{ bucket.createdAt | timeAgo }}</p>
       </div>
+      <p *ngIf="bucket.deadline && !bucket.done">
+        {{ bucket.deadline | timeLeft }}
+      </p>
 
       <app-open-form
         (click)="blockFormClosing($event)"
