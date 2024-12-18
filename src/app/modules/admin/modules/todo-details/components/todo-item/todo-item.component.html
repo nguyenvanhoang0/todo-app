@@ -1,14 +1,22 @@
-<div [ngClass]="bucketItemWithStatus.length > 0 ? 'container' : ''">
+<div [ngClass]="extendBucketItem.length > 0 ? 'container' : ''">
   <div
     class="group-bucket-item"
     [ngClass]="totalBucketItems > configurationParams.limit ? 'and' : ''"
   >
-    @for (bucket of bucketItemWithStatus; track bucket.id) {
+    @for (bucket of extendBucketItem; track bucket.id) {
     <div
       class="bucket-item"
-      [ngClass]="bucket.done ? 'finish' : bucket.status"
-      (click)="openItemDetailsView(true, bucket)"
-      (keydown.enter)="openItemDetailsView(true, bucket)"
+      [ngClass]="
+        selectionMode
+          ? bucket.selected
+            ? 'selected'
+            : ''
+          : bucket.done
+          ? 'finish'
+          : bucket.status
+      "
+      (click)="handleClickItemDetails(bucket)"
+      (keydown.enter)="handleClickItemDetails(bucket)"
       tabindex="0"
     >
       <app-icon
@@ -63,10 +71,10 @@
     (Visible)="handleItemDetailsView($event)"
   >
     <app-todo-item-details
-      *ngIf="bucketSelectItem"
+      *ngIf="selectBucketItem"
       [bucketId]="todoId"
       (done)="handleItemDetailsView($event)"
-      [bucketItem]="bucketSelectItem"
+      [bucketItem]="selectBucketItem"
     ></app-todo-item-details>
   </app-open-modal>
 </div>

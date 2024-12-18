@@ -11,7 +11,7 @@
         ></app-icon>
       </p>
 
-      <div class="action">
+      <div class="action-bucket">
         <app-sidebar [contentTemplate]="customContent"></app-sidebar>
         <app-open-form
           [formName]="'edit bucket'"
@@ -32,14 +32,20 @@
       </div>
     </div>
     <div class="title-action">
-      <app-open-form
-        [formName]="'add bucket items'"
-        [icon]="'plus'"
-        [id]="todoId"
-      >
-      </app-open-form>
-
-      <div class="search">
+      <div class="action">
+        <app-open-form
+          [formName]="'add bucket items'"
+          [icon]="'plus'"
+          [id]="todoId"
+        >
+        </app-open-form>
+        <app-selected-todo-list
+          [todoId]="todoId"
+          [selectionMode]="selectionMode"
+          (outselectionMode)="updateSelectionMode($event)"
+        ></app-selected-todo-list>
+      </div>
+      <div class="action">
         <app-icon
           class="icon"
           [ngClass]="filter ? 'filter' : ''"
@@ -73,18 +79,21 @@
     <app-todo-item
       [done]="0"
       [todoId]="todoId"
-      (totalBucket)="getTotalBucketNotDone($event)"
+      [selectionMode]="selectionMode"
+      (totalBucketItem)="getTotalBucketNotDone($event)"
     ></app-todo-item>
     <app-todo-item
       [done]="1"
       [todoId]="todoId"
-      (totalBucket)="getTotalBucketDone($event)"
+      [selectionMode]="selectionMode"
+      (totalBucketItem)="getTotalBucketDone($event)"
     ></app-todo-item>
     @if(!total&& !message.isLoading){ <app-empty></app-empty>
     } }@else {
     <app-todo-item
       [todoId]="todoId"
-      (totalBucket)="getTotalBucket($event)"
+      [selectionMode]="selectionMode"
+      (totalBucketItem)="getTotalBucket($event)"
     ></app-todo-item>
     @if(!total&&!message.isLoading){ <app-empty></app-empty>
     } } }

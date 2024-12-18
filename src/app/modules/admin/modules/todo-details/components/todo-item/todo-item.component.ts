@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { IBucketItem, IBucketItemWithStatus } from '../../types/todo-item.type';
+import { IBucketItem, IExtendBucketItem } from '../../types/todo-item.type';
 import { IQueryParams } from 'src/app/modules/admin/types/query-params.type';
 import { EventService } from 'src/app/modules/admin/services/event/event.service';
 import { MessageService } from 'src/app/services/message/message.service';
@@ -17,6 +17,7 @@ import { TodoItemService } from '../../services/todo-item/todo-item.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigurationParamsService } from 'src/app/modules/admin/services/configuration-params/configuration-params.service';
 import { DateTimeService } from 'src/app/services/date-time/date-time.service';
+import { SelectService } from 'src/app/modules/admin/services/select/select.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -32,11 +33,13 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
 
   @Input() done: 0 | 1 | undefined;
   @Input() todoId!: number;
-  @Output() totalBucket = new EventEmitter<number>();
+  @Input() selectionMode = false;
+  selectedBucketItemList?: IBucketItem[];
 
-  // bucketItem: IBucketItem[] = [];
-  bucketItemWithStatus: IBucketItemWithStatus[] = [];
-  bucketSelectItem?: IBucketItem;
+  @Output() totalBucketItem = new EventEmitter<number>();
+
+  extendBucketItem: IExtendBucketItem[] = [];
+  selectBucketItem?: IBucketItem;
   totalBucketItems = 0;
   searchContent = '';
 
@@ -54,6 +57,7 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     private _todoItemsService: TodoItemService,
     private _configService: ConfigurationParamsService,
     private _dateTimeService: DateTimeService,
+    private _selectService: SelectService,
 
     public message: MessageService
   ) {}
@@ -64,10 +68,13 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     }
     this.listenToBucketitemChanges();
     this.listenToParamsChanges();
+    this.listenToBucketitemSelectedChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['todoId'].firstChange && changes['todoId']) {
+    console.log(this.todoId);
+
+    if (changes['todoId'] && !changes['todoId'].firstChange) {
       this.search(this.configurationParams.query);
     }
   }
@@ -111,6 +118,13 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     });
   }
 
+  listenToBucketitemSelectedChanges() {
+    this._selectService.bucketItem$.subscribe((items) => {
+      this.selectedBucketItemList = items;
+      this.updateSelectedItems();
+    });
+  }
+
   getBucketItems(id: number, params: IQueryParams): void {
     console.log('load');
 
@@ -128,14 +142,15 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
             this.configurationParams.page > page
           ) {
             this.onPageChange(page);
+          } else {
+            this.totalBucketItems = response.total;
+            this.extendBucketItem = response.data.map((item) =>
+              this.transformBucketItem(item)
+            );
+            this.updateSelectedItems();
+            this.totalBucketItem.emit(response.total);
+            this.message.createMessage('success', 'loading success', '', false);
           }
-          this.totalBucketItems = response.total;
-          // this.bucketItem = response.data;
-          this.bucketItemWithStatus = response.data.map((item) =>
-            this.transformBucketItem(item)
-          );
-          this.totalBucket.emit(response.total);
-          this.message.createMessage('success', 'loading success', '', false);
         },
         error: (err) => {
           this.message.createMessage('error', err);
@@ -171,20 +186,38 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
     });
   }
 
-  transformBucketItem(bucketItem: IBucketItem): IBucketItemWithStatus {
+  transformBucketItem(bucketItem: IBucketItem): IExtendBucketItem {
     return {
       ...bucketItem,
       status: this._dateTimeService.checkDeadlineStatus(bucketItem.deadline),
     };
   }
 
+  handleClickItemDetails(selectBucketItem: IBucketItem) {
+    if (this.selectionMode) {
+      this._selectService.toggleBucketItem(selectBucketItem);
+    } else {
+      this.openItemDetailsView(true, selectBucketItem);
+    }
+  }
+
+  updateSelectedItems(): void {
+    this.extendBucketItem.forEach((item) => {
+      const isSelected = this.selectedBucketItemList?.some(
+        (selectedItem) => selectedItem.id === item.id
+      );
+      item.selected = isSelected;
+    });
+    console.log(this.selectedBucketItemList);
+  }
+
   handleItemDetailsView(value: boolean) {
     this.itemDetailsView = value;
   }
 
-  openItemDetailsView(value: boolean, bucketSelectItem: IBucketItem) {
+  openItemDetailsView(value: boolean, selectBucketItem: IBucketItem) {
     this.itemDetailsView = value;
-    this.bucketSelectItem = bucketSelectItem;
+    this.selectBucketItem = selectBucketItem;
   }
 
   blockFormClosing(event: MouseEvent) {

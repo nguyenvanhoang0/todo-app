@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { IBucket } from '../todo/types/todo.type';
 import { EventService } from '../../services/event/event.service';
 import { MessageService } from 'src/app/services/message/message.service';
+import { SelectService } from '../../services/select/select.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -20,15 +21,20 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   todoId!: number;
   bucket?: IBucket;
+
   totalBucketDone?: number;
   totalBucketNotDone?: number;
   total?: number;
+
   filter = true;
+  selectionMode = false;
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,
     private _eventService: EventService,
     private _todoDetailsService: TodoDetailsService,
+    private _selectService: SelectService,
+
     private _cdr: ChangeDetectorRef,
     public message: MessageService
   ) {}
@@ -54,6 +60,8 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.routeSubscription = this._route.paramMap.subscribe((params) => {
       this.todoId = Number(params.get('id'));
       this.getBucketDetails(this.todoId);
+      this._selectService.clearBucketItems();
+      this.selectionMode = false;
     });
   }
 
@@ -99,6 +107,12 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.total = Total;
   }
 
+  TotalBucket() {
+    this.total =
+      (this.totalBucketDone ? this.totalBucketDone : 0) +
+      (this.totalBucketNotDone ? this.totalBucketNotDone : 0);
+  }
+
   onSearch(search: string): void {
     const currentParams = { ...this._route.snapshot.queryParams };
     this._router.navigate([`admin/todo-details/${this.todoId}`], {
@@ -113,10 +127,8 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  TotalBucket() {
-    this.total =
-      (this.totalBucketDone ? this.totalBucketDone : 0) +
-      (this.totalBucketNotDone ? this.totalBucketNotDone : 0);
+  updateSelectionMode(newMode: boolean): void {
+    this.selectionMode = newMode;
   }
 
   ngOnDestroy() {

@@ -56,6 +56,10 @@
         }
       }
 
+      &.selected {
+        background: linear-gradient(to right, #b7eb8f, #d9f7be);
+      }
+
       .status {
         position: absolute;
         left: -42px;

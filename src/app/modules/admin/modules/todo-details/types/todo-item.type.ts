@@ -9,6 +9,7 @@ export type IBucketItem = {
   deadline?: string;
 };
 
-export type IBucketItemWithStatus = IBucketItem & {
+export type IExtendBucketItem = IBucketItem & {
   status?: 'warning' | 'close-circle';
+  selected?: boolean;
 };

@@ -1,0 +1,67 @@
+.todo-list-view {
+  padding: 24px;
+  text-align: left;
+
+  .title {
+    font-size: large;
+    margin-bottom: 24px;
+  }
+
+  .bucket-item-list {
+    list-style-type: none; /* Xóa dấu chấm ở đầu mỗi mục */
+    margin: 0;
+
+    .bucket-item {
+      // background-color: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      // transition: transform 0.2s ease-in-out;
+      display: flex;
+      gap: 12px;
+
+      .todo-content {
+        font-size: medium;
+        width: 320px;
+      }
+
+      .status {
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+
+        &.finish {
+          color: var(--green6);
+        }
+
+        &.unfinished {
+          color: var(--red4);
+        }
+      }
+    }
+  }
+
+  .action {
+    display: flex;
+    gap: 12px;
+    justify-content: end;
+  }
+}
+
+.item-id {
+  font-weight: bold;
+  color: #333;
+}
+
+.item-content {
+  color: #555;
+}
+
+.item-created-at {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+button {
+  align-items: center;
+}

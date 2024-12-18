@@ -1,0 +1,132 @@
+<nz-button-group>
+  <button
+    nz-button
+    [nzType]="selectionMode ? 'primary' : 'default'"
+    (click)="handleSelectionMode()"
+    (keydown.enter)="handleSelectionMode()"
+    tabindex="0"
+  >
+    Select
+  </button>
+  @if (selectionMode) {
+  <button
+    nz-button
+    nzType="default"
+    class="flex"
+    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    (click)="handleSelectedTodoListView(true)"
+    (keydown.enter)="handleSelectedTodoListView(true)"
+    tabindex="0"
+  >
+    {{ selectBucketItemlist?.length }}
+    <app-icon name="eye"></app-icon>
+  </button>
+  <button
+    nz-button
+    nzType="default"
+    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    (click)="confirmDone = true"
+    (keydown.enter)="confirmDone = true"
+    tabindex="0"
+  >
+    <app-icon name="check"></app-icon>
+  </button>
+  <button
+    nz-button
+    nzType="dashed"
+    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    (click)="confirmDelete = true"
+    (keydown.enter)="confirmDelete = true"
+    tabindex="0"
+  >
+    <app-icon name="delete"></app-icon>
+  </button>
+  <button
+    nz-button
+    nzType="dashed"
+    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    (click)="confirmClear = true"
+    (keydown.enter)="confirmClear = true"
+    tabindex="0"
+  >
+    <app-icon name="clear"></app-icon>
+  </button>
+  }
+</nz-button-group>
+<app-open-modal
+  [isVisible]="selectedTodoListView"
+  (Visible)="handleSelectedTodoListView($event)"
+>
+  <div class="todo-list-view">
+    <div class="title">selected todo list:</div>
+    <ul class="bucket-item-list">
+      <li *ngFor="let item of selectBucketItemlist" class="bucket-item">
+        <p class="item-id">ID: {{ item.id }}</p>
+        <!-- <p class="item-content">{{ item.content }}</p> -->
+        <app-text [line]="1" class="todo-content">{{ item.content }}</app-text>
+        <div class="status" [ngClass]="item.done ? 'finish' : 'unfinished'">
+          status : {{ item.done ? 'finish' : 'unfinished'
+          }}<app-icon [name]="item.done ? 'check' : 'clock-circle'"></app-icon>
+        </div>
+        <p *ngIf="item.deadline && !item.done">
+          {{ item.deadline | timeLeft }}
+        </p>
+      </li>
+    </ul>
+    <div class="action">
+      <button
+        nz-button
+        nzType="primary"
+        (click)="confirmDone = true"
+        (keydown.enter)="confirmDone = true"
+        tabindex="0"
+      >
+        <app-icon name="check"></app-icon>
+      </button>
+      <button
+        nz-button
+        nzType="default"
+        (click)="confirmDelete = true"
+        (keydown.enter)="confirmDelete = true"
+        tabindex="0"
+        nzDanger
+      >
+        <app-icon name="delete"></app-icon>
+      </button>
+      <button
+        nz-button
+        nzType="dashed"
+        (click)="confirmClear = true"
+        (keydown.enter)="confirmClear = true"
+        tabindex="0"
+        nzDanger
+      >
+        <app-icon name="clear"></app-icon>
+      </button>
+    </div>
+  </div>
+</app-open-modal>
+
+<app-open-modal [isVisible]="confirmClear" (Visible)="onConfirmClear($event)">
+  <app-confirmation-form
+    *ngIf="confirmClear"
+    (confirm)="onConfirmClear($event)"
+  >
+    {{ 'ARE_YOU_SURE_YOU_WANT_TO_CLEAR' | translate }}
+  </app-confirmation-form>
+</app-open-modal>
+
+<app-open-modal [isVisible]="confirmDelete" (Visible)="onConfirmDelete($event)">
+  <app-confirmation-form
+    *ngIf="confirmDelete"
+    (confirm)="onConfirmDelete($event)"
+  >
+    {{ 'ARE_YOU_SURE_YOU_WANT_TO_DELETE' | translate }}
+  </app-confirmation-form>
+</app-open-modal>
+
+<app-open-modal [isVisible]="confirmDone" (Visible)="onConfirmDone($event)">
+  <app-confirmation-form *ngIf="confirmDone" (confirm)="onConfirmDone($event)">
+    {{ 'ARE_YOU_SURE_YOU_WANT_TO_MARK_COMPLETE' | translate }}
+  </app-confirmation-form>
+</app-open-modal>

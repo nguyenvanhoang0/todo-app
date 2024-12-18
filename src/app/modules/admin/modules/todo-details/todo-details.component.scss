@@ -27,7 +27,7 @@
         }
       }
 
-      .action {
+      .action-bucket {
         display: flex;
         gap: 12px;
       }
@@ -36,8 +36,8 @@
     .title-action {
       display: flex;
       justify-content: space-between;
-      .search {
-        width: 42%;
+      .action {
+        // width: 42%;
         display: flex;
         align-items: center;
         gap: 12px;

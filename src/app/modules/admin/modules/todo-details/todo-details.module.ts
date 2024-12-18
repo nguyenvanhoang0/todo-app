@@ -18,17 +18,28 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
 import { SearchFieldComponent } from 'src/app/shared/components/searchField/searchField.component';
 import { BucketListComponent } from 'src/app/shared/components/bucket-list/bucket-list.component';
+import { SelectedTodoListComponent } from './components/selected-todo-list/selected-todo-list.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ConfirmationFormComponent } from 'src/app/shared/components/confirmation-form/confirmation-form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [TodoDetailsComponent, TodoItemComponent,TodoItemDetailsComponent],
+  declarations: [
+    TodoDetailsComponent,
+    TodoItemComponent,
+    TodoItemDetailsComponent,
+    SelectedTodoListComponent,
+  ],
   imports: [
     CommonModule,
     TodoDetailsRoutingModule,
     NzSkeletonModule,
     SharedModule,
     ReactiveFormsModule,
+    TranslateModule,
     NzPaginationModule,
     NzInputModule,
+    NzButtonModule,
     OpenFormComponent,
     OpenModalComponent,
     IconComponent,
@@ -36,7 +47,8 @@ import { BucketListComponent } from 'src/app/shared/components/bucket-list/bucke
     EmptyComponent,
     SidebarComponent,
     SearchFieldComponent,
-    BucketListComponent
+    BucketListComponent,
+    ConfirmationFormComponent,
   ],
 })
 export class TodoDetailsModule {}
