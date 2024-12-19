@@ -1,0 +1,28 @@
+<div class="container">
+  <div
+    class="icon-theme"
+    (click)="changeThemeForm = true"
+    (keydown.enter)="changeThemeForm = true"
+    tabindex="0"
+  >
+    <app-icon [name]="'global'"></app-icon>
+  </div>
+  <app-open-modal
+    [isVisible]="changeThemeForm"
+    (Visible)="openChangeThemeForm($event)"
+  >
+    <div>
+      <h1>Chọn Theme</h1>
+      <ul>
+        <li *ngFor="let theme of themes">
+          <button
+            (click)="changeTheme(theme)"
+            [class.active]="theme === selectedTheme"
+          >
+            {{ theme | titlecase }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </app-open-modal>
+</div>

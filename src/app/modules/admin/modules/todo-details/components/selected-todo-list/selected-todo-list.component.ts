@@ -15,7 +15,7 @@ export class SelectedTodoListComponent implements OnInit {
   @Input() selectionMode = false;
   @Output() outselectionMode = new EventEmitter<boolean>();
 
-  selectBucketItemlist?: IBucketItem[];
+  selectBucketItemlist: IBucketItem[] = [];
 
   selectedTodoListView = false;
   confirmClear = false;
@@ -124,6 +124,13 @@ export class SelectedTodoListComponent implements OnInit {
       this.confirmDelete = false;
     } else {
       this.confirmDelete = false;
+    }
+  }
+
+  removeFromSelectedList(selectBucketItem: IBucketItem) {
+    this._selectService.toggleBucketItem(selectBucketItem);
+    if (this.selectBucketItemlist?.length === 0) {
+      this.selectedTodoListView = false;
     }
   }
 }

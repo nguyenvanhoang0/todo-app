@@ -49,12 +49,51 @@ ul {
   margin: 0px;
 }
 
-.flex{
+.flex {
   display: flex;
   gap: 4px;
 }
 
-// .ant-layout {
-//   background-image: url('assets/img/back_auth.png');
-//   background-size: cover;
-// }
+$theme-red: (
+  background: $red1,
+  text: $red9,
+  button-bg: $red6,
+  button-text: $red1,
+  border: $red5,
+);
+
+$theme-blue: (
+  background: $blue1,
+  text: $blue9,
+  button-bg: $blue6,
+  button-text: $blue1,
+  border: $blue5,
+);
+
+@mixin apply-theme($theme) {
+  --background-color: map-get($theme, background);
+  --text-color: map-get($theme, text);
+  --button-bg-color: map-get($theme, button-bg);
+  --button-text-color: map-get($theme, button-text);
+  --border-color: map-get($theme, border);
+}
+
+/* Áp dụng theme */
+.theme-red {
+  @include apply-theme($theme-red);
+}
+
+.theme-blue {
+  @include apply-theme($theme-blue);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: 1px solid var(--border-color);
+}

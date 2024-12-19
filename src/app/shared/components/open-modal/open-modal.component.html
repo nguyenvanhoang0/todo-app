@@ -7,6 +7,7 @@
 >
   <div
     class="content"
+    [ngClass]="location"
     (click)="blockFormClosing($event)"
     (keydown.enter)="changeVisible()"
     tabindex="0"

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IUserInfo } from 'src/app/core/store/_auth/_auth.types';
 import { Observable, Subscription, take } from 'rxjs';
 import { selectUserInfo } from 'src/app/core/store/_auth/_auth.selectors';
@@ -13,7 +13,7 @@ import { MessageService } from 'src/app/services/message/message.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent implements OnDestroy , OnInit{
+export class ProfileComponent implements OnDestroy, OnInit {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnDestroy , OnInit{
     private _store: Store<MainState>,
     private _router: Router,
     private _message: MessageService,
-    private _authApiService: AuthApiService,
+    private _authApiService: AuthApiService
   ) {
     this.userInfo$.subscribe();
   }
@@ -46,12 +46,13 @@ export class ProfileComponent implements OnDestroy , OnInit{
     this.subscriptions.add(
       this._authApiService.getAvatar().subscribe({
         next: (response: string) => {
-          this.avatar = response; 
+          this.avatar = response;
+          console.log(this.avatar);
         },
         error: (error) => {
           this._message.createMessage('error', 'Failed to load avatar');
           console.error('Error loading avatar:', error);
-        }
+        },
       })
     );
   }
@@ -59,7 +60,7 @@ export class ProfileComponent implements OnDestroy , OnInit{
   handleClickUpdate() {
     this._router.navigate(['admin/update-me']).then();
   }
-  
+
   onConfirm(confirm: boolean) {
     if (confirm === true) {
       this.confirmationForm = false;
@@ -70,7 +71,7 @@ export class ProfileComponent implements OnDestroy , OnInit{
   }
 
   ngOnDestroy() {
-    if(this.eventSubscription){
+    if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
     this.subscriptions.unsubscribe();

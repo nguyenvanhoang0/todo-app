@@ -25,6 +25,7 @@ import {
 import { NavBarBodyComponent } from './components/nav-bar/components/nav-bar-body/nav-bar-body.component';
 import { AccountComponent } from './components/header-menu/components/account/account.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ChangeThemeComponent } from 'src/app/shared/components/change-theme/change-theme.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ConfirmationFormComponent,
     OpenModalComponent,
     ChangeLanguageComponent,
+    ChangeThemeComponent,
     NzLayoutComponent,
     NzHeaderComponent,
     NzContentComponent,

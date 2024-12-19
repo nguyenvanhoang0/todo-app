@@ -6,6 +6,7 @@ import { ErrorMessageDirective } from 'src/app/core/directive/error-message.dire
 import { IErrorMessages } from 'src/app/core/types/error.type';
 import { NzFormPatchModule } from 'ng-zorro-antd/core/form';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { InputFieldTypes } from '../input-field/input-field.types';
 
 @Component({
   selector: 'app-custom-input',
@@ -39,7 +40,7 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input() id?: string;
 
   @Input() placeholder = '';
-  @Input() type = 'text';
+  @Input() type: InputFieldTypes = 'text';
   @Input() required = false;
   @Input() minLength?: number;
   @Input() maxLength?: number;

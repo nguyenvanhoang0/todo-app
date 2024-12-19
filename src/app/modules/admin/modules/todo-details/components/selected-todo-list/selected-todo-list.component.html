@@ -13,18 +13,18 @@
     nz-button
     nzType="default"
     class="flex"
-    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    [disabled]="selectBucketItemlist.length === 0 || message.isLoading"
     (click)="handleSelectedTodoListView(true)"
     (keydown.enter)="handleSelectedTodoListView(true)"
     tabindex="0"
   >
-    {{ selectBucketItemlist?.length }}
+    {{ selectBucketItemlist.length }}
     <app-icon name="eye"></app-icon>
   </button>
   <button
     nz-button
     nzType="default"
-    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    [disabled]="selectBucketItemlist.length === 0 || message.isLoading"
     (click)="confirmDone = true"
     (keydown.enter)="confirmDone = true"
     tabindex="0"
@@ -34,7 +34,7 @@
   <button
     nz-button
     nzType="dashed"
-    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    [disabled]="selectBucketItemlist.length === 0 || message.isLoading"
     (click)="confirmDelete = true"
     (keydown.enter)="confirmDelete = true"
     tabindex="0"
@@ -44,7 +44,7 @@
   <button
     nz-button
     nzType="dashed"
-    [disabled]="selectBucketItemlist?.length === 0 || message.isLoading"
+    [disabled]="selectBucketItemlist.length === 0 || message.isLoading"
     (click)="confirmClear = true"
     (keydown.enter)="confirmClear = true"
     tabindex="0"
@@ -54,6 +54,7 @@
   }
 </nz-button-group>
 <app-open-modal
+  [location]="selectBucketItemlist.length >= 7 ? 'center' : 'top'"
   [isVisible]="selectedTodoListView"
   (Visible)="handleSelectedTodoListView($event)"
 >
@@ -71,6 +72,13 @@
         <p *ngIf="item.deadline && !item.done">
           {{ item.deadline | timeLeft }}
         </p>
+        <app-icon
+          class="delete"
+          [name]="'delete'"
+          (click)="removeFromSelectedList(item)"
+          (keydown.enter)="removeFromSelectedList(item)"
+          tabindex="0"
+        ></app-icon>
       </li>
     </ul>
     <div class="action">
