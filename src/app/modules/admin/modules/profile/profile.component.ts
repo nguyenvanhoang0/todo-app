@@ -47,7 +47,6 @@ export class ProfileComponent implements OnDestroy, OnInit {
       this._authApiService.getAvatar().subscribe({
         next: (response: string) => {
           this.avatar = response;
-          console.log(this.avatar);
         },
         error: (error) => {
           this._message.createMessage('error', 'Failed to load avatar');

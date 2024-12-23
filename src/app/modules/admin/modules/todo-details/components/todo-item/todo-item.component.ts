@@ -72,8 +72,6 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.todoId);
-
     if (changes['todoId'] && !changes['todoId'].firstChange) {
       this.search(this.configurationParams.query);
     }
@@ -119,15 +117,15 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
   }
 
   listenToBucketitemSelectedChanges() {
-    this._selectService.bucketItem$.subscribe((items) => {
-      this.selectedBucketItemList = items;
-      this.updateSelectedItems();
-    });
+    this.subscriptions.add(
+      this._selectService.bucketItem$.subscribe((items) => {
+        this.selectedBucketItemList = items;
+        this.updateSelectedItems();
+      })
+    );
   }
 
   getBucketItems(id: number, params: IQueryParams): void {
-    console.log('load');
-
     this.handleItemDetailsView(false);
     this.message.createMessageloading(false);
     this.subscriptions.add(
@@ -208,7 +206,6 @@ export class TodoItemComponent implements OnDestroy, OnInit, OnChanges {
       );
       item.selected = isSelected;
     });
-    console.log(this.selectedBucketItemList);
   }
 
   handleItemDetailsView(value: boolean) {

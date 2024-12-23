@@ -10,6 +10,6 @@ export type IBucketItem = {
 };
 
 export type IExtendBucketItem = IBucketItem & {
-  status?: 'warning' | 'close-circle';
+  status?: 'warning' | 'danger' | 'missed-deadline';
   selected?: boolean;
 };

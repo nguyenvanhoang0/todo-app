@@ -24,8 +24,12 @@
         [name]="
           bucket.done
             ? 'check-circle'
-            : bucket.status
-            ? bucket.status
+            : bucket.status === 'warning'
+            ? 'warning'
+            : bucket.status === 'danger'
+            ? 'clock-circle'
+            : bucket.status === 'missed-deadline'
+            ? 'close-circle'
             : undefined
         "
       ></app-icon>

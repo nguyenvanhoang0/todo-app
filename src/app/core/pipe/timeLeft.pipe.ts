@@ -10,7 +10,7 @@ export class TimeLeftPipe implements PipeTransform {
 
     const diff = new Date(date).getTime() - now.getTime();
     if (diff < 0) {
-      return 'Overdue';
+      return 'Missed deadline';
     }
     // if (diff <= 5 * 60 * 1000) { // Dưới 5 phút
     //   const minutes = Math.floor(diff / (1000 * 60)) % 60;

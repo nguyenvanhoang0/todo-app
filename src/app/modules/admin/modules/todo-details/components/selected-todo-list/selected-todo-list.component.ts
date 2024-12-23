@@ -113,6 +113,7 @@ export class SelectedTodoListComponent implements OnInit {
     if (confirm === true) {
       this.markItemsAsDone();
       this.confirmDone = false;
+      this.selectedTodoListView = false;
     } else {
       this.confirmDone = false;
     }

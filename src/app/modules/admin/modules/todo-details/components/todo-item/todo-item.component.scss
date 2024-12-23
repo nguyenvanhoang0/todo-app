@@ -19,6 +19,8 @@
       margin: 3px 0px;
       position: relative;
       text-align: left;
+      gap: 12px;
+      transition: 0.2s;
 
       &.finish {
         border-radius: 0px;
@@ -46,13 +48,23 @@
         }
       }
 
-      &.close-circle {
+      &.danger {
         background-color: var(--pink14);
         border: 1px solid var(--pink12);
         border-left: 6px solid var(--pink12);
 
         .status {
           color: var(--pink12);
+        }
+      }
+
+      &.missed-deadline {
+        // background-color: var(--pink14);
+        border: 1px solid var(--gray6);
+        border-left: 6px solid var(--gray6);
+        color: var(--gray6);
+        .status {
+          color: var(--gray6);
         }
       }
 
@@ -67,7 +79,7 @@
       }
 
       .title {
-        width: 40%;
+        width: 45%;
 
         .content {
           font-size: medium;
@@ -78,8 +90,14 @@
         }
       }
 
+      > p {
+        flex: 1;
+        text-align: left;
+      }
+
       &:hover {
         background-color: var(--red2);
+        color: black;
         transition: 0.2s;
         cursor: pointer;
       }

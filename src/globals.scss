@@ -54,8 +54,16 @@ ul {
   gap: 4px;
 }
 
+$theme-gray: (
+  background: $gray10,
+  text: $gray7,
+  button-bg: $red6,
+  button-text: $gray7,
+  border: $gray6,
+);
+
 $theme-red: (
-  background: $red1,
+  background: $gray10,
   text: $red9,
   button-bg: $red6,
   button-text: $red1,
@@ -85,6 +93,10 @@ $theme-blue: (
 
 .theme-blue {
   @include apply-theme($theme-blue);
+}
+
+.theme-gray {
+  @include apply-theme($theme-gray);
 }
 
 body {

@@ -56,7 +56,7 @@ export class DateTimeService {
 
   checkDeadlineStatus(
     deadline?: string
-  ): 'warning' | 'close-circle' | undefined {
+  ): 'warning' | 'danger' | 'missed-deadline' | undefined {
     const now = new Date();
 
     if (deadline) {
@@ -66,12 +66,17 @@ export class DateTimeService {
       if (diffInMilliseconds > 6 * 60 * 60 * 1000) {
         return undefined;
       } else if (
-        diffInMilliseconds > 0 &&
+        diffInMilliseconds > 1 * 60 * 60 * 1000 &&
         diffInMilliseconds <= 6 * 60 * 60 * 1000
       ) {
         return 'warning';
+      } else if (
+        diffInMilliseconds > 0 &&
+        diffInMilliseconds <= 1 * 60 * 60 * 1000
+      ) {
+        return 'danger';
       } else {
-        return 'close-circle';
+        return 'missed-deadline';
       }
     } else {
       return undefined;
