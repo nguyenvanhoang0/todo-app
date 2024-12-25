@@ -14,16 +14,7 @@ import { OpenFormComponent } from '../open-form/open-form.component';
   styleUrl: './change-theme.component.scss',
 })
 export class ChangeThemeComponent {
-  themes: ThemeType[] = [
-    'red',
-    'pink',
-    'orange',
-    'green',
-    'cyan',
-    'blue',
-    'gray',
-    'white',
-  ];
+  themes: ThemeType[] = ['red', 'blue', 'gray'];
   selectedTheme: ThemeType;
   changeThemeForm = false;
 

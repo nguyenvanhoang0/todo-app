@@ -29,7 +29,7 @@
         transition: 0.2s;
 
         &:hover {
-          background: var(--red2);
+          background: var(--hover);
           transition: 0.2s;
         }
 
@@ -96,7 +96,7 @@
       }
 
       &:hover {
-        background-color: var(--red2);
+        background-color: var(--hover);
         color: black;
         transition: 0.2s;
         cursor: pointer;

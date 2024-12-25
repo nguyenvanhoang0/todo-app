@@ -10,6 +10,26 @@
     border-radius: 6px;
     transition: 0.2s;
 
+    .theme-selected {
+      padding: 7px;
+      border-radius: 50%;
+      &.red {
+        background-color: var(--red2);
+      }
+
+      &.blue {
+        background-color: var(--blue3);
+      }
+
+      &.gray {
+        background-color: var(--gray11);
+      }
+
+      &.white {
+        background-color: var(--red2);
+      }
+    }
+
     &:hover {
       background-color: #1890ff;
       color: white;
@@ -17,46 +37,63 @@
     }
   }
   div {
-    padding: 20px;
     text-align: center;
     font-family: Arial, sans-serif;
+    text-align: left;
 
     h1 {
       font-size: 24px;
       margin-bottom: 20px;
       color: #333;
     }
+  }
+  .title {
+    border-bottom: 1px solid gray;
+    padding: 12px 20px;
+    width: 100%;
+  }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+  ul {
+    list-style-type: none;
+    display: flex;
+    gap: 12px;
+    padding: 20px;
 
-      li {
-        display: inline-block;
-        margin: 10px;
+    li {
+      display: inline-block;
+      // margin: 10px;
+      border-radius: 50%;
+      position: relative;
 
-        button {
-          padding: 10px 20px;
-          border: 2px solid #ddd;
-          border-radius: 5px;
-          background-color: transparent;
-          color: #333;
-          font-size: 16px;
-          cursor: pointer;
-          transition: all 0.3s ease;
+      &.red {
+        background-color: var(--red2);
+      }
 
-          &:hover {
-            background-color: #f0f0f0;
-            border-color: #ccc;
-          }
+      &.blue {
+        background-color: var(--blue3);
+      }
 
-          &.active {
-            background-color: #4285f4;
-            color: white;
-            border-color: #4285f4;
-            font-weight: bold;
-          }
-        }
+      &.gray {
+        background-color: var(--gray11);
+      }
+
+      &.white {
+        background-color: var(--red2);
+      }
+
+      .theme {
+        width: 64px;
+        height: 64px;
+      }
+
+      .selected {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        padding: 6px;
+        border-radius: 50%;
+        background-color: greenyellow;
+        color: black;
       }
     }
   }

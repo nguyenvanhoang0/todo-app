@@ -56,34 +56,46 @@ ul {
 
 $theme-gray: (
   background: $gray10,
+  background-header: $gray11,
   text: $gray7,
   button-bg: $red6,
-  button-text: $gray7,
+  button-text: $gray9,
   border: $gray6,
+  hover: $gray12,
+  text-hover: $gray7,
 );
 
 $theme-red: (
-  background: $gray10,
+  background: $red1,
+  background-header: $red2,
   text: $red9,
   button-bg: $red6,
   button-text: $red1,
   border: $red5,
+  hover: $red2,
+  text-hover: $pink8,
 );
 
 $theme-blue: (
   background: $blue1,
+  background-header: $blue3,
   text: $blue9,
   button-bg: $blue6,
   button-text: $blue1,
   border: $blue5,
+  hover: $blue3,
+  text-hover: $blue9,
 );
 
 @mixin apply-theme($theme) {
-  --background-color: map-get($theme, background);
-  --text-color: map-get($theme, text);
-  --button-bg-color: map-get($theme, button-bg);
-  --button-text-color: map-get($theme, button-text);
-  --border-color: map-get($theme, border);
+  --background-color: #{map-get($theme, background)};
+  --background-color-header: #{map-get($theme, background-header)};
+  --text-color: #{map-get($theme, text)};
+  --button-bg-color: #{map-get($theme, button-bg)};
+  --button-text-color: #{map-get($theme, button-text)};
+  --border-color: #{map-get($theme, border)};
+  --hover: #{map-get($theme, hover)};
+  --text-hover: #{map-get($theme, text-hover)};
 }
 
 /* Áp dụng theme */
@@ -108,4 +120,20 @@ button {
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   border: 1px solid var(--border-color);
+}
+
+nz-header {
+  background-color: var(--background-color) !important;
+}
+
+.ant-layout-content {
+  background-color: var(--background-color);
+}
+
+// .ant-layout-header {
+//   background-color: var(--background-color-header) !important;
+// }
+
+.ant-menu-inline {
+  border: none;
 }

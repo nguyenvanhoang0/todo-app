@@ -70,7 +70,7 @@ button {
   &.text {
     background-color: #ffffff00;
     box-shadow: 0 2px 0 rgba(255, 255, 255, 0);
-    color: black;
+    color: var(--text-color);
 
     &:hover {
       color: #007bff;

@@ -1,4 +1,4 @@
-.group-bucket{
+.group-bucket {
   min-height: 148px;
 
   &.content {
@@ -6,7 +6,7 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 24px;
     width: 100%;
-  
+
     .bucket {
       padding: 12px 24px;
       max-height: 62px;
@@ -19,22 +19,21 @@
       transition: 0.2s;
       cursor: pointer;
 
-      .bucket-content{
+      .bucket-content {
         text-align: left;
-        
-        >div{
+
+        > div {
           font-size: x-small;
         }
       }
-  
+
       &:hover {
-        background-color: var(--red2);
+        background-color: var(--hover);
         transition: 0.2s;
       }
     }
   }
 }
-
 
 .pagination {
   margin-top: 24px;

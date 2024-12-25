@@ -23,7 +23,6 @@ nz-footer {
   }
 }
 
-
 //header sider
 .header {
   background-size: cover;
@@ -51,9 +50,14 @@ nz-footer {
     font-size: 13px;
     text-align: left;
 
+    .userName,
+    .email {
+      color: var(--text-color);
+    }
+
     .userName:hover,
     .email:hover {
-      color: var(--primary);
+      color: var(--text-hover);
       font-style: normal;
       cursor: pointer;
       text-decoration: underline;
@@ -68,7 +72,6 @@ nz-footer {
     }
   }
 }
-
 
 .ant-layout-header {
   line-height: 1.2;

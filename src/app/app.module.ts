@@ -32,7 +32,6 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
 
   const options: IModuleTranslationOptions = {
     modules: [
-      // { baseTranslateUrl },
       { baseTranslateUrl: `${baseTranslateUrl}/auth` },
       { baseTranslateUrl: `${baseTranslateUrl}/admin` },
       { baseTranslateUrl: `${baseTranslateUrl}/profile` },

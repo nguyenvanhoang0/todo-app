@@ -3,7 +3,8 @@
 }
 
 nz-header {
-  color: #fff;
+  color: var(--text-color);
+  background-color: var(--background-color-header) !important;
 }
 
 .ant-layout-content {

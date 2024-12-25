@@ -5,22 +5,25 @@
     (keydown.enter)="changeThemeForm = true"
     tabindex="0"
   >
-    <app-icon [name]="'global'"></app-icon>
+    <div class="theme-selected" [ngClass]="selectedTheme"></div>
   </div>
   <app-open-modal
     [isVisible]="changeThemeForm"
     (Visible)="openChangeThemeForm($event)"
   >
     <div>
-      <h1>Chọn Theme</h1>
+      <p class="title">Chọn Theme</p>
       <ul>
-        <li *ngFor="let theme of themes">
-          <button
+        <li *ngFor="let theme of themes" [ngClass]="theme">
+          <div
+            class="theme"
             (click)="changeTheme(theme)"
-            [class.active]="theme === selectedTheme"
-          >
-            {{ theme | titlecase }}
-          </button>
+            (keydown.enter)="changeTheme(theme)"
+            tabindex="0"
+          ></div>
+          <div *ngIf="theme === selectedTheme" class="selected">
+            <app-icon [name]="'check'"></app-icon>
+          </div>
         </li>
       </ul>
     </div>
