@@ -10,28 +10,44 @@ const routes: Routes = [
       {
         path: 'me',
         loadChildren: () =>
-          import('./modules/profile/profile.module').then((module) => module.ProfileModule),
+          import('./modules/profile/profile.module').then(
+            (module) => module.ProfileModule
+          ),
       },
       {
         path: 'update-me',
         loadChildren: () =>
-          import('./modules/update-profile/update-profile.module').then((module) => module.UpdateProfileModule),
+          import('./modules/update-profile/update-profile.module').then(
+            (module) => module.UpdateProfileModule
+          ),
       },
       {
         path: 'todo',
         loadChildren: () =>
-          import('./modules/todo/todo.module').then((module) => module.TodoModule),
+          import('./modules/todo/todo.module').then(
+            (module) => module.TodoModule
+          ),
       },
       {
         path: 'todo-details/:id',
         loadChildren: () =>
-          import('./modules/todo-details/todo-details.module').then((module) => module.TodoDetailsModule),
+          import('./modules/todo-details/todo-details.module').then(
+            (module) => module.TodoDetailsModule
+          ),
+      },
+
+      {
+        path: 'components',
+        loadChildren: () =>
+          import('./modules/components-core/components-core.module').then(
+            (module) => module.ComponentsCoreModule
+          ),
       },
       {
         path: '**',
         pathMatch: 'prefix',
-        redirectTo: 'me'
-      }
+        redirectTo: 'me',
+      },
     ],
   },
 ];

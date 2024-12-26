@@ -1,0 +1,17 @@
+<div class="button-groups">
+  <div class="group" *ngFor="let group of buttonGroups | keyvalue">
+    <p>{{ group.key | titlecase }}:</p>
+    <!-- Tên nhóm, ví dụ: variantGroup -->
+    <div class="buttons">
+      <button
+        *ngFor="let button of group.value"
+        appButton
+        [variant]="button.variant"
+        [disabled]="button.disabled"
+        [loading]="button.loading"
+      >
+        {{ button.label }}
+      </button>
+    </div>
+  </div>
+</div>
