@@ -3,16 +3,23 @@
   flex-direction: column;
   align-items: start;
   text-align: left;
+  height: 100%;
+  width: 100%;
 
   .group {
     width: 100%;
+    display: flex;
+    gap: 12px;
+  }
 
-    .buttons {
-      display: flex;
-      gap: 24px;
-      button {
-        flex: 1;
-      }
-    }
+  .button-view {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    margin-top: 24px;
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
