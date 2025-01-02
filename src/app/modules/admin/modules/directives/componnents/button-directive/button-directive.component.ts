@@ -2,16 +2,15 @@ import { Component } from '@angular/core';
 import { Ivariant } from 'src/app/shared/directive/button.type';
 
 @Component({
-  selector: 'app-button-variants',
-  templateUrl: './button-variants.component.html',
-  styleUrl: './button-variants.component.scss',
+  selector: 'app-button-directive',
+  templateUrl: './button-directive.component.html',
+  styleUrl: './button-directive.component.scss',
 })
-export class ButtonVariantsComponent {
+export class ButtonDirectiveComponent {
   variants: Ivariant[] = ['primary', 'secondary', 'tertiary', 'neutral'];
   variant: Ivariant = 'neutral';
   disabled = false;
   loading = false;
-  hideContent = false;
   label = 'sâs';
 
   changeVariant(variant: Ivariant) {

@@ -12,6 +12,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BucketListComponent } from './components/bucket-list/bucket-list.component';
 import { SearchFieldComponent } from './components/searchField/searchField.component';
 import { TimeLeftPipe } from '../core/pipe/timeLeft.pipe';
+import { ButtonDirective } from './directive/button.directive';
 
 const COMPONENTS = [
   IconComponent,
@@ -28,8 +29,8 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [TimeAgoPipe, TimeLeftPipe],
+  declarations: [TimeAgoPipe, TimeLeftPipe, ButtonDirective],
   imports: [COMPONENTS],
-  exports: [TimeAgoPipe, TimeLeftPipe],
+  exports: [TimeAgoPipe, TimeLeftPipe, ButtonDirective],
 })
 export class SharedModule {}

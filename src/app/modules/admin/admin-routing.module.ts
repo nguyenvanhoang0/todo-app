@@ -44,6 +44,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'directives',
+        loadChildren: () =>
+          import('./modules/directives/directives.module').then(
+            (module) => module.DirectivesModule
+          ),
+      },
+      {
         path: '**',
         pathMatch: 'prefix',
         redirectTo: 'me',

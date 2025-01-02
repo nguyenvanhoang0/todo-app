@@ -105,3 +105,94 @@ button {
     transform: rotate(360deg);
   }
 }
+
+// --------------------------------------------------------------------------
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+
+  &.btn-tertiary {
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #ced4da;
+
+    &:hover {
+      background-color: #e2e6ea;
+    }
+  }
+
+  &.btn-neutral {
+    background-color: transparent;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+
+    &:hover {
+      background-color: #e2e6ea;
+    }
+  }
+
+  // Định nghĩa cho kích thước của button
+  &.btn-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  &.btn-medium {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  &.btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  // Định nghĩa cho trạng thái disable
+  &.btn-disabled {
+    background-color: #e0e0e0;
+    color: #b0b0b0;
+    border: 1px solid #d0d0d0;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
+  // Định nghĩa cho trạng thái loading
+  &.btn-loading {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    pointer-events: none;
+
+    &.btn-hide-content {
+      color: transparent;
+    }
+  }
+}

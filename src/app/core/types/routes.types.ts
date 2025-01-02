@@ -17,9 +17,21 @@ export const MAIN_ROUTES: IRoute[] = [
     route: ['components'],
     children: [
       {
-        title: 'Button variants',
+        title: 'Button component',
         icon: 'tag',
         route: ['components/button-variants'],
+      },
+    ],
+  },
+  {
+    title: 'Directives',
+    icon: 'tags',
+    route: ['directives'],
+    children: [
+      {
+        title: 'Button directive',
+        icon: 'tag',
+        route: ['directives/button-directive'],
       },
     ],
   },

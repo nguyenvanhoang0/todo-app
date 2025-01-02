@@ -7,7 +7,7 @@ import {
   HostListener,
   OnChanges,
 } from '@angular/core';
-import { Ivariant } from './variant.type';
+import { Ivariant } from './button.type';
 
 @Directive({
   selector: '[appButton]',
