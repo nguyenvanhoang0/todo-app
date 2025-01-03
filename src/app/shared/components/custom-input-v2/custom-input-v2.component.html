@@ -1,0 +1,12 @@
+<div class="input-container" [class.focused]="isFocused">
+  <ng-content select="[icon-start]">
+    <app-icon *ngIf="iconStart" [name]="iconStart" class="icon"> </app-icon>
+  </ng-content>
+  <ng-content select="[input]">
+    <input type="text" [placeholder]="placeholder" />
+  </ng-content>
+
+  <ng-content select="[icon-end]">
+    <app-icon *ngIf="iconEnd" [name]="iconEnd" class="icon"> </app-icon>
+  </ng-content>
+</div>

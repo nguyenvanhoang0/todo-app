@@ -1,10 +1,10 @@
 @if (!loading || !hideContent) {
 <ng-container *ngIf="!hideContent">
-  <ng-content select="[icon-start]">
-    <app-icon
-      *ngIf="iconStart || loading"
-      [name]="loading ? 'loading' : iconStart"
-    ></app-icon>
+  <ng-content *ngIf="loading" select="[icon-loading]">
+    <app-icon [name]="'loading'" class="icon"> </app-icon>
+  </ng-content>
+  <ng-content *ngIf="iconStart && !loading" select="[icon-start]">
+    <app-icon [name]="iconStart"></app-icon>
   </ng-content>
   <ng-content select="[content]"> button </ng-content>
   <ng-content select="[icon-end]">

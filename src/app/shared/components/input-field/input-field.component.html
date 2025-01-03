@@ -1,13 +1,12 @@
 <div class="input-field">
-  
   <nz-input-group>
     <label [attr.for]="id"
-    >{{ label }}
-    <p *ngIf="required === true && label">*</p></label
-  >
+      >{{ label }}
+      <p *ngIf="required === true && label">*</p></label
+    >
     <input
       nz-input
-      id="{{id}}"
+      id="{{ id }}"
       [name]="id"
       *ngIf="!optionValues"
       [type]="passwordVisible ? 'text' : type"
@@ -15,7 +14,6 @@
       (ngModelChange)="valueChange.emit($event)"
       [required]="required"
       [placeholder]="placeholder"
-      [appWordLimit]="15"
     />
   </nz-input-group>
   <nz-radio-group

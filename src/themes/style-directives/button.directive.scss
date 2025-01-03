@@ -88,13 +88,13 @@ button {
     }
   }
 
-  &:hover:not(.disabled):not(.loading) {
-    // transform: scale(1.05);
-  }
+  // &:hover:not(.disabled):not(.loading) {
+  //   // transform: scale(1.05);
+  // }
 
-  &:active:not(.disabled):not(.loading) {
-    // transform: scale(0.98);
-  }
+  // &:active:not(.disabled):not(.loading) {
+  //   // transform: scale(0.98);
+  // }
 }
 
 @keyframes spin {
@@ -109,7 +109,8 @@ button {
 // --------------------------------------------------------------------------
 
 .btn {
-  display: inline-flex;
+  display: flex;
+  gap: 12px;
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
@@ -128,26 +129,16 @@ button {
   }
 
   &.btn-secondary {
-    background-color: #6c757d;
+    background-color: #007bff9c;
     color: white;
-    border: 1px solid #6c757d;
+    // border: 1px solid #0056b3;
 
     &:hover {
-      background-color: #5a6268;
+      background-color: #3980cc;
     }
   }
 
   &.btn-tertiary {
-    background-color: #f8f9fa;
-    color: #495057;
-    border: 1px solid #ced4da;
-
-    &:hover {
-      background-color: #e2e6ea;
-    }
-  }
-
-  &.btn-neutral {
     background-color: transparent;
     color: #6c757d;
     border: 1px solid #6c757d;
@@ -157,20 +148,30 @@ button {
     }
   }
 
+  &.btn-neutral {
+    background-color: transparent;
+    color: #6c757d;
+    border: none;
+
+    &:hover {
+      background-color: #e2e6ea;
+    }
+  }
+
   // Định nghĩa cho kích thước của button
   &.btn-small {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+    padding: 6px 12px;
+    font-size: 12px;
   }
 
   &.btn-medium {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    padding: 8px 16px;
+    font-size: 14px;
   }
 
   &.btn-large {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.25rem;
+    padding: 8px 18px;
+    font-size: 16px;
   }
 
   // Định nghĩa cho trạng thái disable
@@ -187,12 +188,13 @@ button {
 
   // Định nghĩa cho trạng thái loading
   &.btn-loading {
-    background-color: #007bff;
-    border: 1px solid #007bff;
+    // background-color: #007bff;
+    // border: 1px solid #007bff;
     pointer-events: none;
+    // color: white;
 
-    &.btn-hide-content {
-      color: transparent;
-    }
+    // &.btn-hide-content {
+    //   color: transparent;
+    // }
   }
 }

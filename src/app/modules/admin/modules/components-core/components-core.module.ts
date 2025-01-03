@@ -8,16 +8,29 @@ import { InputFieldComponent } from 'src/app/shared/components/input-field/input
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CustomButtonComponent } from 'src/app/shared/components/custom-button/custom-button.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { FormsModule } from '@angular/forms';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { InputComponent } from './components/input/input.component';
+import { CustomInputV2Component } from 'src/app/shared/components/custom-input-v2/custom-input-v2.component';
 
 @NgModule({
-  declarations: [ComponentsCoreComponent, ButtonVariantsComponent],
+  declarations: [
+    ComponentsCoreComponent,
+    InputComponent,
+    ButtonVariantsComponent,
+  ],
   imports: [
     CommonModule,
     ComponentsCoreRoutingModule,
+    FormsModule,
     NzButtonModule,
     SharedModule,
+    NzSelectModule,
+    NzInputModule,
     InputFieldComponent,
     CustomButtonComponent,
+    CustomInputV2Component,
   ],
 })
 export class ComponentsCoreModule {}

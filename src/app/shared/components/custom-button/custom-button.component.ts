@@ -2,7 +2,12 @@ import { Component, input, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { IconNameTypes } from '../icon/icon.types';
-import { ISize, Ivariant, Size, variant } from '../../directive/button.type';
+import {
+  ISize,
+  Ivariant,
+  Size,
+  variant,
+} from '../../directive/button/button.type';
 /* eslint-disable @angular-eslint/component-selector */
 
 @Component({

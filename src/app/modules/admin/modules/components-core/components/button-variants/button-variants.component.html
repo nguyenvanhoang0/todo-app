@@ -4,31 +4,67 @@
       [optionValues]="variants"
       [(value)]="variant"
     ></app-input-field>
+    <app-input-field [optionValues]="sizes" [(value)]="size"></app-input-field>
     <button
       nz-button
       [nzType]="loading ? 'primary' : 'default'"
-      (click)="toggleLoading()"
+      (click)="loading = !loading"
     >
       loading
     </button>
     <button
       nz-button
       [nzType]="disabled ? 'primary' : 'default'"
-      (click)="toggleDisabled()"
+      (click)="disabled = !disabled"
     >
       disabled
     </button>
+    <button
+      nz-button
+      [nzType]="hideContent ? 'primary' : 'default'"
+      (click)="hideContent = !hideContent"
+    >
+      hideContent
+    </button>
     <app-input-field id="title" [(value)]="label" type="text">
     </app-input-field>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="left icon"
+      [(ngModel)]="startIcon"
+      ><nz-option nzLabel="null" [nzValue]="undefined"></nz-option>
+      <nz-option
+        *ngFor="let item of iconNames"
+        [nzLabel]="item"
+        [nzValue]="item"
+      ></nz-option>
+    </nz-select>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="right icon"
+      [(ngModel)]="endIcon"
+      ><nz-option nzLabel="null" [nzValue]="undefined"></nz-option>
+      <nz-option
+        *ngFor="let item of iconNames"
+        [nzLabel]="item"
+        [nzValue]="item"
+      ></nz-option>
+    </nz-select>
   </div>
   <div class="button-view">
     <button
       app-custom-button
       [variant]="variant"
+      [size]="size"
       [disabled]="disabled"
       [loading]="loading"
+      [hideContent]="hideContent"
+      [iconStart]="startIcon"
+      [iconEnd]="endIcon"
     >
-      {{ label ? label : 'button' }}
+      <p content>{{ label ? label : 'button' }}</p>
     </button>
   </div>
 </div>

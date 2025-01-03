@@ -21,6 +21,11 @@ export const MAIN_ROUTES: IRoute[] = [
         icon: 'tag',
         route: ['components/button-variants'],
       },
+      {
+        title: 'input component',
+        icon: 'tag',
+        route: ['components/input-component'],
+      },
     ],
   },
   {

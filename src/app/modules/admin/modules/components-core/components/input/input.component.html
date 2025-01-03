@@ -1,0 +1,33 @@
+<div class="input-groups">
+  <div class="group">
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="left icon"
+      [(ngModel)]="startIcon"
+      ><nz-option nzLabel="null" [nzValue]="undefined"></nz-option>
+      <nz-option
+        *ngFor="let item of iconNames"
+        [nzLabel]="item"
+        [nzValue]="item"
+      ></nz-option>
+    </nz-select>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="right icon"
+      [(ngModel)]="endIcon"
+      ><nz-option nzLabel="null" [nzValue]="undefined"></nz-option>
+      <nz-option
+        *ngFor="let item of iconNames"
+        [nzLabel]="item"
+        [nzValue]="item"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <div class="input-view">
+    <app-custom-input-v2 [iconStart]="startIcon" [iconEnd]="endIcon">
+      <input input appInput type="text" placeholder="dsds" />
+    </app-custom-input-v2>
+  </div>
+</div>

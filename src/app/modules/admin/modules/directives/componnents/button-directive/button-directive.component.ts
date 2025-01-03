@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ivariant } from 'src/app/shared/directive/button.type';
+import { Ivariant } from 'src/app/shared/directive/button/button.type';
 
 @Component({
   selector: 'app-button-directive',

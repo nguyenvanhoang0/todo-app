@@ -1,4 +1,4 @@
-import { Ivariant } from 'src/app/shared/directive/button.type';
+import { Ivariant } from 'src/app/shared/directive/button/button.type';
 
 type IbuttonVariants = {
   variant: Ivariant;

@@ -3,7 +3,7 @@ export const variant = {
   secondary: 'secondary',
   tertiary: 'tertiary',
   neutral: 'neutral',
-};
+} as const;
 export const Size = {
   small: 'small',
   medium: 'medium',

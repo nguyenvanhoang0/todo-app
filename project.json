@@ -36,7 +36,8 @@
           "./src/globals.scss",
           "./src/variables.scss",
           "./src/themes/theme.less",
-          "./src/themes/style-directives/button.directive.scss"
+          "./src/themes/style-directives/button.directive.scss",
+          "./src/themes/style-directives/input.directive.scss"
         ],
         "scripts": []
       },

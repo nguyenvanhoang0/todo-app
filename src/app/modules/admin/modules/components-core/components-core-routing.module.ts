@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComponentsCoreComponent } from './components-core.component';
 import { ButtonVariantsComponent } from './components/button-variants/button-variants.component';
+import { InputComponent } from './components/input/input.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'button-variants',
     component: ButtonVariantsComponent,
+  },
+  {
+    path: 'input-component',
+    component: InputComponent,
   },
 ];
 

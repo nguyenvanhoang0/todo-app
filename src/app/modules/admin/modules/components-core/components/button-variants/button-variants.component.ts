@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Ivariant } from 'src/app/shared/directive/button.type';
+import { EIconNameTypes } from 'src/app/core/enums/icon.enum';
+import { IconNameTypes } from 'src/app/shared/components/icon/icon.types';
+import { ISize, Ivariant } from 'src/app/shared/directive/button/button.type';
 
 @Component({
   selector: 'app-button-variants',
@@ -8,11 +10,20 @@ import { Ivariant } from 'src/app/shared/directive/button.type';
 })
 export class ButtonVariantsComponent {
   variants: Ivariant[] = ['primary', 'secondary', 'tertiary', 'neutral'];
-  variant: Ivariant = 'neutral';
+  sizes: ISize[] = ['large', 'medium', 'small'];
+  variant: Ivariant = 'primary';
+  size: ISize = 'medium';
   disabled = false;
   loading = false;
   hideContent = false;
-  label = 'sâs';
+  label = 'button';
+  startIconContent?: string;
+  endIconContent?: string;
+  iconNames = Object.keys(EIconNameTypes).map(
+    (key) => EIconNameTypes[key as keyof typeof EIconNameTypes]
+  );
+  startIcon: IconNameTypes;
+  endIcon: IconNameTypes;
 
   changeVariant(variant: Ivariant) {
     this.variant = variant;
@@ -28,5 +39,12 @@ export class ButtonVariantsComponent {
 
   toggleLoading() {
     this.loading = !this.loading;
+  }
+  click() {
+    console.log(1);
+  }
+  click2(event: Event) {
+    console.log(2);
+    event.stopPropagation();
   }
 }
