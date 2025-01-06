@@ -13,12 +13,15 @@ import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { InputComponent } from './components/input/input.component';
 import { CustomInputV2Component } from 'src/app/shared/components/custom-input-v2/custom-input-v2.component';
+import { CountDownViewComponent } from './components/count-down-view/count-down-view.component';
+import { CountDownComponent } from 'src/app/shared/components/count-down/count-down.component';
 
 @NgModule({
   declarations: [
     ComponentsCoreComponent,
     InputComponent,
     ButtonVariantsComponent,
+    CountDownViewComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { CustomInputV2Component } from 'src/app/shared/components/custom-input-v
     InputFieldComponent,
     CustomButtonComponent,
     CustomInputV2Component,
+    CountDownComponent,
   ],
 })
 export class ComponentsCoreModule {}

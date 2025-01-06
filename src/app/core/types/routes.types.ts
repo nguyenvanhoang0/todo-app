@@ -26,6 +26,11 @@ export const MAIN_ROUTES: IRoute[] = [
         icon: 'tag',
         route: ['components/input-component'],
       },
+      {
+        title: 'count down',
+        icon: 'tag',
+        route: ['components/count-down'],
+      },
     ],
   },
   {

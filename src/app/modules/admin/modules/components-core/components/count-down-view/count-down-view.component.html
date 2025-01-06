@@ -1,0 +1,12 @@
+<app-count-down
+  [duration]="24 * 60 * 60 * 1000"
+  [status]="status"
+  format="hh:mm:ss"
+  (finish)="onCountdownFinish()"
+></app-count-down>
+<button (click)="toggleStatus('run')">Start</button>
+<button (click)="toggleStatus(status === 'pause' ? 'run' : 'pause')">
+  {{ status === 'pause' ? 'continue' : 'Pause' }}
+</button>
+<button (click)="toggleStatus('end')">end</button>
+<button (click)="toggleStatus('retry')">retry</button>

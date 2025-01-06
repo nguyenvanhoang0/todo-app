@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ComponentsCoreComponent } from './components-core.component';
 import { ButtonVariantsComponent } from './components/button-variants/button-variants.component';
 import { InputComponent } from './components/input/input.component';
+import { CountDownViewComponent } from './components/count-down-view/count-down-view.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'input-component',
     component: InputComponent,
+  },
+  {
+    path: 'count-down',
+    component: CountDownViewComponent,
   },
 ];
 
