@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Iformat, IStatus } from './count-down.type';
 
 @Component({
   selector: 'app-count-down',
@@ -19,10 +20,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CountDownComponent implements OnChanges, OnDestroy {
   @Input() duration = 0;
-  @Input() status: 'run' | 'pause' | 'end' | 'retry' = 'pause';
-  @Input() format: 'hh:mm:ss' | 'mm:ss' | 'ss' = 'hh:mm:ss';
+  @Input() status: IStatus = 'pause';
+  @Input() format: Iformat = 'hh:mm:ss';
   @Output() finish = new EventEmitter<void>();
-  private initialDuration = 0;
+  initialDuration = 0;
   remainingTime = 0;
   formattedTime = '';
   private timerSubscription?: Subscription;
@@ -34,13 +35,16 @@ export class CountDownComponent implements OnChanges, OnDestroy {
       this.updateFormattedTime();
     }
 
-    if (changes['status'] && changes['status'].currentValue) {
+    if (
+      (changes['status'] && changes['status'].currentValue) ||
+      (changes['format'] && changes['format'].currentValue)
+    ) {
       this.handleStatusChange(this.status);
+      this.updateFormattedTime();
     }
-    console.log(1);
   }
 
-  private handleStatusChange(status: 'run' | 'pause' | 'end' | 'retry'): void {
+  handleStatusChange(status: 'run' | 'pause' | 'end' | 'retry'): void {
     if (status === 'run') {
       this.startTimer();
     } else if (status === 'pause') {
@@ -50,15 +54,13 @@ export class CountDownComponent implements OnChanges, OnDestroy {
     } else if (status === 'retry') {
       this.retryTimer();
     }
-    console.log(2, status);
   }
 
-  private startTimer(): void {
+  startTimer(): void {
     if (!this.timerSubscription) {
       this.timerSubscription = interval(1000).subscribe(() => {
         this.remainingTime -= 1000;
         this.updateFormattedTime();
-
         if (this.remainingTime <= 0) {
           this.stopTimer();
           this.finish.emit();
@@ -67,36 +69,32 @@ export class CountDownComponent implements OnChanges, OnDestroy {
     }
   }
 
-  private stopTimer(): void {
+  stopTimer(): void {
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
       this.timerSubscription = undefined;
     }
   }
 
-  private endTimer(): void {
+  endTimer(): void {
     this.stopTimer();
     this.remainingTime = 0;
     this.updateFormattedTime();
     this.finish.emit();
   }
 
-  private retryTimer(): void {
+  retryTimer(): void {
     this.stopTimer();
     this.remainingTime = this.initialDuration;
     this.updateFormattedTime();
   }
 
-  private updateFormattedTime(): void {
+  updateFormattedTime(): void {
     const totalSeconds = Math.max(Math.floor(this.remainingTime / 1000), 0);
 
     const hours = Math.floor(totalSeconds / 3600);
-    console.log('hours', hours);
-
-    console.log('totalSeconds', totalSeconds % 3600);
-    console.log('totalSeconds', totalSeconds);
-
     const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const totalminutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
     switch (this.format) {
@@ -106,7 +104,7 @@ export class CountDownComponent implements OnChanges, OnDestroy {
         )}:${this.pad(seconds)}`;
         break;
       case 'mm:ss':
-        this.formattedTime = `${this.pad(minutes)}:${this.pad(seconds)}`;
+        this.formattedTime = `${this.pad(totalminutes)}:${this.pad(seconds)}`;
         break;
       case 'ss':
         this.formattedTime = `${totalSeconds}`;
@@ -115,7 +113,7 @@ export class CountDownComponent implements OnChanges, OnDestroy {
     console.log(3, this.formattedTime);
   }
 
-  private pad(value: number): string {
+  pad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
   }
 

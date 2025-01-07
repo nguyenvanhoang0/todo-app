@@ -31,6 +31,11 @@ export const MAIN_ROUTES: IRoute[] = [
         icon: 'tag',
         route: ['components/count-down'],
       },
+      {
+        title: 'Calendar',
+        icon: 'calendar',
+        route: ['components/calendar'],
+      },
     ],
   },
   {

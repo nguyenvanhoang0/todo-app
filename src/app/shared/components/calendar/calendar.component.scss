@@ -1,0 +1,84 @@
+.mini-calendar {
+  width: 250px;
+  margin: 10px auto;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  //   overflow: hidden;
+
+  .title-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+
+    .title {
+      font-size: 16px;
+      text-align: left;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+  }
+}
+
+.mini-calendar-table {
+  width: 100%;
+  color: #bbb;
+  font-size: 12px;
+
+  .mini-day-header {
+    color: #929292;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &.cn {
+      color: var(--text-hover);
+    }
+  }
+
+  .mini-day-cell {
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &.currentMonth {
+      color: #000;
+    }
+
+    &.selected {
+      background-color: #ffc107;
+      color: #000;
+      font-weight: bold;
+    }
+
+    &.past-day {
+      //   color: #bbb;
+    }
+
+    &.today-day {
+      background-color: var(--background-color-header);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    &.future-day {
+      //   color: #007bff;
+    }
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="mini-calendar no-select">
+  <div class="title-group">
+    <p class="title">
+      month {{ currentMonth }},{{ currentYear
+      }}<app-icon name="calendar"></app-icon>
+    </p>
+    <div class="flex">
+      <app-icon name="left" (click)="updateCurrentMonthAndYear(-1)"></app-icon>
+      <app-icon name="right" (click)="updateCurrentMonthAndYear(+1)"></app-icon>
+    </div>
+  </div>
+
+  <table class="mini-calendar-table">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let dayOfWeek of daysOfWeek"
+          class="mini-day-header"
+          [ngClass]="dayOfWeek === 'CN' ? 'cn' : ''"
+        >
+          {{ dayOfWeek }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container>
+        <tr *ngFor="let week of weeks">
+          <ng-container *ngFor="let days of week">
+            <td
+              class="mini-day-cell"
+              (click)="selectDate(days)"
+              [ngClass]="[
+                days.status + '-day',
+                viewingDate === days ? 'selected' : ''
+              ]"
+              [class.currentMonth]="currentMonth === days.month"
+              [class.selected]="viewingDate === days"
+            >
+              {{ days.day <= 9 ? '0' + days.day : days.day }}
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
