@@ -50,9 +50,21 @@
     }
 
     &.selected {
-      background-color: #ffc107;
+      background-color: var(--select);
       color: #000;
       font-weight: bold;
+      // border-radius: 6px;
+      // &:first-child {
+      //   border-radius: 16px 0 0 16px;
+      // }
+      // &:last-child {
+      //   border-radius: 0 16px 16px 0;
+      // }
+    }
+
+    &.in-range {
+      background-color: var(--background-color-header);
+      color: var(--text-hover);
     }
 
     &.past-day {

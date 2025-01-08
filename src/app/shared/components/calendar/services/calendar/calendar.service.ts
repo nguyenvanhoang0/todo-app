@@ -90,8 +90,6 @@ export class CalendarService {
       addDaysInWeek();
     }
 
-    console.log(this.weeks);
-
     return this.weeks;
   }
 
@@ -116,7 +114,7 @@ export class CalendarService {
     const todayDate = new Date();
     const todayDetails: IDayDetails = {
       day: todayDate.getDate(),
-      month: todayDate.getMonth() + 1, // Tháng trong JavaScript là từ 0 đến 11, nên cần cộng thêm 1.
+      month: todayDate.getMonth() + 1,
       year: todayDate.getFullYear(),
       status: 'today',
     };

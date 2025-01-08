@@ -25,18 +25,18 @@
     <tbody>
       <ng-container>
         <tr *ngFor="let week of weeks">
-          <ng-container *ngFor="let days of week">
+          <ng-container *ngFor="let day of week">
             <td
               class="mini-day-cell"
-              (click)="selectDate(days)"
+              (click)="selectDate(day)"
               [ngClass]="[
-                days.status + '-day',
-                viewingDate === days ? 'selected' : ''
+                day.status + '-day',
+                day.selected ? 'selected' : '',
+                day.inRange ? 'in-range' : ''
               ]"
-              [class.currentMonth]="currentMonth === days.month"
-              [class.selected]="viewingDate === days"
+              [class.currentMonth]="currentMonth === day.month"
             >
-              {{ days.day <= 9 ? '0' + days.day : days.day }}
+              {{ day.day <= 9 ? '0' + day.day : day.day }}
             </td>
           </ng-container>
         </tr>

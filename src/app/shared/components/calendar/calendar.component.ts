@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -8,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IDayDetails, IMonthDetails } from './types/date.type';
+import { IExtendDayDetails, IMonthDetails } from './types/date.type';
 import { CalendarService } from './services/calendar/calendar.service';
 import { IconComponent } from '../icon/icon.component';
 
@@ -21,50 +22,90 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class CalendarComponent implements OnInit, OnChanges {
   @Input() monthDetails!: IMonthDetails;
-
+  @Input() startDate: Date | null = null;
+  @Input() endDate: Date | null = null;
   @Output() dateSelected = new EventEmitter<Date>();
+  @Output() dateRangeChange = new EventEmitter<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>();
+
   currentDate: Date = new Date();
 
   currentYear = this.currentDate.getFullYear();
   currentMonth = this.currentDate.getMonth() + 1;
   daysOfWeek: string[] = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
-  weeks: IDayDetails[][];
-  @Input() viewingDate: IDayDetails = this.calendarService.getTodayDetails();
+  weeks: IExtendDayDetails[][];
 
-  constructor(private calendarService: CalendarService) {
+  // startDate: IExtendDayDetails | null = null;
+  // endDate: IExtendDayDetails | null = null;
+
+  selectMode: 'single' | 'range' = 'range';
+  constructor(
+    private calendarService: CalendarService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.weeks = [];
   }
 
   ngOnInit(): void {
     this.weeks = [];
     this.calculateDaysInMonth();
-    console.log(this.monthDetails);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('currentMonth changed:', this.currentMonth);
-    this.currentMonth = this.monthDetails.currentMonth;
-    this.currentYear = this.monthDetails.currentYear;
+    if (changes['monthDetails'] && changes['monthDetails'].currentValue) {
+      console.log('currentMonth changed:', this.currentMonth);
+      this.currentMonth = this.monthDetails.currentMonth;
+      this.currentYear = this.monthDetails.currentYear;
 
-    if (this.currentMonth) {
-      this.calculateDaysInMonth();
+      if (this.currentMonth) {
+        this.calculateDaysInMonth();
+      }
     }
   }
 
   calculateDaysInMonth() {
-    const result = this.calendarService.calculateDaysInMonth(
+    this.weeks = this.calendarService.calculateDaysInMonth(
       this.currentYear,
       this.currentMonth
     );
-    this.weeks = result;
+    this.updateSelectionStates();
   }
 
-  selectDate(date: IDayDetails) {
-    this.viewingDate = date;
-
-    this.dateSelected.emit(new Date(date.year, date.month - 1, date.day));
-    console.log(this.dateSelected);
+  selectDate(day: IExtendDayDetails): void {
+    if (this.selectMode === 'single') {
+      this.startDate = new Date(day.year, day.month - 1, day.day);
+      this.dateSelected.emit(this.startDate);
+      this.endDate = null;
+    } else if (this.selectMode === 'range') {
+      if (!this.startDate || (this.startDate && this.endDate)) {
+        this.startDate = new Date(day.year, day.month - 1, day.day);
+        this.endDate = null;
+      } else if (!this.endDate) {
+        const selectedDate = new Date(day.year, day.month - 1, day.day);
+        if (selectedDate > this.startDate) {
+          this.endDate = selectedDate;
+        } else {
+          this.endDate = this.startDate;
+          this.startDate = selectedDate;
+        }
+      }
+    }
+    if (
+      this.currentYear > day.year ||
+      (this.currentYear === day.year && this.currentMonth > day.month)
+    ) {
+      this.updateCurrentMonthAndYear(-1);
+    } else if (
+      this.currentYear < day.year ||
+      (this.currentYear === day.year && this.currentMonth < day.month)
+    ) {
+      this.updateCurrentMonthAndYear(+1);
+    }
+    this.updateSelectionStates();
+    this.emitDateRange();
   }
 
   updateCurrentMonthAndYear(offset: number) {
@@ -76,8 +117,39 @@ export class CalendarComponent implements OnInit, OnChanges {
     } else {
       this.currentMonth = newMonth;
     }
+
     this.calculateDaysInMonth();
-    // this.emitMonthDetails(this.currentMonth, this.currentYear)
-    console.log(4);
+  }
+
+  updateSelectionStates(): void {
+    this.weeks.forEach((week) => {
+      week.forEach((day) => {
+        const currentDate = new Date(day.year, day.month - 1, day.day);
+
+        day.selected =
+          day.month !== this.currentMonth
+            ? undefined
+            : this.selectMode === 'single'
+            ? currentDate.getTime() === this.startDate?.getTime()
+            : currentDate.getTime() === this.startDate?.getTime() ||
+              currentDate.getTime() === this.endDate?.getTime();
+
+        day.inRange =
+          this.startDate &&
+          this.endDate &&
+          this.selectMode === 'range' &&
+          day.month === this.currentMonth
+            ? currentDate > this.startDate && currentDate < this.endDate
+            : undefined;
+      });
+    });
+    console.log(1);
+  }
+
+  emitDateRange(): void {
+    this.dateRangeChange.emit({
+      startDate: this.startDate,
+      endDate: this.endDate,
+    });
   }
 }

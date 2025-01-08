@@ -63,6 +63,7 @@ $theme-gray: (
   border: $gray6,
   hover: $gray12,
   text-hover: $gray7,
+  select: $red7,
 );
 
 $theme-red: (
@@ -74,6 +75,7 @@ $theme-red: (
   border: $red5,
   hover: $red2,
   text-hover: $pink8,
+  select: $red4,
 );
 
 $theme-blue: (
@@ -85,6 +87,7 @@ $theme-blue: (
   border: $blue5,
   hover: $blue3,
   text-hover: $blue9,
+  select: $blue5,
 );
 
 @mixin apply-theme($theme) {
@@ -96,6 +99,7 @@ $theme-blue: (
   --border-color: #{map-get($theme, border)};
   --hover: #{map-get($theme, hover)};
   --text-hover: #{map-get($theme, text-hover)};
+  --select: #{map-get($theme, select)};
 }
 
 /* Áp dụng theme */

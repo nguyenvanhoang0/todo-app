@@ -1,1 +1,15 @@
-<app-calendar></app-calendar>
+<div class="group-calendar">
+  <app-calendar></app-calendar>
+  <div class="flex">
+    <app-calendar
+      [startDate]="startDate"
+      [endDate]="endDate"
+      (dateSelected)="onStartDateChange($event)"
+    ></app-calendar>
+    <app-calendar
+      [startDate]="startDate"
+      [endDate]="endDate"
+      (dateSelected)="onEndDateChange($event)"
+    ></app-calendar>
+  </div>
+</div>

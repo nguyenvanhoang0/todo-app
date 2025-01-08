@@ -5,6 +5,11 @@ export type IDayDetails = {
   status: string;
 };
 
+export type IExtendDayDetails = IDayDetails & {
+  selected?: boolean;
+  inRange?: boolean;
+};
+
 export type IMonthDetails = {
   currentMonth: number;
   currentYear: number;
