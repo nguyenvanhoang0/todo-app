@@ -17,24 +17,29 @@ export const MAIN_ROUTES: IRoute[] = [
     route: ['components'],
     children: [
       {
-        title: 'Button component',
+        title: 'Button ',
         icon: 'tag',
         route: ['components/button-variants'],
       },
       {
-        title: 'input component',
+        title: 'input ',
         icon: 'tag',
         route: ['components/input-component'],
       },
       {
         title: 'count down',
-        icon: 'tag',
+        icon: 'clock-circle',
         route: ['components/count-down'],
       },
       {
         title: 'Calendar',
         icon: 'calendar',
         route: ['components/calendar'],
+      },
+      {
+        title: 'select',
+        icon: 'tag',
+        route: ['components/select'],
       },
     ],
   },

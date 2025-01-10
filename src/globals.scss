@@ -54,6 +54,24 @@ ul {
   gap: 4px;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 $theme-gray: (
   background: $gray10,
   background-header: $gray11,
@@ -120,11 +138,11 @@ body {
   color: var(--text-color);
 }
 
-button {
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: 1px solid var(--border-color);
-}
+// button {
+//   background-color: var(--button-bg-color);
+//   color: var(--button-text-color);
+//   border: 1px solid var(--border-color);
+// }
 
 nz-header {
   background-color: var(--background-color) !important;

@@ -33,3 +33,13 @@
     transition: 0.2s;
   }
 }
+
+::ng-deep [appInput] {
+  border: none;
+
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+}

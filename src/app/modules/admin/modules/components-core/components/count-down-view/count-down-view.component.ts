@@ -13,7 +13,7 @@ export class CountDownViewComponent {
   status: IStatus = 'pause';
   formats: Iformat[] = ['hh:mm:ss', 'mm:ss', 'ss'];
   format: Iformat = 'hh:mm:ss';
-  duration = 24 * 60 * 60 * 1000;
+  duration = 4 * 60 * 60 * 1000 + 20 * 60 * 1000;
 
   toggleStatus(status: IStatus) {
     this.status = status;

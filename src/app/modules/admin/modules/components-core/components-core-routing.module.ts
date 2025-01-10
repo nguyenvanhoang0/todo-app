@@ -5,6 +5,7 @@ import { ButtonVariantsComponent } from './components/button-variants/button-var
 import { InputComponent } from './components/input/input.component';
 import { CountDownViewComponent } from './components/count-down-view/count-down-view.component';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
+import { SelectViewComponent } from './components/select-view/select-view.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarViewComponent,
+  },
+  {
+    path: 'select',
+    component: SelectViewComponent,
   },
 ];
 

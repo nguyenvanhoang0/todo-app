@@ -17,6 +17,8 @@ import { CountDownViewComponent } from './components/count-down-view/count-down-
 import { CountDownComponent } from 'src/app/shared/components/count-down/count-down.component';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { CalendarComponent } from 'src/app/shared/components/calendar/calendar.component';
+import { SelectViewComponent } from './components/select-view/select-view.component';
+import { CustomSelectComponent } from 'src/app/shared/components/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { CalendarComponent } from 'src/app/shared/components/calendar/calendar.c
     ButtonVariantsComponent,
     CountDownViewComponent,
     CalendarViewComponent,
+    SelectViewComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { CalendarComponent } from 'src/app/shared/components/calendar/calendar.c
     CustomInputV2Component,
     CountDownComponent,
     CalendarComponent,
+    CustomSelectComponent,
   ],
 })
 export class ComponentsCoreModule {}

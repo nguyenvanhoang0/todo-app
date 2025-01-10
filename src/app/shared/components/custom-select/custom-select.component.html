@@ -1,0 +1,23 @@
+<div class="custom-select">
+  <input
+    appInput
+    type="text"
+    [value]="selectedValue || ''"
+    [placeholder]="placeholder"
+    (focus)="openDropdown()"
+    (blur)="closeDropdown()"
+    (input)="filterOptions($event)"
+  />
+
+  <ul *ngIf="isOpen" class="custom-select-dropdown">
+    <li
+      *ngFor="let option of filteredOptions"
+      (click)="selectOption(option)"
+      (keydown.enter)="selectOption(option)"
+      tabindex="0"
+      [class.selected]="option === selectedValue"
+    >
+      {{ option }}
+    </li>
+  </ul>
+</div>
