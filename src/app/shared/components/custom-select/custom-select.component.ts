@@ -1,19 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   Component,
   EventEmitter,
   forwardRef,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputComponent } from 'src/app/modules/admin/modules/components-core/components/input/input.component';
 import { SharedModule } from '../../shared.module';
+import { MultiLevelDropdownComponent } from './components/multi-level-dropdown/multi-level-dropdown.component';
+import { DropdownOption } from './custom-select.types';
+import { CustomInputV2Component } from '../custom-input-v2/custom-input-v2.component';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-custom-select',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    CustomInputV2Component,
+    MultiLevelDropdownComponent,
+    IconComponent,
+  ],
   templateUrl: './custom-select.component.html',
   styleUrl: './custom-select.component.scss',
   providers: [
@@ -24,12 +36,17 @@ import { SharedModule } from '../../shared.module';
     },
   ],
 })
-export class CustomSelectComponent implements ControlValueAccessor {
+export class CustomSelectComponent implements ControlValueAccessor, OnInit {
+  @Input() multiLeveloptions: DropdownOption[] = [];
   @Input() options: string[] = [];
   @Input() placeholder = 'Select an option';
-
+  @Input() disabled = false;
+  @Input() multiple = false;
+  @Input() search = false;
+  @Output() valueChange = new EventEmitter<any[]>();
   isOpen = false;
   selectedValue: string | null = null;
+  multiselectedValue: any[] = [];
   filteredOptions: string[] = [];
 
   private onChange: (value: string) => void = () => {
@@ -39,29 +56,32 @@ export class CustomSelectComponent implements ControlValueAccessor {
     //
   };
 
-  // Mở hoặc đóng dropdown
   ngOnInit() {
     this.filteredOptions = this.options;
   }
 
-  // Mở dropdown
   openDropdown() {
     this.isOpen = true;
   }
 
-  // Đóng dropdown khi mất focus
   closeDropdown() {
     setTimeout(() => {
       this.isOpen = false;
       this.onTouched();
-    }, 200); // Delay nhỏ để tránh sự kiện bị xung đột với click
+    }, 200);
+  }
+
+  multiselectOption(option: any[]) {
+    this.multiselectedValue = option;
+    this.isOpen = false;
+    this.onTouched();
   }
 
   selectOption(option: string) {
     this.selectedValue = option;
     this.isOpen = false;
-    this.onChange(option); // Cập nhật giá trị cho FormControl
-    this.onTouched(); // Đánh dấu là đã chạm
+    this.onChange(option);
+    this.onTouched();
   }
 
   filterOptions(event: Event) {
@@ -71,20 +91,16 @@ export class CustomSelectComponent implements ControlValueAccessor {
     );
   }
 
-  // Các phương thức của ControlValueAccessor
   writeValue(value: string): void {
     this.selectedValue = value || null;
   }
-
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
-
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    // Nếu cần hỗ trợ disabled, có thể thêm logic ở đây
-  }
+  // setDisabledState?(isDisabled: boolean): void {
+  // }
 }

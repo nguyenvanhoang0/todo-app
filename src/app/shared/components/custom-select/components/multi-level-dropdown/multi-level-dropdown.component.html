@@ -1,0 +1,36 @@
+<div *ngIf="isOpen">
+  <ng-container
+    *ngTemplateOutlet="renderOptions; context: { $implicit: options }"
+  ></ng-container>
+</div>
+
+<ng-template #renderOptions let-options>
+  <li *ngFor="let option of options" class="dropdown-item">
+    <!-- <span
+      (click)="selectOption(option)"
+      (keydown.enter)="selectOption(option)"
+      tabindex="0"
+      class="label"
+      [class.has-children]="option.children?.length"
+      [class.selected]="selectedValue.includes(option.label)"
+    >
+      {{ option.label }}
+    </span> -->
+    <label class="label">
+      <input
+        type="checkbox"
+        [checked]="selectedValue.includes(option.label)"
+        (change)="selectOption(option)"
+      />
+      {{ option.label }}
+    </label>
+    <ul *ngIf="option.children?.length" class="dropdown-children">
+      <ng-container
+        *ngTemplateOutlet="
+          renderOptions;
+          context: { $implicit: option.children }
+        "
+      ></ng-container>
+    </ul>
+  </li>
+</ng-template>

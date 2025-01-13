@@ -1,0 +1,36 @@
+.dropdown-item {
+  cursor: pointer;
+
+  .has-children {
+    font-weight: bold;
+  }
+
+  .label {
+    padding: 8px 0px 8px 8px;
+    display: flex;
+    flex: 1;
+    &.selected {
+      background-color: #007bff;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #4aa2ff;
+      }
+    }
+
+    &:hover {
+      background-color: #3195ff;
+      color: #ffffff;
+    }
+  }
+
+  .dropdown-children {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+
+    .dropdown-item {
+      font-weight: normal;
+    }
+  }
+}

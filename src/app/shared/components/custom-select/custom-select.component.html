@@ -1,23 +1,39 @@
 <div class="custom-select">
-  <input
-    appInput
-    type="text"
-    [value]="selectedValue || ''"
-    [placeholder]="placeholder"
-    (focus)="openDropdown()"
-    (blur)="closeDropdown()"
-    (input)="filterOptions($event)"
-  />
+  <app-custom-input-v2 class="custom-input">
+    <div
+      icon-start
+      *ngFor="let selectedValue of multiselectedValue"
+      class="selected-value"
+    >
+      {{ selectedValue }} <app-icon name="close"></app-icon>
+    </div>
+    <input
+      appInput
+      input
+      type="text"
+      [value]="selectedValue || ''"
+      [placeholder]="placeholder"
+      (focus)="openDropdown()"
+      (blur)="closeDropdown()"
+      (input)="filterOptions($event)"
+    />
+  </app-custom-input-v2>
 
-  <ul *ngIf="isOpen" class="custom-select-dropdown">
+  <ul class="custom-select-dropdown" [ngClass]="isOpen ? '' : 'none'">
     <li
       *ngFor="let option of filteredOptions"
       (click)="selectOption(option)"
       (keydown.enter)="selectOption(option)"
       tabindex="0"
-      [class.selected]="option === selectedValue"
+      [ngClass]="selectedValue === option ? 'selected' : ''"
     >
       {{ option }}
     </li>
+    <app-multi-level-dropdown
+      *ngIf="!options.length"
+      [isOpen]="isOpen"
+      [options]="multiLeveloptions"
+      (valueChange)="multiselectOption($event)"
+    ></app-multi-level-dropdown>
   </ul>
 </div>
