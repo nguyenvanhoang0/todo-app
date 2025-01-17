@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropdownOption } from '../../custom-select.types';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -11,12 +18,19 @@ import { SharedModule } from 'src/app/shared/shared.module';
   templateUrl: './multi-level-dropdown.component.html',
   styleUrl: './multi-level-dropdown.component.scss',
 })
-export class MultiLevelDropdownComponent {
+export class MultiLevelDropdownComponent implements OnChanges {
   @Input() options: DropdownOption[] = [];
   @Input() isOpen = false;
-  @Output() valueChange = new EventEmitter<any[]>();
-
   @Input() selectedValue: any[] = [];
+
+  @Output() selected = new EventEmitter<any[]>();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedValue'] && !changes['selectedValue'].firstChange) {
+      this.syncSelectionState(this.selectedValue);
+      console.log(3333);
+    }
+  }
 
   selectOption(option: DropdownOption) {
     if (option.children?.length) {
@@ -36,15 +50,13 @@ export class MultiLevelDropdownComponent {
 
     // Cập nhật trạng thái của cha
     this.updateParentSelection(this.options);
-
-    // Phát sự kiện giá trị thay đổi
-    this.valueChange.emit(this.selectedValue);
+    this.selected.emit(this.selectedValue);
   }
 
   /**
    * Kiểm tra xem một mục có được chọn hay không (bao gồm cả mục cha và mục con)
    */
-  private isSelected(option: DropdownOption): boolean {
+  isSelected(option: DropdownOption): boolean {
     console.log(2);
 
     if (option.children?.length) {
@@ -56,7 +68,7 @@ export class MultiLevelDropdownComponent {
   /**
    * Cập nhật trạng thái của mục con (được chọn hoặc bỏ chọn)
    */
-  private updateChildrenSelection(option: DropdownOption, isSelected: boolean) {
+  updateChildrenSelection(option: DropdownOption, isSelected: boolean) {
     if (isSelected) {
       if (!this.selectedValue.includes(option.label)) {
         this.selectedValue.push(option.label);
@@ -80,7 +92,7 @@ export class MultiLevelDropdownComponent {
   /**
    * Cập nhật trạng thái của mục cha dựa trên trạng thái của các con
    */
-  private updateParentSelection(options: DropdownOption[]) {
+  updateParentSelection(options: DropdownOption[]) {
     for (const option of options) {
       if (option.children?.length) {
         const isSelected = option.children.every((child) =>
@@ -101,5 +113,25 @@ export class MultiLevelDropdownComponent {
       }
     }
     console.log(4);
+  }
+
+  syncSelectionState(options: DropdownOption[]): void {
+    for (const option of options) {
+      const isSelected = this.isSelected(option);
+
+      if (isSelected && !this.selectedValue.includes(option.label)) {
+        this.selectedValue.push(option.label);
+      } else if (!isSelected) {
+        const index = this.selectedValue.indexOf(option.label);
+        if (index > -1) {
+          this.selectedValue.splice(index, 1);
+        }
+      }
+
+      // Đệ quy xử lý cho các mục con
+      if (option.children?.length) {
+        this.syncSelectionState(option.children);
+      }
+    }
   }
 }

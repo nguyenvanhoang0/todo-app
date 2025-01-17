@@ -1,0 +1,52 @@
+.input-container {
+  border: 1px solid gray;
+  // padding: 6px 12px;
+  border-radius: 2px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: 0.2s;
+  padding: 6px 8px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+
+  input {
+    display: flex;
+    flex: 1;
+    min-width: 100px;
+    border: none;
+    padding: 6px 8px;
+    background-color: transparent;
+    // border-radius: 2px;
+
+    &:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  .icon {
+    padding: 0px 6px;
+  }
+
+  &.focused {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    transition: 0.2s;
+  }
+}
+
+::ng-deep [appInput] {
+  border: none;
+  padding: 0px;
+
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+}

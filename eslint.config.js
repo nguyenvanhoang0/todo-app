@@ -38,7 +38,8 @@ module.exports = [
       //   'type',
       //   { allowObjectTypes: true },
       // ],S
-
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/interface-name-prefix': 'off',
     },

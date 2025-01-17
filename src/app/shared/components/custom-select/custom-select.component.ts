@@ -15,6 +15,7 @@ import { MultiLevelDropdownComponent } from './components/multi-level-dropdown/m
 import { DropdownOption } from './custom-select.types';
 import { CustomInputV2Component } from '../custom-input-v2/custom-input-v2.component';
 import { IconComponent } from '../icon/icon.component';
+import { FormItemComponent } from '../form-item/form-item.component';
 
 @Component({
   selector: 'app-custom-select',
@@ -25,6 +26,7 @@ import { IconComponent } from '../icon/icon.component';
     CustomInputV2Component,
     MultiLevelDropdownComponent,
     IconComponent,
+    FormItemComponent,
   ],
   templateUrl: './custom-select.component.html',
   styleUrl: './custom-select.component.scss',
@@ -60,8 +62,29 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
     this.filteredOptions = this.options;
   }
 
+  writeValue(value: string): void {
+    this.selectedValue = value || null;
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  changeFocus(focus: boolean) {
+    console.log(focus);
+
+    if (focus) {
+      this.openDropdown();
+    } else {
+      this.closeDropdown();
+    }
+  }
+
   openDropdown() {
     this.isOpen = true;
+    console.log(1111);
   }
 
   closeDropdown() {
@@ -69,11 +92,11 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
       this.isOpen = false;
       this.onTouched();
     }, 200);
+    console.log(222);
   }
 
   multiselectOption(option: any[]) {
     this.multiselectedValue = option;
-    this.isOpen = false;
     this.onTouched();
   }
 
@@ -84,21 +107,15 @@ export class CustomSelectComponent implements ControlValueAccessor, OnInit {
     this.onTouched();
   }
 
+  removeSelectedValue(index: number): void {
+    this.multiselectedValue.splice(index, 1);
+  }
+
   filterOptions(event: Event) {
     const value = (event.target as HTMLInputElement).value.toLowerCase();
     this.filteredOptions = this.options.filter((option) =>
       option.toLowerCase().includes(value)
     );
-  }
-
-  writeValue(value: string): void {
-    this.selectedValue = value || null;
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
   }
 
   // setDisabledState?(isDisabled: boolean): void {

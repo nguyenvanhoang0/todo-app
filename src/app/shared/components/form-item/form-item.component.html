@@ -1,0 +1,16 @@
+<div
+  #containerRef
+  class="input-container"
+  [class.focused]="isFocused"
+  (click)="onContainerClick($event)"
+>
+  <ng-content #prefixRef select="[icon-start]">
+    <app-icon *ngIf="iconStart" [name]="iconStart" class="icon"> </app-icon>
+  </ng-content>
+  <ng-content> </ng-content>
+
+  <ng-content #suffixRef select="[icon-end]">
+    <app-icon *ngIf="iconEnd" [name]="iconEnd" class="icon"> </app-icon>
+  </ng-content>
+  <ng-content select="[dropdown]" class="custom-select-dropdown"> </ng-content>
+</div>
