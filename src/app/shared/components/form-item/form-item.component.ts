@@ -3,8 +3,6 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
-  HostBinding,
-  HostListener,
   Input,
   Output,
   ViewChild,

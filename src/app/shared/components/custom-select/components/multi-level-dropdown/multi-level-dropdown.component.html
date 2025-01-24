@@ -1,8 +1,8 @@
-<div *ngIf="isOpen" class="dropdown">
+<ul *ngIf="isOpen" class="dropdown">
   <ng-container
     *ngTemplateOutlet="renderOptions; context: { $implicit: options }"
   ></ng-container>
-</div>
+</ul>
 
 <ng-template #renderOptions let-options>
   <li *ngFor="let option of options" class="dropdown-item">

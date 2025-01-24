@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IMonthDetails } from 'src/app/shared/components/calendar/types/date.type';
 
 @Component({
   selector: 'app-calendar-view',
@@ -8,11 +9,18 @@ import { Component } from '@angular/core';
 export class CalendarViewComponent {
   startDate: Date | null = null;
   endDate: Date | null = null;
-
+  currentYear = new Date().getFullYear();
+  isOpen = false;
+  monthsInCurrentYear: IMonthDetails[] = Array.from(
+    { length: 12 },
+    (_, index) => ({
+      currentMonth: index + 1,
+      currentYear: this.currentYear,
+    })
+  );
   onStartDateChange(date: Date): void {
     this.startDate = date;
 
-    // Nếu startDate lớn hơn endDate, xóa endDate
     if (this.endDate && this.startDate > this.endDate) {
       this.endDate = null;
     }
@@ -25,5 +33,31 @@ export class CalendarViewComponent {
     if (this.startDate && this.endDate < this.startDate) {
       this.startDate = null;
     }
+  }
+
+  changeFocus(focus: boolean) {
+    console.log(focus);
+
+    if (focus) {
+      this.openDropdown();
+    } else {
+      this.closeDropdown();
+    }
+  }
+
+  private onTouched: () => void = () => {
+    //
+  };
+  openDropdown() {
+    this.isOpen = true;
+    console.log(1111);
+  }
+
+  closeDropdown() {
+    setTimeout(() => {
+      this.isOpen = false;
+      this.onTouched();
+    }, 200);
+    console.log(222);
   }
 }

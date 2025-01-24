@@ -30,6 +30,10 @@ export class SelectViewComponent {
               label: 'Option 2.2.1',
               value: 'option2.2.1',
             },
+            {
+              label: 'Option 2.2.2',
+              value: 'option2.2.2',
+            },
           ],
         },
       ],

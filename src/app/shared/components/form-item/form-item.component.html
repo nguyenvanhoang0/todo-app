@@ -12,5 +12,7 @@
   <ng-content #suffixRef select="[icon-end]">
     <app-icon *ngIf="iconEnd" [name]="iconEnd" class="icon"> </app-icon>
   </ng-content>
-  <ng-content select="[dropdown]" class="custom-select-dropdown"> </ng-content>
+  <div class="custom-select-dropdown">
+    <ng-content select="[dropdown]"> </ng-content>
+  </div>
 </div>

@@ -1,15 +1,29 @@
 <div class="group-calendar">
   <app-calendar></app-calendar>
-  <div class="flex">
+  <app-form-item class="custom-input" (focused)="changeFocus($event)">
+    <input
+      appInput
+      #inputRef
+      type="text"
+      [value]="startDate || ''"
+      [placeholder]="'heheheh'"
+    />
     <app-calendar
-      [startDate]="startDate"
-      [endDate]="endDate"
+      dropdown
+      *ngIf="isOpen"
+      [selectMode]="'single'"
       (dateSelected)="onStartDateChange($event)"
     ></app-calendar>
+  </app-form-item>
+
+  <!-- <div class="flex">
     <app-calendar
+      *ngFor="let time of monthsInCurrentYear"
       [startDate]="startDate"
       [endDate]="endDate"
-      (dateSelected)="onEndDateChange($event)"
+      [monthDetails]="time"
+      (dateSelected)="onStartDateChange($event)"
     ></app-calendar>
-  </div>
+    
+  </div> -->
 </div>

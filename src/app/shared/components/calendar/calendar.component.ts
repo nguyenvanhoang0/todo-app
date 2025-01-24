@@ -24,6 +24,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() monthDetails!: IMonthDetails;
   @Input() startDate: Date | null = null;
   @Input() endDate: Date | null = null;
+  @Input() selectMode: 'single' | 'range' = 'range';
+
   @Output() dateSelected = new EventEmitter<Date>();
   @Output() dateRangeChange = new EventEmitter<{
     startDate: Date | null;
@@ -41,7 +43,6 @@ export class CalendarComponent implements OnInit, OnChanges {
   // startDate: IExtendDayDetails | null = null;
   // endDate: IExtendDayDetails | null = null;
 
-  selectMode: 'single' | 'range' = 'range';
   constructor(
     private calendarService: CalendarService,
     private cdr: ChangeDetectorRef
